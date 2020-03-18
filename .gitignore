@@ -1,7 +1,23 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.tar.gz
 
+# Test binary, built with `go test -c`
+*.test
 
-.env*
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+coverage.txt
 
+# Mac specific
 .DS_Store
 
 *.log
+
+.env*
+
+bin/
