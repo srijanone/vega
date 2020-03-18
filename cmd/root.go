@@ -20,7 +20,7 @@ var (
 	vegaHome  string
 	rootCmd   *cobra.Command
 	// TODO: globalConfig is the configuration stored in $VEGA_HOME/config.toml
-	// globalConfig DraftConfig
+	// globalConfig VegaConfig
 )
 
 func init() {
@@ -29,12 +29,12 @@ func init() {
 }
 
 func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
-	var desc = "vega - speed development"
+	rootDesc := "vega - speed development"
 
 	cmd := &cobra.Command{
 		Use:   "vega",
-		Short: desc,
-		Long:  desc,
+		Short: rootDesc,
+		Long:  rootDesc,
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println("root command called")
 		},
@@ -42,13 +42,16 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 			if flagDebug {
 				log.SetLevel(log.DebugLevel)
 			}
+			// fmt.Printf("homeEnvVar", homeEnvVar)
+			// fmt.Printf("vegaHome", vegaHome)
 			os.Setenv(homeEnvVar, vegaHome)
 			// globalConfig, err = ReadConfig()
 			return
 		},
 	}
 
-	cmd.AddCommand(initCmd)
+	cmd.AddCommand(newInitCmd(out))
+	cmd.AddCommand(newHomeCmd(out))
 
 	cmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
