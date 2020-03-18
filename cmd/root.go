@@ -29,7 +29,7 @@ func init() {
 }
 
 func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
-	rootDesc := "vega - speed development"
+	const rootDesc = "vega - speed development"
 
 	cmd := &cobra.Command{
 		Use:   "vega",
@@ -50,7 +50,7 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 		},
 	}
 
-	cmd.AddCommand(newInitCmd(out))
+	cmd.AddCommand(newInitCmd(out, in))
 	cmd.AddCommand(newHomeCmd(out))
 
 	cmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
