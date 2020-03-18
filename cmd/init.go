@@ -19,15 +19,12 @@ type initCmd struct {
 }
 
 func newInitCmd(out io.Writer, in io.Reader) *cobra.Command {
-
 	init := &initCmd{
 		in:  in,
 		out: out,
 	}
 
-	fmt.Println("init", init)
-
-	const initDesc = `This command sets up local configuration in $VEGA_HOME (default ~/.vega/) with default starter-kits`
+	const initDesc = `sets up local configuration in $VEGA_HOME (default ~/.vega/) with default starter-kits`
 
 	initCmd := &cobra.Command{
 		Use:   "init",

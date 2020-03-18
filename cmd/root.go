@@ -24,7 +24,6 @@ var (
 )
 
 func init() {
-	fmt.Println("init of cmd")
 	rootCmd = newRootCmd(os.Stdout, os.Stdin)
 }
 
@@ -36,7 +35,8 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 		Short: rootDesc,
 		Long:  rootDesc,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("root command called")
+			// TODO: What to do by default
+			// fmt.Println("root command called")
 		},
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) (err error) {
 			if flagDebug {
