@@ -42,18 +42,18 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 			if flagDebug {
 				log.SetLevel(log.DebugLevel)
 			}
-			// fmt.Printf("homeEnvVar", homeEnvVar)
-			// fmt.Printf("vegaHome", vegaHome)
 			os.Setenv(homeEnvVar, vegaHome)
 			// globalConfig, err = ReadConfig()
 			return
 		},
 	}
 
+	persistentFlags := cmd.PersistentFlags()
+	persistentFlags.StringVar(&vegaHome, "home", defaultVegaHome(), "location of your Vega init directory ($VEGA_HOME)")
+	persistentFlags.BoolVar(&flagDebug, "debug", false, "enable verbose output")
+
 	cmd.AddCommand(newInitCmd(out, in))
 	cmd.AddCommand(newHomeCmd(out))
-
-	cmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
 	return cmd
 }
