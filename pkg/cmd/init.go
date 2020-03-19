@@ -7,8 +7,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	common "github.com/srijanone/vega/common"
-	vega "github.com/srijanone/vega/core"
+	common "github.com/srijanone/vega/pkg/common"
+	vega "github.com/srijanone/vega/pkg/core"
 )
 
 type initCmd struct {
