@@ -34,10 +34,10 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 		Use:   "vega",
 		Short: rootDesc,
 		Long:  rootDesc,
-		Run: func(cmd *cobra.Command, args []string) {
-			// TODO: What to do by default
-			// fmt.Println("root command called")
-		},
+		//Run: func(cmd *cobra.Command, args []string) {
+		//	// TODO: What to do by default
+		//	// fmt.Println("root command called")
+		//},
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) (err error) {
 			if flagDebug {
 				log.SetLevel(log.DebugLevel)
@@ -54,6 +54,7 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 
 	cmd.AddCommand(newInitCmd(out, in))
 	cmd.AddCommand(newHomeCmd(out))
+	cmd.AddCommand(newVersionCmd(out))
 
 	return cmd
 }
