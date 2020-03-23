@@ -1,11 +1,13 @@
 package common
 
 import (
+	"strings"
+
 	generator "github.com/dustinkirkland/golang-petname"
 )
 
 func NormalizeApplicationName(name string) string {
-	return name
+	return strings.ToLower(name)
 }
 
 func GeneratePetName() string {
