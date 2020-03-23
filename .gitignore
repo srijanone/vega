@@ -13,8 +13,11 @@
 *.out
 coverage.txt
 
-# Mac specific
+# Mac Specific
 .DS_Store
+
+# IDE Specific
+.idea
 
 *.log
 

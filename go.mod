@@ -1,6 +1,6 @@
 module github.com/srijanone/vega
 
-go 1.13
+go 1.14
 
 require (
 	github.com/sirupsen/logrus v1.2.0
