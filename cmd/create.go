@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
-	vega "github.com/srijanone/vega/pkg/core"
 	common "github.com/srijanone/vega/pkg/common"
+	vega "github.com/srijanone/vega/pkg/core"
 )
 
 type createCmd struct {
@@ -64,6 +64,7 @@ func (sk *starterKitStruct) Find(dir string, name string) ([]string, error) {
 func (sk *starterKitStruct) CreateFrom(dest string, source string, name string) error {
 	return nil
 }
+
 var starterKit starterKitStruct = starterKitStruct{"Dockerfile"}
 
 func (cCmd *createCmd) execute() error {

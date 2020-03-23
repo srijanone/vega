@@ -8,6 +8,6 @@ func NormalizeApplicationName(name string) string {
 	return name
 }
 
-func GeneratePetName () string {
+func GeneratePetName() string {
 	return generator.Generate(2, "-")
 }
