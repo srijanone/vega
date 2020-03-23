@@ -8,7 +8,13 @@ import (
 	"github.com/spf13/cobra"
 
 	common "github.com/srijanone/vega/pkg/common"
+	downloader "github.com/srijanone/vega/pkg/downloader"
 	vega "github.com/srijanone/vega/pkg/core"
+)
+
+const (
+	starterKitsRepoName = "git@github.com:Azure/draft.git" // TODO: Change this to vega once make public
+	starterKitsDirName = "packs"
 )
 
 type initCmd struct {
@@ -67,12 +73,16 @@ func (iCmd *initCmd) setupVegaHome() error {
 	for _, path := range directories {
 		// TODO: One liner
 		err := common.EnsureDir(path)
+		fmt.Fprintln(iCmd.out, "Initializing", path)
 		if err != nil {
 			return err
 		}
 	}
 
 	// Ensuring default starter kits exists or not
-	// TODO: Ensure starter kits
+	d := downloader.Downloader{}
+	sourceRepo := fmt.Sprintf("%s//%s", starterKitsRepoName, starterKitsDirName)
+	fmt.Fprintln(iCmd.out, "Downloading starterkits...")
+	d.Download(sourceRepo, iCmd.home.StarterKits())
 	return nil
 }
