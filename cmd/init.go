@@ -58,7 +58,7 @@ func (iCmd *initCmd) execute() error {
 		}
 	}
 
-	fmt.Fprintln(iCmd.out, "$VEGA_HOME has been initialized at %s", vegaHome)
+	fmt.Fprintln(iCmd.out, "$VEGA_HOME has been initialized at", vegaHome)
 	return nil
 }
 
