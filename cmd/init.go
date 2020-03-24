@@ -8,13 +8,13 @@ import (
 	"github.com/spf13/cobra"
 
 	common "github.com/srijanone/vega/pkg/common"
-	downloader "github.com/srijanone/vega/pkg/downloader"
 	vega "github.com/srijanone/vega/pkg/core"
+	downloader "github.com/srijanone/vega/pkg/downloader"
 )
 
 const (
 	starterKitsRepoName = "git@github.com:Azure/draft.git" // TODO: Change this to vega once make public
-	starterKitsDirName = "packs"
+	starterKitsDirName  = "packs"
 )
 
 type initCmd struct {
