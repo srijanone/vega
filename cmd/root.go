@@ -48,9 +48,10 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 	persistentFlags.StringVar(&vegaHome, "home", defaultVegaHome(), "location of your Vega init directory ($VEGA_HOME)")
 	persistentFlags.BoolVar(&flagDebug, "debug", false, "enable verbose output")
 
-	cmd.AddCommand(newHomeCmd(out))
 	cmd.AddCommand(newInitCmd(out, in))
+	cmd.AddCommand(newHomeCmd(out))
 	cmd.AddCommand(newCreateCmd(out))
+	cmd.AddCommand(newVersionCmd(out))
 
 	return cmd
 }
