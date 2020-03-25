@@ -34,6 +34,9 @@ vega down
 - [x] Basic Functionality
 - [ ] Dockerize
 - [ ] Makefile
+  - run
+  - test
+  - clean
 - [ ] Unit Tests
 
 ---
