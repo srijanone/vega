@@ -25,7 +25,6 @@ func newVersionCmd(out io.Writer) *cobra.Command {
 		Short: versionDesc,
 		Long:  versionDesc,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("version called")
 			fmt.Println(version.New().FormatVersion(vCmd.short))
 		},
 	}

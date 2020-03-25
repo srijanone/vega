@@ -15,7 +15,6 @@ func newHomeCmd(out io.Writer) *cobra.Command {
 		Short: homeDesc,
 		Long:  homeDesc,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("home called")
 			fmt.Println(homePath())
 		},
 	}

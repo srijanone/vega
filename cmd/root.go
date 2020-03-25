@@ -39,7 +39,6 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 				log.SetLevel(log.DebugLevel)
 			}
 			os.Setenv(homeEnvVar, vegaHome)
-			// globalConfig, err = ReadConfig()
 			return
 		},
 	}

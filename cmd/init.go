@@ -37,7 +37,6 @@ func newInitCmd(out io.Writer, in io.Reader) *cobra.Command {
 		Short: initDesc,
 		Long:  initDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			fmt.Println("init called")
 			if len(args) != 0 {
 				return errors.New("Command does not accept arguments")
 			}

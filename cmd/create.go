@@ -12,7 +12,6 @@ import (
 
 type createCmd struct {
 	out            io.Writer
-	appName        string
 	starterKit     string
 	home           vega.Home
 	dest           string
@@ -31,24 +30,18 @@ func newCreateCmd(out io.Writer) *cobra.Command {
 		Short: createDesc,
 		Long:  createDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			fmt.Println("create called")
 			if len(args) > 0 {
 				cCmd.dest = args[0]
 			}
 			return cCmd.execute()
-		},
-		PreRun: func(cmd *cobra.Command, args []string) {
-			// transforming name as Docker doesn't allow upper case names for repositories
-			//common.normalizeApplicationName(cCmd.appName)
 		},
 	}
 
 	cCmd.home = vega.Home(homePath())
 
 	flags := createCmd.Flags()
-	flags.StringVarP(&cCmd.appName, "app", "a", "", "name of the app. (default: randomly generated name)")
 	flags.StringVarP(&cCmd.starterKit, "starterkit", "s", "", "name of the Vega starterkit to scaffold the app")
-	// TODO: make starterkit required
+	cobra.MarkFlagRequired(flags, "starterkit")
 	return createCmd
 }
 
@@ -61,16 +54,13 @@ func (sk *starterKitStruct) Find(dir string, name string) ([]string, error) {
 	return []string{}, nil
 }
 
-func (sk *starterKitStruct) CreateFrom(dest string, source string, name string) error {
+func (sk *starterKitStruct) CreateFrom(dest string, source string) error {
 	return nil
 }
 
 var starterKit starterKitStruct = starterKitStruct{"Dockerfile"}
 
 func (cCmd *createCmd) execute() error {
-	if cCmd.appName == "" {
-		cCmd.appName = common.GeneratePetName()
-	}
 	// TODO: Check if starterkits files are already there or not
 	dockerfileExists, err := common.Exists(filepath.Join(cCmd.dest, starterKit.dockerfileName))
 	if err != nil {
@@ -88,7 +78,7 @@ func (cCmd *createCmd) execute() error {
 	if len(starterKits) == 1 {
 		starterKitSrc := starterKits[0]
 		fmt.Fprintln(cCmd.out, "Found starterkit")
-		if err = starterKit.CreateFrom(cCmd.dest, starterKitSrc, cCmd.appName); err != nil {
+		if err = starterKit.CreateFrom(cCmd.dest, starterKitSrc); err != nil {
 			return err
 		}
 	} else if len(starterKits) > 0 {
