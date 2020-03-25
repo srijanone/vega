@@ -15,7 +15,7 @@ type starterkitListCmd struct {
 }
 
 func newStarterKitListCmd(out io.Writer) *cobra.Command {
-	const listCmdDesc = "List starter-kits"
+	const listCmdDesc = "List starterkits"
 	list := &starterkitListCmd{out: out}
 	listCmd := &cobra.Command{
 		Use:   "list",
@@ -34,7 +34,7 @@ func (cmd *starterkitListCmd) execute() error {
 	if err != nil {
 		return err
 	}
-	fmt.Fprintln(cmd.out, "Available Starter-kits:")
+	fmt.Fprintln(cmd.out, "Available starterkits:")
 	for _, starterkit := range starterkits {
 		fmt.Fprintf(cmd.out, "  %s (%s)\n", starterkit.Name, starterkit.Path)
 	}
