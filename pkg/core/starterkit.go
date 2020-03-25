@@ -18,12 +18,12 @@ type StarterKit struct {
 }
 
 // StarterKitFind finds a starterkits with the given name  and returns path
-func StarterKitFind(starterkitsDir string, name string) (string, error) {
-	if _, err := os.Stat(starterkitsDir); os.IsNotExist(err) {
-		return "", fmt.Errorf("starterkit dir %s not found", starterkitsDir)
+func StarterKitFind(starterkitDir string, name string) (string, error) {
+	if _, err := os.Stat(starterkitDir); os.IsNotExist(err) {
+		return "", fmt.Errorf("starterkit dir %s not found", starterkitDir)
 	}
 
-	targetDir := filepath.Join(starterkitsDir, name)
+	targetDir := filepath.Join(starterkitDir, name)
 	if _, err := os.Stat(targetDir); os.IsNotExist(err) {
 		return "", ErrStarterKitNotFoundInRepo
 	}
@@ -32,17 +32,17 @@ func StarterKitFind(starterkitsDir string, name string) (string, error) {
 }
 
 // StarterKitList returns a list of all Starter-Kits.
-func StarterKitList(starterkitsDir string) ([]StarterKit, error) {
-	switch fi, err := os.Stat(starterkitsDir); {
+func StarterKitList(starterkitDir string) ([]StarterKit, error) {
+	switch fi, err := os.Stat(starterkitDir); {
 	case err != nil:
 		if os.IsNotExist(err) {
-			return nil, fmt.Errorf("starterkit directory %s not found", starterkitsDir)
+			return nil, fmt.Errorf("starterkit directory %s not found", starterkitDir)
 		}
 	case !fi.IsDir():
-		return nil, fmt.Errorf("%s is not a directory", starterkitsDir)
+		return nil, fmt.Errorf("%s is not a directory", starterkitDir)
 	}
 	var starterkits []StarterKit
-	files, err := ioutil.ReadDir(starterkitsDir)
+	files, err := ioutil.ReadDir(starterkitDir)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ func StarterKitList(starterkitsDir string) ([]StarterKit, error) {
 		if file.IsDir() {
 			starterkit := &StarterKit{}
 			starterkit.Name = file.Name()
-			starterkit.Path = filepath.ToSlash(filepath.Join(starterkitsDir, file.Name()))
+			starterkit.Path = filepath.ToSlash(filepath.Join(starterkitDir, file.Name()))
 			starterkits = append(starterkits, *starterkit)
 		}
 	}
