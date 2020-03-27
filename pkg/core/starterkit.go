@@ -6,6 +6,9 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
+
+	"github.com/otiai10/copy"
 )
 
 // ErrStarterKitNotFoundInRepo is the error returned when a starterkit is not found in a starterkits
@@ -17,18 +20,27 @@ type StarterKit struct {
 	Path string
 }
 
-// StarterKitFind finds a starterkits with the given name  and returns path
-func StarterKitFind(starterkitDir string, name string) (string, error) {
-	if _, err := os.Stat(starterkitDir); os.IsNotExist(err) {
-		return "", fmt.Errorf("starterkit dir %s not found", starterkitDir)
-	}
+type StarterKits struct {
+}
 
-	targetDir := filepath.Join(starterkitDir, name)
-	if _, err := os.Stat(targetDir); os.IsNotExist(err) {
-		return "", ErrStarterKitNotFoundInRepo
+// StarterKitFind finds a starterkits matching with the given name
+func StarterKitFind(starterkitDir string, name string) ([]StarterKit, error) {
+	starterkits := []StarterKit{}
+	strterkitsList, err := StarterKitList(starterkitDir)
+	if err != nil {
+		return nil, err
 	}
-
-	return targetDir, nil
+	for _, starterkit := range strterkitsList {
+		if starterkit.Name == name {
+			starterkits = nil
+			starterkits = append(starterkits, starterkit)
+			break
+		}
+		if strings.HasPrefix(starterkit.Name, name) {
+			starterkits = append(starterkits, starterkit)
+		}
+	}
+	return starterkits, nil
 }
 
 // StarterKitList returns a list of all Starter-Kits.
@@ -55,4 +67,9 @@ func StarterKitList(starterkitDir string) ([]StarterKit, error) {
 		}
 	}
 	return starterkits, nil
+}
+
+func StarterKitCreate(src string, dst string) error {
+	err := copy.Copy(src, dst)
+	return err
 }
