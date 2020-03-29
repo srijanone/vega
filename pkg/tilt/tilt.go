@@ -29,7 +29,8 @@ func Up(out io.Writer, arguments... string)  {
 }
 
 func Down(out io.Writer, arguments... string)  {
-	execute(out, "down")
+	arguments = append([]string{"down"}, arguments...)
+	execute(out, arguments...)
 }
 
 func execute(out io.Writer, arguments... string)  {
