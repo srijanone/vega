@@ -72,11 +72,11 @@ func (cCmd *createCmd) execute() error {
 
 	if len(starterkits) == 1 {
 		starterkit := starterkits[0]
-		fmt.Fprintln(cCmd.out, "Found starterkit")
+		fmt.Fprintln(cCmd.out, "Found starterkit", cCmd.starterkit)
 		starterkit.Create(cCmd.dest)
 	} else if len(starterkits) > 0 {
 		// TODO: display proper list of matching kits
-		return fmt.Errorf("Multiple starterkits named %s found: %v", cCmd.starterkit, starterkits)
+		return fmt.Errorf("Multiple starterkit named %s found: %v", cCmd.starterkit, starterkits)
 	} else {
 		return fmt.Errorf("No starterkit found with name %s", cCmd.starterkit)
 	}
