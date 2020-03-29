@@ -1,12 +1,12 @@
 package vega
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
-	"errors"
 )
 
 // ErrStarterKitNotFoundInRepo is the error returned when a starterkit is not found in a starterkits
