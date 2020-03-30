@@ -34,21 +34,23 @@ vega create --starterkit <starterkit>
 vega up
 vega down
 ```
+
 ---
 
 ## Development
 
 `go run main.go`
 
-- For Releasing: `goreleaser`
+- For Releasing Binaries: `goreleaser`
 
 ---
 
 ## To Do
 
 - [x] Basic Functionality
+- [x] Release Binaries
 - [ ] Dockerize
-- [ ] Makefile
+- [x] Makefile
   - run
   - test
   - clean
