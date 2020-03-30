@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	commandName = "tilt"
+	commandName  = "tilt"
 	RequiredText = `
 		Tilt is not installed, which is required to run the application. 
 	`
@@ -23,17 +23,17 @@ func IsInstalled() bool {
 	return err == nil
 }
 
-func Up(out io.Writer, arguments... string)  {
+func Up(out io.Writer, arguments ...string) {
 	arguments = append([]string{"up"}, arguments...)
 	execute(out, arguments...)
 }
 
-func Down(out io.Writer, arguments... string)  {
+func Down(out io.Writer, arguments ...string) {
 	arguments = append([]string{"down"}, arguments...)
 	execute(out, arguments...)
 }
 
-func execute(out io.Writer, arguments... string)  {
+func execute(out io.Writer, arguments ...string) {
 	command := exec.Command(commandName, arguments...)
 	command.Stdout = out
 	command.Stderr = os.Stderr
