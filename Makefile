@@ -11,6 +11,9 @@ LDFLAGS += -X=github.com/srijanone/vega/pkg/version.SemVer=$(GIT_TAG)
 LDFLAGS += -X=github.com/srijanone/vega/pkg/version.GitCommit=$(GIT_COMMIT)
 LDFLAGS += -X=github.com/srijanone/vega/pkg/version.BuildTime=$(BUILD_TIME)
 
+OS 			:= `uname | tr '[:upper:]' '[:lower:]'`
+ARCH 		:= `uname -m`
+
 
 .PHONY: info
 info:
@@ -19,7 +22,7 @@ info:
 
 .PHONY: build
 build: info
-	go build -v
+	GOOS=darwin GOARCH=386 go build -v -ldflags "$(LDFLAGS)"
 
 
 .PHONY: clean
