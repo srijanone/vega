@@ -17,11 +17,11 @@ Via **Homebrew** (Mac only):
 brew install srijanone/vega/vega
 ```
 
-Get **\*.deb and \*.rpm files**:
-- (releases)[https://github.com/srijanone/vega/releases]
+Via **\*.deb and \*.rpm files**:
+- [releases](https://github.com/srijanone/vega/releases)
 
-Get prebuilt binaries:
-- (releases)[https://github.com/srijanone/vega/releases]
+Via prebuilt binaries:
+- [releases](https://github.com/srijanone/vega/releases)
 
 ---
 
