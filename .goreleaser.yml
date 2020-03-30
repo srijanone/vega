@@ -20,6 +20,23 @@ builds:
       - amd64
       - 386
 
+brews:
+  - name: vega
+    github:
+      owner: srijanone
+      name: homebrew-vega
+    url_template: "https://github.com/srijanone/vega/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    commit_author:
+      name: Vijay Soni (vs4vijay)
+      email: vs4vijay@gmail.com
+    folder: Formula
+    description: "vega"
+    skip_upload: false
+    install: |
+      bin.install "vega"
+    test: |
+      system "#{bin}/vega version"
+
 archives:
   - replacements:
       darwin: mac
