@@ -1,0 +1,41 @@
+before:
+  hooks:
+    - go mod download
+
+dist: bin
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
+      - -X=github.com/srijanone/vega/pkg/version.SemVer={{ .Version }}
+      - -X=github.com/srijanone/vega/pkg/version.GitCommit={{ .Commit }}
+      - -X=github.com/srijanone/vega/pkg/version.BuildTime={{ .Date }}
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - 386
+
+archives:
+  - replacements:
+      darwin: mac
+      linux: linux
+      windows: windows
+      386: i386
+      amd64: x86_64
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
