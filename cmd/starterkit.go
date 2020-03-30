@@ -7,12 +7,15 @@ import (
 )
 
 func newStarterKitCmd(out io.Writer) *cobra.Command {
-	const starterkitDesc = "Manage starterkit used for initializeing project"
+	const starterkitDesc = "Manage starterkit used for initializing project"
+
 	starterkitCmd := &cobra.Command{
 		Use:   "starterkit",
 		Short: starterkitDesc,
 		Long:  starterkitDesc,
 	}
+
 	starterkitCmd.AddCommand(newStarterKitListCmd(out))
+
 	return starterkitCmd
 }

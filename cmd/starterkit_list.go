@@ -15,28 +15,38 @@ type starterkitListCmd struct {
 }
 
 func newStarterKitListCmd(out io.Writer) *cobra.Command {
+	skListCmd := &starterkitListCmd{
+		out: out,
+	}
+
 	const listCmdDesc = "List starterkits"
-	list := &starterkitListCmd{out: out}
+
 	listCmd := &cobra.Command{
 		Use:   "list",
 		Short: listCmdDesc,
 		Long:  listCmdDesc,
-		Run: func(cmd *cobra.Command, args []string) {
-			list.execute()
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return skListCmd.execute()
 		},
 	}
-	list.home = vega.Home(homePath())
+
+	skListCmd.home = vega.Home(homePath())
+
 	return listCmd
 }
 
 func (cmd *starterkitListCmd) execute() error {
-	starterkits, err := vega.StarterKitList(cmd.home.StarterKits())
+	starterkitRepo := vega.StarterKitRepo{
+		Name: "local",
+		Path: cmd.home.StarterKits(),
+	}
+	starterkits, err := starterkitRepo.List()
 	if err != nil {
 		return err
 	}
 	fmt.Fprintln(cmd.out, "Available starterkits:")
 	for _, starterkit := range starterkits {
-		fmt.Fprintf(cmd.out, "  %s (%s)\n", starterkit.Name, starterkit.Path)
+		fmt.Fprintf(cmd.out, "  %10s (%s)\n", starterkit.Name, starterkit.Path)
 	}
 	return nil
 }

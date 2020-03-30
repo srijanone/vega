@@ -16,7 +16,7 @@ go get github.com/srijanone/vega
 
 ```console
 vega init
-vega starterkits list
+vega starterkit list
 vega create --starterkit <starterkit>
 vega up
 vega down
