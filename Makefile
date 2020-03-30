@@ -36,7 +36,17 @@ build: info
 	GOOS=darwin GOARCH=386 go build -v -ldflags "$(LDFLAGS)"
 
 
+.PHONY: build-all
+build-all:
+	@for os in ${OS_LIST}; do \
+		for arch in ${ARCH_LIST}; do \
+			echo "Building for OS($${os}) and Arch($${arch})"; \
+			GOOS=$${os} GOARCH=$${arch} go build -v -ldflags "$(LDFLAGS)" -o "bin/vizix_$${os}_$${arch}"; \
+		done \
+	done
+
+
 .PHONY: clean
 clean:
 	@echo "cleaning..."
-	rm -rf ~/.vega
+	rm -rf bin
