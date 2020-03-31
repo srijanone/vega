@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type starterkitAddCmd struct {
+type repoAddCmd struct {
 	URL  string
 	dst  string
 	out  io.Writer
@@ -18,31 +18,33 @@ type starterkitAddCmd struct {
 }
 
 func newAddCmd(out io.Writer) *cobra.Command {
-	const addCmdDesc = "Add new starterkits repository"
-	skAddCmd := starterkitAddCmd{out: out}
-
+	rAddCmd := repoAddCmd{out: out}
+	
+	const addCmdDesc = "add starterkits repository"
+	
 	addCmd := &cobra.Command{
 		Use:   "add [name] [url]",
 		Short: addCmdDesc,
-		Args:  cobra.ExactArgs(2),
 		Long:  addCmdDesc,
+		Args:  cobra.ExactArgs(2),
 		Run: func(cmd *cobra.Command, args []string) {
-			skAddCmd.name = args[0]
-			skAddCmd.URL = args[1]
-			skAddCmd.home = vega.Home(homePath())
-			skAddCmd.add()
+			rAddCmd.name = args[0]
+			rAddCmd.URL = args[1]
+			rAddCmd.home = vega.Home(homePath())
+			rAddCmd.execute()
 		},
 	}
+	
 	return addCmd
 }
 
-func (cmd *starterkitAddCmd) add() {
+func (rAddCmd *repoAddCmd) execute() {
 	starterKitsRepo := vega.StarterKitRepo{
-		Name: cmd.name,
-		URL:  cmd.URL,
-		Home: cmd.home,
+		Name: rAddCmd.name,
+		URL:  rAddCmd.URL,
+		Home: rAddCmd.home,
 	}
 
-	fmt.Fprintln(cmd.out, "Adding new repo:", cmd.URL)
+	fmt.Fprintln(rAddCmd.out, "Adding new repo:", rAddCmd.URL)
 	starterKitsRepo.Add()
 }
