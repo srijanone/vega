@@ -1,0 +1,76 @@
+before:
+  hooks:
+    - go mod download
+
+dist: bin
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
+      - -X=github.com/srijanone/vega/pkg/version.SemVer={{ .Version }}
+      - -X=github.com/srijanone/vega/pkg/version.GitCommit={{ .Commit }}
+      - -X=github.com/srijanone/vega/pkg/version.BuildTime={{ .Date }}
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - 386
+
+brews:
+  - name: vega
+    github:
+      owner: srijanone
+      name: homebrew-vega
+    url_template: "https://github.com/srijanone/vega/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    commit_author:
+      name: Vijay Soni (vs4vijay)
+      email: vs4vijay@gmail.com
+    folder: Formula
+    description: "vega"
+    skip_upload: false
+    install: |
+      bin.install "vega"
+    test: |
+      system "#{bin}/vega version"
+
+nfpms:
+  - file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    homepage:  https://github.com/srijanone/vega
+    description: "vega"
+    maintainer: Vijay Soni <vs4vijay@gmail.com>
+    license: MIT
+    formats:
+      - deb
+      - rpm
+
+#snapcrafts:
+#  - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+#    summary: "vega"
+#    description: "vega"
+#    grade: stable
+#    confinement: classic
+#    publish: true
+
+archives:
+  - replacements:
+      darwin: mac
+      linux: linux
+      windows: windows
+      386: i386
+      amd64: x86_64
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"

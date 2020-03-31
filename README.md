@@ -10,6 +10,19 @@ Via **Go Get**:
 ```
 go get github.com/srijanone/vega
 ```
+
+Via **Homebrew** (Mac only):
+
+```
+brew install srijanone/vega/vega
+```
+
+Via **\*.deb and \*.rpm files**:
+- [releases](https://github.com/srijanone/vega/releases)
+
+Via prebuilt binaries:
+- [releases](https://github.com/srijanone/vega/releases)
+
 ---
 
 ## Getting Started
@@ -21,19 +34,23 @@ vega create --starterkit <starterkit>
 vega up
 vega down
 ```
+
 ---
 
 ## Development
 
 `go run main.go`
 
+- For Releasing Binaries: `goreleaser`
+
 ---
 
 ## To Do
 
 - [x] Basic Functionality
+- [x] Release Binaries
 - [ ] Dockerize
-- [ ] Makefile
+- [x] Makefile
   - run
   - test
   - clean
