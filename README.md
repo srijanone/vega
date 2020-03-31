@@ -16,7 +16,6 @@ go get github.com/srijanone/vega
 
 ```console
 vega init
-vega repo add <url>
 vega starterkit list
 vega create --starterkit <starterkit>
 vega up
