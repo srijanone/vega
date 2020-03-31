@@ -14,7 +14,7 @@ type RepositoryListCmd struct {
 }
 
 func newRepositoryList(out io.Writer) *cobra.Command {
-	const listCmdDesc = "Display List of all the repositories available locally"
+	const listCmdDesc = "list all the starterkit repositories available locally"
 	repositoryListCmd := RepositoryListCmd{
 		out: out,
 	}
