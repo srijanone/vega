@@ -37,16 +37,16 @@ brews:
     test: |
       system "#{bin}/vega version"
 
-nfpms:
-  - file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    homepage:  https://github.com/srijanone/vega
-    description: "vega"
-    maintainer: Vijay Soni <vs4vijay@gmail.com>
-    license: MIT
-    formats:
-      - deb
-      - rpm
-
+#nfpms:
+#  - file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+#    homepage:  https://github.com/srijanone/vega
+#    description: "vega"
+#    maintainer: Vijay Soni <vs4vijay@gmail.com>
+#    license: MIT
+#    formats:
+#      - deb
+#      - rpm
+#
 #snapcrafts:
 #  - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 #    summary: "vega"

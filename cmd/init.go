@@ -30,7 +30,7 @@ func newInitCmd(out io.Writer, in io.Reader) *cobra.Command {
 		out: out,
 	}
 
-	const initDesc = `sets up local configuration in $VEGA_HOME (default ~/.vega/) with default starter-kits`
+	const initDesc = `sets up local configuration in $VEGA_HOME with default starterkits`
 
 	initCmd := &cobra.Command{
 		Use:   "init",

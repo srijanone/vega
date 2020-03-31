@@ -17,6 +17,8 @@ Via **Homebrew** (Mac only):
 brew install srijanone/vega/vega
 ```
 
+- Update vega: `brew update && brew upgrade vega` 
+
 Via **\*.deb and \*.rpm files**:
 - [releases](https://github.com/srijanone/vega/releases)
 
