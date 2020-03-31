@@ -8,7 +8,7 @@ import (
 )
 
 func newHomeCmd(out io.Writer) *cobra.Command {
-	const homeDesc = "print location of VEGA_HOME"
+	const homeDesc = "print location of $VEGA_HOME"
 
 	homeCmd := &cobra.Command{
 		Use:   "home",

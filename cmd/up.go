@@ -37,8 +37,8 @@ func newUpCmd(out io.Writer) *cobra.Command {
 	}
 
 	flags := upCmd.Flags()
-	flags.BoolVar(&noBrowser, "no-browser", false, "If true, Web UI will not open on startup (Default: false)")
-	flags.BoolVar(&watch, "watch", true, "If true, services will be automatically rebuilt and redeployed when files change (Default: true)")
-	flags.StringVar(&port, "port", "9090", "Port for the Logging HTTP server (Default: 9090)")
+	flags.BoolVar(&noBrowser, "no-browser", false, "If true, Web UI will not open on startup")
+	flags.BoolVar(&watch, "watch", true, "If true, services will be automatically rebuilt and redeployed when files change")
+	flags.StringVar(&port, "port", "9090", "Port for the Logging HTTP server")
 	return upCmd
 }
