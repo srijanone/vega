@@ -7,7 +7,7 @@ import (
 )
 
 func newRepoCmd(out io.Writer) *cobra.Command {
-	const repoDesc = "Manage starterkits repositories"
+	const repoDesc = "manage starterkits repositories"
 
 	repoCmd := &cobra.Command{
 		Use:   "repo",
