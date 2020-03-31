@@ -2,6 +2,7 @@
 
 Vega (वेग) is developer friendly project scaffolding tool to speed up development process.
 
+![Release](https://github.com/srijanone/vega/workflows/Release/badge.svg)
 
 ## Installation
 
@@ -18,9 +19,6 @@ brew install srijanone/vega/vega
 ```
 
 - Update vega: `brew update && brew upgrade vega` 
-
-Via **\*.deb and \*.rpm files**:
-- [releases](https://github.com/srijanone/vega/releases)
 
 Via prebuilt binaries:
 - [releases](https://github.com/srijanone/vega/releases)

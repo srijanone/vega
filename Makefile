@@ -16,6 +16,7 @@ OS_LIST		:= darwin linux windows
 ARCH 		:= `uname -m`
 ARCH_LIST	:= 386 amd64
 
+
 .PHONY: info
 info:
 	@echo "info..."
@@ -41,9 +42,19 @@ build-all:
 	@for os in ${OS_LIST}; do \
 		for arch in ${ARCH_LIST}; do \
 			echo "Building for OS($${os}) and Arch($${arch})"; \
-			GOOS=$${os} GOARCH=$${arch} go build -v -ldflags "$(LDFLAGS)" -o "bin/vizix_$${os}_$${arch}"; \
+			GOOS=$${os} GOARCH=$${arch} go build -v -ldflags "$(LDFLAGS)" -o "bin/vega_$${os}_$${arch}"; \
 		done \
 	done
+
+
+.PHONY: release-dry-run
+release-dry-run:
+	goreleaser --snapshot --skip-publish --rm-dist
+
+
+.PHONY: release-using-gorelease
+release-using-gorelease:
+	goreleaser --rm-dist
 
 
 .PHONY: clean
