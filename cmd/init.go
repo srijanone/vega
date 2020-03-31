@@ -9,7 +9,6 @@ import (
 
 	common "github.com/srijanone/vega/pkg/common"
 	vega "github.com/srijanone/vega/pkg/core"
-	downloader "github.com/srijanone/vega/pkg/downloader"
 )
 
 const (
@@ -79,9 +78,12 @@ func (iCmd *initCmd) setupVegaHome() error {
 	}
 
 	// Ensuring default starter kits exists or not
-	d := downloader.Downloader{}
-	sourceRepo := fmt.Sprintf("%s//%s", starterKitsRepoName, starterKitsDirName)
-	fmt.Fprintln(iCmd.out, "Downloading starterkits...")
-	d.Download(sourceRepo, iCmd.home.StarterKits())
+	defaultStarterKit := vega.StarterKitRepo{
+		Name: "default",
+		URL:  starterKitsRepoName,
+		Home: iCmd.home,
+		Dir:  starterKitsDirName,
+	}
+	defaultStarterKit.Add()
 	return nil
 }

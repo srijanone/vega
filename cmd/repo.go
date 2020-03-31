@@ -19,5 +19,6 @@ func newRepoCmd(out io.Writer) *cobra.Command {
 		},
 	}
 	repoCmd.AddCommand(newAddCmd(out))
+	repoCmd.AddCommand(newRepositoryList(out))
 	return repoCmd
 }

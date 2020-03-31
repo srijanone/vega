@@ -5,15 +5,16 @@ import (
 	"io"
 
 	vega "github.com/srijanone/vega/pkg/core"
-	"github.com/srijanone/vega/pkg/downloader"
 
 	"github.com/spf13/cobra"
 )
 
 type starterkitAddCmd struct {
 	URL  string
+	dst  string
 	out  io.Writer
 	home vega.Home
+	name string
 }
 
 func newAddCmd(out io.Writer) *cobra.Command {
@@ -21,12 +22,13 @@ func newAddCmd(out io.Writer) *cobra.Command {
 	skAddCmd := starterkitAddCmd{out: out}
 
 	addCmd := &cobra.Command{
-		Use:   "add [address]",
+		Use:   "add [name] [url]",
 		Short: addCmdDesc,
-		Args:  cobra.ExactArgs(1),
+		Args:  cobra.ExactArgs(2),
 		Long:  addCmdDesc,
 		Run: func(cmd *cobra.Command, args []string) {
-			skAddCmd.URL = args[0]
+			skAddCmd.name = args[0]
+			skAddCmd.URL = args[1]
 			skAddCmd.home = vega.Home(homePath())
 			skAddCmd.add()
 		},
@@ -34,13 +36,13 @@ func newAddCmd(out io.Writer) *cobra.Command {
 	return addCmd
 }
 
-func (cmd *starterkitAddCmd) add() error {
-	//TODO: Merge multiple repo
-	//TODO: Allow local starter kit repo
-	fmt.Println("Adding new repo:", cmd.URL)
-	d := downloader.Downloader{}
-	sourceRepo := fmt.Sprintf("%s//%s", cmd.URL, "starterkits")
-	fmt.Fprintln(cmd.out, "Downloading starterkits...")
-	d.Download(sourceRepo, cmd.home.Caches())
-	return nil
+func (cmd *starterkitAddCmd) add() {
+	starterKitsRepo := vega.StarterKitRepo{
+		Name: cmd.name,
+		URL:  cmd.URL,
+		Home: cmd.home,
+	}
+
+	fmt.Fprintln(cmd.out, "Adding new repo:", cmd.URL)
+	starterKitsRepo.Add()
 }

@@ -7,6 +7,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	downloader "github.com/srijanone/vega/pkg/downloader"
 )
 
 // ErrStarterKitNotFoundInRepo is the error returned when a starterkit is not found in a starterkits
@@ -14,10 +16,33 @@ var ErrStarterKitNotFoundInRepo = errors.New("starterkit not found")
 
 type StarterKitRepo struct {
 	Name string
-	Path string
+	Path string // local absolute path to repo
+	Home Home
+	URL  string
+	Dir  string // starterkit directory name at source/remote
 }
 
-// Gets the list of all StarterKits for given repo.
+// Repositories list of all the local Repositories
+func Repositories(path string) ([]StarterKitRepo, error) {
+
+	var repositories []StarterKitRepo
+	files, err := ioutil.ReadDir(path)
+	if err != nil {
+		return nil, err
+	}
+	for _, file := range files {
+		if file.IsDir() {
+			repository := &StarterKitRepo{
+				Name: file.Name(),
+				Path: filepath.ToSlash(filepath.Join(path, file.Name())),
+			}
+			repositories = append(repositories, *repository)
+		}
+	}
+	return repositories, nil
+}
+
+// List Gets the list of all StarterKits for given repo.
 func (repo *StarterKitRepo) List() (StarterKits, error) {
 	var starterkits StarterKits
 
@@ -46,7 +71,7 @@ func (repo *StarterKitRepo) List() (StarterKits, error) {
 	return starterkits, nil
 }
 
-// Finds a starterkits matching with the given name
+//Find return starterkits matching with the given name
 func (repo *StarterKitRepo) Find(name string) ([]StarterKit, error) {
 	var starterkits StarterKits
 
@@ -66,4 +91,18 @@ func (repo *StarterKitRepo) Find(name string) ([]StarterKit, error) {
 		}
 	}
 	return starterkits, nil
+}
+
+//Add add staterkits repo to vega and download all the starterkits
+func (repo StarterKitRepo) Add() {
+	d := downloader.Downloader{}
+	if repo.Dir == "" {
+		repo.Dir = "starterkits"
+	}
+	sourceRepo := fmt.Sprintf("%s//%s", repo.URL, repo.Dir)
+	fmt.Println("Downloading starterkits...")
+	if repo.Path == "" {
+		repo.Path = filepath.Join(repo.Home.StarterKits(), repo.Name)
+	}
+	d.Download(sourceRepo, repo.Path)
 }

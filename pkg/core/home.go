@@ -21,6 +21,10 @@ func (home Home) StarterKits() string {
 	return home.Path("starterkits")
 }
 
+func (home Home) Repos() string {
+	return home.Path("repos")
+}
+
 func (home Home) Logs() string {
 	return home.Path("logs")
 }

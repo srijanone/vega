@@ -16,6 +16,7 @@ type createCmd struct {
 	home           vega.Home
 	dest           string
 	repositoryName string
+	repo           string
 }
 
 func newCreateCmd(out io.Writer) *cobra.Command {
@@ -44,6 +45,7 @@ func newCreateCmd(out io.Writer) *cobra.Command {
 
 	flags := createCmd.Flags()
 	flags.StringVarP(&cCmd.starterkit, "starterkit", "s", "", "name of the Vega starterkit to scaffold the app")
+	flags.StringVarP(&cCmd.repo, "repo", "r", "default", "name of the starterkit repo")
 	cobra.MarkFlagRequired(flags, "starterkit")
 	return createCmd
 }
@@ -60,9 +62,10 @@ func (cCmd *createCmd) execute() error {
 		return nil
 	}
 
+	path := filepath.Join(cCmd.home.StarterKits(), cCmd.repo)
 	starterkitRepo := vega.StarterKitRepo{
-		Name: "local",
-		Path: cCmd.home.StarterKits(),
+		Name: cCmd.repo,
+		Path: path,
 	}
 
 	starterkits, err := starterkitRepo.Find(cCmd.starterkit)
@@ -72,13 +75,12 @@ func (cCmd *createCmd) execute() error {
 
 	if len(starterkits) == 1 {
 		starterkit := starterkits[0]
-		fmt.Fprintln(cCmd.out, "Found starterkit", cCmd.starterkit)
 		starterkit.Create(cCmd.dest)
 	} else if len(starterkits) > 0 {
 		// TODO: display proper list of matching kits
 		return fmt.Errorf("Multiple starterkit named %s found: %v", cCmd.starterkit, starterkits)
 	} else {
-		return fmt.Errorf("No starterkit found with name %s", cCmd.starterkit)
+		return fmt.Errorf("No starterkit found with name %s in %s repo", cCmd.starterkit, cCmd.repo)
 	}
 
 	fmt.Fprintln(cCmd.out, "Ready for development")

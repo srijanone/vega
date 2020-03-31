@@ -1,6 +1,8 @@
 package vega
 
 import (
+	"fmt"
+
 	"github.com/otiai10/copy"
 )
 
@@ -17,6 +19,7 @@ const DockerfileName string = "Dockerfile"
 
 func (sk *StarterKit) Create(dest string) error {
 	// TODO: Merge gracefully in future
+	fmt.Printf("Creating strterkit %s ... \n", sk.Name)
 	err := copy.Copy(sk.Path, dest)
 	return err
 }
