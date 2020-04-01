@@ -2,7 +2,7 @@ FROM composer:1 AS build-env
 COPY . /app
 RUN cd /app && composer install
 
-FROM php:7.1-apache
+FROM php:7.4-apache
 ENV PORT 80
 EXPOSE 80
 COPY --from=build-env /app /var/www/html
