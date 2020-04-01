@@ -42,7 +42,7 @@ build-all:
 	@for os in ${OS_LIST}; do \
 		for arch in ${ARCH_LIST}; do \
 			echo "Building for OS($${os}) and Arch($${arch})"; \
-			GOOS=$${os} GOARCH=$${arch} go build -v -ldflags "$(LDFLAGS)" -o "bin/vega_$${os}_$${arch}"; \
+			GOOS=$${os} GOARCH=$${arch} go build -v -ldflags "$(LDFLAGS)" -o "bin/$(PROJECT)_$${os}_$${arch}"; \
 		done \
 	done
 
