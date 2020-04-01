@@ -19,7 +19,7 @@ const DockerfileName string = "Dockerfile"
 
 func (sk *StarterKit) Create(dest string) error {
 	// TODO: Merge gracefully in future
-	fmt.Printf("Creating strterkit %s ... \n", sk.Name)
+	fmt.Printf("Creating starterkit %s ... \n", sk.Name)
 	err := copy.Copy(sk.Path, dest)
 	return err
 }

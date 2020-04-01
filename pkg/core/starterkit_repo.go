@@ -22,8 +22,8 @@ type StarterKitRepo struct {
 	Dir  string // starterkit directory name at source/remote
 }
 
-// Repositories list of all the local Repositories
-func Repositories(path string) ([]StarterKitRepo, error) {
+// RepoList list of all the local Repositories
+func RepoList(path string) ([]StarterKitRepo, error) {
 
 	var repositories []StarterKitRepo
 	files, err := ioutil.ReadDir(path)
@@ -94,7 +94,21 @@ func (repo *StarterKitRepo) Find(name string) ([]StarterKit, error) {
 }
 
 //Add add staterkits repo to vega and download all the starterkits
-func (repo StarterKitRepo) Add() {
+func (repo *StarterKitRepo) Add() {
+	d := downloader.Downloader{}
+	if repo.Dir == "" {
+		repo.Dir = "starterkits"
+	}
+	sourceRepo := fmt.Sprintf("%s//%s", repo.URL, repo.Dir)
+	fmt.Println("Downloading starterkits...")
+	if repo.Path == "" {
+		repo.Path = filepath.Join(repo.Home.StarterKits(), repo.Name)
+	}
+	d.Download(sourceRepo, repo.Path)
+}
+
+//Delete starterkit repo
+func (repo StarterKitRepo) Delete() {
 	d := downloader.Downloader{}
 	if repo.Dir == "" {
 		repo.Dir = "starterkits"

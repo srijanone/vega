@@ -8,14 +8,14 @@ import (
 	vega "github.com/srijanone/vega/pkg/core"
 )
 
-type RepositoryListCmd struct {
+type repositoryListCmd struct {
 	out  io.Writer
 	home vega.Home
 }
 
 func newRepositoryList(out io.Writer) *cobra.Command {
 	const listCmdDesc = "list all the starterkit repositories available locally"
-	repositoryListCmd := RepositoryListCmd{
+	repoListCmd := repositoryListCmd{
 		out: out,
 	}
 	listCmd := &cobra.Command{
@@ -23,17 +23,17 @@ func newRepositoryList(out io.Writer) *cobra.Command {
 		Short: listCmdDesc,
 		Long:  listCmdDesc,
 		Run: func(cmd *cobra.Command, args []string) {
-			repositoryListCmd.execute()
+			repoListCmd.execute()
 		},
 	}
 
-	repositoryListCmd.home = vega.Home(homePath())
+	repoListCmd.home = vega.Home(homePath())
 
 	return listCmd
 }
 
-func (cmd *RepositoryListCmd) execute() error {
-	repositories, err := vega.Repositories(cmd.home.StarterKits())
+func (cmd *repositoryListCmd) execute() error {
+	repositories, err := vega.RepoList(cmd.home.StarterKits())
 	if err != nil {
 		return err
 	}

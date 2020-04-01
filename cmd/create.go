@@ -11,12 +11,11 @@ import (
 )
 
 type createCmd struct {
-	out            io.Writer
-	starterkit     string
-	home           vega.Home
-	dest           string
-	repositoryName string
-	repo           string
+	out        io.Writer
+	starterkit string
+	home       vega.Home
+	dest       string
+	repo       string
 }
 
 func newCreateCmd(out io.Writer) *cobra.Command {
