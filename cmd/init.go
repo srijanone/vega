@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	starterKitsRepoName = "git@github.com:Azure/draft.git" // TODO: Change this to vega once make public
-	starterKitsDirName  = "packs"
+	starterKitsRepoName = "git@github.com:srijanone/vega.git"
+	starterKitsDirName  = "starterkits"
 )
 
 type initCmd struct {

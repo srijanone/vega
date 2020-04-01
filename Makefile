@@ -1,20 +1,20 @@
-PROJECT 	:= "vega"
+PROJECT 		:= "vega"
 
 GIT_COMMIT 	:= `git rev-parse HEAD`
-GIT_SHA 	:= `git rev-parse --short HEAD`
-GIT_TAG 	:= `git describe --tags --abbrev=0 --exact-match 2>/dev/null || echo "canary"`
+GIT_SHA 		:= `git rev-parse --short HEAD`
+GIT_TAG 		:= `git describe --tags --abbrev=0 --exact-match 2>/dev/null || echo "canary"`
 BUILD_TIME  := `date -u +"%Y-%m-%dT%H:%M:%SZ"`
 
-LDFLAGS 	:= ""
-LDFLAGS 	+= -X=github.com/srijanone/vega/pkg/version.SemVer=$(GIT_TAG)
-LDFLAGS 	+= -X=github.com/srijanone/vega/pkg/version.GitCommit=$(GIT_COMMIT)
-LDFLAGS 	+= -X=github.com/srijanone/vega/pkg/version.BuildTime=$(BUILD_TIME)
+LDFLAGS 		:= ""
+LDFLAGS 		+= -X=github.com/srijanone/vega/pkg/version.SemVer=$(GIT_TAG)
+LDFLAGS 		+= -X=github.com/srijanone/vega/pkg/version.GitCommit=$(GIT_COMMIT)
+LDFLAGS 		+= -X=github.com/srijanone/vega/pkg/version.BuildTime=$(BUILD_TIME)
 
-OS 			:= `uname | tr '[:upper:]' '[:lower:]'`
-OS_LIST		:= darwin linux windows
+OS 					:= `uname | tr '[:upper:]' '[:lower:]'`
+OS_LIST			:= darwin linux windows
 
-ARCH 		:= `uname -m`
-ARCH_LIST	:= 386 amd64
+ARCH 				:= `uname -m`
+ARCH_LIST		:= 386 amd64
 
 
 .PHONY: info
