@@ -35,9 +35,24 @@ vega up
 vega down
 ```
 
+## Commands
+
+
+| Command                                      | Description                                                                           | Arguments                                       | Output     |
+| -------------------------------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------- | ---------- |
+| `vega`                                         | Prints out usage and help                                                             | `\--home <path/to/home>`                          |            |
+| `vega version`                                 | Prints out version                                                                    |                                                 | Vega 1.0.0 |
+| `vega home`                                    | Prints out home vega home                                                             |                                                 |            |
+| `vega starterkit list`                         | List all available starterkits                                                        |                                                 | drupal8    |
+| `vega create \[path\] --starterkit <name>`     | Creates the starter kit in current directory. Can choose folder/github repo. as well. | `\--starterkit <name><br>\--repo <repo>`          |            |
+| `vega repo add <repo-name> <url>`              | Add another starterkit repo                                                           |                                                 |            |
+| `vega repo list`                               | Lists all the repo available                                                          |                                                 |            |
+| `vega up`                                      | Runs the application                                                                  | \--port <log-port><br>\--watch<br>\--no-browser |            |
+| `vega down`                                    | Remove the application resources                                                      |                                                 |            |
+
 ---
 
-## Development
+### Development
 
 `go run main.go`
 
@@ -49,7 +64,7 @@ vega down
 
 - [x] Basic Functionality
 - [x] Release Binaries
-- [ ] Dockerize
+- [x] Dockerize
 - [x] Makefile
   - run
   - test

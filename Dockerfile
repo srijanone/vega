@@ -16,7 +16,8 @@ FROM alpine:latest
 RUN apk update
 RUN apk add --no-cache bash
 RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache git
 
 COPY --from=builder /go/bin/vega .
 
-ENTRYPOINT ["./vega"]
+ENTRYPOINT ["vega"]
