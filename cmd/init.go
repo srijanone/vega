@@ -39,7 +39,6 @@ func newInitCmd(out io.Writer, in io.Reader) *cobra.Command {
 			if len(args) != 0 {
 				return errors.New("Command does not accept arguments")
 			}
-			fmt.Println("Vega Home: ", homePath())
 			init.home = vega.Home(homePath())
 			return init.execute()
 		},

@@ -10,11 +10,10 @@ import (
 )
 
 type repoAddCmd struct {
-	URL  string
-	dst  string
 	out  io.Writer
 	home vega.Home
 	name string
+	URL  string
 }
 
 func newAddCmd(out io.Writer) *cobra.Command {
@@ -45,6 +44,6 @@ func (rAddCmd *repoAddCmd) execute() {
 		Home: rAddCmd.home,
 	}
 
-	fmt.Fprintln(rAddCmd.out, "Adding new repo:", rAddCmd.URL)
+	fmt.Fprintf(rAddCmd.out, "Adding new repo %s from %s", rAddCmd.name, rAddCmd.URL)
 	starterKitsRepo.Add()
 }

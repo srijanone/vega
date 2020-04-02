@@ -13,21 +13,21 @@ type repositoryListCmd struct {
 	home vega.Home
 }
 
-func newRepositoryList(out io.Writer) *cobra.Command {
+func newRepositoryCmdList(out io.Writer) *cobra.Command {
+	rListCmd := repositoryListCmd{out: out}
+
 	const listCmdDesc = "list all the starterkit repositories available locally"
-	repoListCmd := repositoryListCmd{
-		out: out,
-	}
+
 	listCmd := &cobra.Command{
 		Use:   "list",
 		Short: listCmdDesc,
 		Long:  listCmdDesc,
 		Run: func(cmd *cobra.Command, args []string) {
-			repoListCmd.execute()
+			rListCmd.execute()
 		},
 	}
 
-	repoListCmd.home = vega.Home(homePath())
+	rListCmd.home = vega.Home(homePath())
 
 	return listCmd
 }
@@ -37,9 +37,9 @@ func (cmd *repositoryListCmd) execute() error {
 	if err != nil {
 		return err
 	}
-	fmt.Fprintln(cmd.out, "Availabe Repositories:")
+	fmt.Fprintln(cmd.out, "Available Repositories:")
 	for _, repo := range repositories {
-		fmt.Fprintln(cmd.out, repo.Name)
+		fmt.Fprintf(cmd.out, "  %20s (%s)\n", repo.Name, repo.Path)
 	}
 	return nil
 }

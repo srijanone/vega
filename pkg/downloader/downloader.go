@@ -43,10 +43,3 @@ func (d *Downloader) Download(src string, dest string) {
 
 	wg.Wait()
 }
-
-// For testing now, will be removed
-//func main() {
-//	fmt.Println("Downloading")
-//	d := &Downloader{}
-//	d.Download("git@github.com:Azure/draft.git//packs", "packs")
-//}

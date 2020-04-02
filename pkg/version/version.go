@@ -3,8 +3,8 @@ package version
 import "fmt"
 
 type Version struct {
-	Version   string `json:"version"`
-	GitCommit string `json:"git-commit"`
+	Version   string
+	GitCommit string
 }
 
 func (v *Version) String() string {

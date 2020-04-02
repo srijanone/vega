@@ -28,18 +28,3 @@ func EnsureDir(dir string) error {
 
 	return nil
 }
-
-func EnsureFile(filename string) error {
-	info, err := os.Stat(filename)
-	if err != nil {
-		file, err := os.Create(filename)
-		if err != nil {
-			return fmt.Errorf("Could not create %s: %s", filename, err)
-		}
-		defer file.Close()
-	} else if info.IsDir() {
-		return fmt.Errorf("%s must not be a directory", filename)
-	}
-
-	return nil
-}

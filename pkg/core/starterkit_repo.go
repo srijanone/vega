@@ -19,13 +19,15 @@ type StarterKitRepo struct {
 	Path string // local absolute path to repo
 	Home Home
 	URL  string
-	Dir  string // starterkit directory name at source/remote
+	Dir  string // starterkits directory name at source/remote
 }
+
+type StarterKitRepos []StarterKitRepo
 
 // RepoList list of all the local Repositories
 func RepoList(path string) ([]StarterKitRepo, error) {
+	var repositories StarterKitRepos
 
-	var repositories []StarterKitRepo
 	files, err := ioutil.ReadDir(path)
 	if err != nil {
 		return nil, err
@@ -42,14 +44,14 @@ func RepoList(path string) ([]StarterKitRepo, error) {
 	return repositories, nil
 }
 
-// List Gets the list of all StarterKits for given repo.
-func (repo *StarterKitRepo) List() (StarterKits, error) {
+// StarterKitList Gets the list of all StarterKits for given repo.
+func (repo *StarterKitRepo) StarterKitList() (StarterKits, error) {
 	var starterkits StarterKits
 
 	switch fileInfo, err := os.Stat(repo.Path); {
 	case err != nil:
 		if os.IsNotExist(err) {
-			return nil, errors.New(fmt.Sprintf("starterkit local repo %s not found", repo.Path))
+			return nil, errors.New("No repo found, please type `vega init`")
 		}
 	case !fileInfo.IsDir():
 		return nil, errors.New(fmt.Sprintf("%s is not a starterkit repo", repo.Path))
@@ -71,11 +73,11 @@ func (repo *StarterKitRepo) List() (StarterKits, error) {
 	return starterkits, nil
 }
 
-//Find return starterkits matching with the given name
+// Find returns the starterkits matching with the given name
 func (repo *StarterKitRepo) Find(name string) ([]StarterKit, error) {
 	var starterkits StarterKits
 
-	starterkitList, err := repo.List()
+	starterkitList, err := repo.StarterKitList()
 	if err != nil {
 		return nil, err
 	}
@@ -93,11 +95,11 @@ func (repo *StarterKitRepo) Find(name string) ([]StarterKit, error) {
 	return starterkits, nil
 }
 
-//Add add staterkits repo to vega and download all the starterkits
+// Add adds repo and starterkits to vega
 func (repo *StarterKitRepo) Add() {
 	d := downloader.Downloader{}
 	if repo.Dir == "" {
-		repo.Dir = "starterkits"
+		repo.Dir = repo.Home.StarterKits()
 	}
 	sourceRepo := fmt.Sprintf("%s//%s", repo.URL, repo.Dir)
 	fmt.Println("Downloading starterkits...")
@@ -107,16 +109,10 @@ func (repo *StarterKitRepo) Add() {
 	d.Download(sourceRepo, repo.Path)
 }
 
-//Delete starterkit repo
+// Delete deletes the starterkit repo
 func (repo StarterKitRepo) Delete() {
-	d := downloader.Downloader{}
 	if repo.Dir == "" {
-		repo.Dir = "starterkits"
+		repo.Dir = repo.Home.StarterKits()
 	}
-	sourceRepo := fmt.Sprintf("%s//%s", repo.URL, repo.Dir)
-	fmt.Println("Downloading starterkits...")
-	if repo.Path == "" {
-		repo.Path = filepath.Join(repo.Home.StarterKits(), repo.Name)
-	}
-	d.Download(sourceRepo, repo.Path)
+	// TODO
 }

@@ -45,7 +45,7 @@ func (cmd *starterkitListCmd) execute() error {
 		Name: cmd.repo,
 		Path: path,
 	}
-	starterkits, err := starterkitRepo.List()
+	starterkits, err := starterkitRepo.StarterKitList()
 	if err != nil {
 		return err
 	}

@@ -14,9 +14,7 @@ type versionCmd struct {
 }
 
 func newVersionCmd(out io.Writer) *cobra.Command {
-	vCmd := &versionCmd{
-		out: out,
-	}
+	vCmd := &versionCmd{out: out}
 
 	const versionDesc = "print version"
 

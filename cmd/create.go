@@ -12,16 +12,14 @@ import (
 
 type createCmd struct {
 	out        io.Writer
-	starterkit string
 	home       vega.Home
+	starterkit string
 	dest       string
 	repo       string
 }
 
 func newCreateCmd(out io.Writer) *cobra.Command {
-	cCmd := &createCmd{
-		out: out,
-	}
+	cCmd := &createCmd{out: out}
 
 	const createDesc = "create starterkit"
 
@@ -43,7 +41,7 @@ func newCreateCmd(out io.Writer) *cobra.Command {
 	cCmd.home = vega.Home(homePath())
 
 	flags := createCmd.Flags()
-	flags.StringVarP(&cCmd.starterkit, "starterkit", "s", "", "name of the Vega starterkit to scaffold the app")
+	flags.StringVarP(&cCmd.starterkit, "starterkit", "s", "", "name of the vega starterkit to scaffold the app")
 	flags.StringVarP(&cCmd.repo, "repo", "r", "default", "name of the starterkit repo")
 	cobra.MarkFlagRequired(flags, "starterkit")
 	return createCmd
