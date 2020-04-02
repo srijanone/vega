@@ -7,6 +7,4 @@ require (
 	github.com/otiai10/copy v1.1.1
 	github.com/sirupsen/logrus v1.5.0
 	github.com/spf13/cobra v0.0.7
-	github.com/sirupsen/logrus v1.5.0
-	github.com/spf13/cobra v0.0.6
 )

@@ -32,6 +32,8 @@ brews:
     folder: Formula
     description: "vega"
     skip_upload: false
+    dependencies:
+      - windmilleng/tap/tilt
     install: |
       bin.install "vega"
     test: |
