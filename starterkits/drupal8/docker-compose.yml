@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  php:
+    image: srijanlabs/php-fpm:7.2-1.x-dev
+    build:
+      context: .
+      dockerfile: Dockerfile-fpm
+    ports:
+      - 9000:9000
+  apache:
+    image: srijanlabs/apache:1.x
+    build:
+      context: .
+      dockerfile: Dockerfile-apache
+    ports:
+      - 8080:8080
+    volumes:
+      - ./apache/vhost/app.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - php
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+volumes:
+  app:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}
