@@ -6,22 +6,23 @@ Vega (वेग) is developer friendly project scaffolding tool to speed up deve
 
 ## Installation
 
-Via **Go Get**:
+Several options to install:
 
-```
-go get github.com/srijanone/vega
-```
+- Via **Homebrew**: `brew install srijanone/vega/vega`
+  - (Mac and Linux only)
+  - Update vega: `brew update && brew upgrade vega` 
+- Via **Go**: `go install github.com/srijanone/vega`
+  - (This might install latest unreleases/bleeding-edge version)
+- Via released binaries:
+  - [releases](https://github.com/srijanone/vega/releases)
 
-Via **Homebrew** (Mac only):
+---
 
-```
-brew install srijanone/vega/vega
-```
+## Requirements
 
-- Update vega: `brew update && brew upgrade vega` 
-
-Via prebuilt binaries:
-- [releases](https://github.com/srijanone/vega/releases)
+- git
+- (tilt)[https://docs.tilt.dev/install.html]
+- (Docker)[https://docs.docker.com/install/]
 
 ---
 
@@ -57,10 +58,10 @@ Via prebuilt binaries:
 ---
 
 ## Development
-
 `go run main.go`
 
 - For Releasing Binaries: `goreleaser`
+  - Github Token to be created and exported: `export GITHUB_TOKEN=<token>`
 
 ---
 
@@ -75,4 +76,6 @@ Via prebuilt binaries:
 
 ## LICENSE
 
-[Apache 2.0](LICENSE)
+This software is covered under the Apache v2.0 license. You can read the [license here](LICENSE).
+
+This software uses tilt binary, which is covered by the Apache v2.0 license too.
