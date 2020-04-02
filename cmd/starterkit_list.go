@@ -21,7 +21,7 @@ func newStarterKitListCmd(out io.Writer) *cobra.Command {
 		out: out,
 	}
 
-	const listCmdDesc = "List starterkits"
+	const listCmdDesc = "list starterkits"
 
 	listCmd := &cobra.Command{
 		Use:   "list",

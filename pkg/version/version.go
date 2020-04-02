@@ -3,40 +3,37 @@ package version
 import "fmt"
 
 type Version struct {
-	SemVer       string `json:"semver"`
-	GitCommit    string `json:"git-commit"`
-	GitTreeState string `json:"git-tree-state"`
+	Version   string `json:"version"`
+	GitCommit string `json:"git-commit"`
 }
 
 func (v *Version) String() string {
-	return v.SemVer
+	return v.Version
 }
 
 func (v *Version) FormatVersion(short bool) string {
 	if short {
-		return fmt.Sprintf("%s+g%s", v.SemVer, v.GitCommit[:7])
+		return fmt.Sprintf("%s+%s", v.Version, v.GitCommit[:7])
 	}
 	return fmt.Sprintf("%#v", v)
 }
 
 var (
-	Release       = "canary"
-	BuildMetadata = ""
-	GitCommit     = ""
-	GitTreeState  = ""
+	SemVer    = "canary"
+	GitCommit = ""
+	BuildTime = ""
 )
 
 func getVersion() string {
-	if BuildMetadata == "" {
-		return Release
+	if BuildTime == "" {
+		return SemVer
 	}
-	return Release + "+" + BuildMetadata
+	return fmt.Sprintf("%s+%s", SemVer, BuildTime)
 }
 
 func New() *Version {
 	return &Version{
-		SemVer:       getVersion(),
-		GitCommit:    GitCommit,
-		GitTreeState: GitTreeState,
+		Version:   getVersion(),
+		GitCommit: GitCommit,
 	}
 }

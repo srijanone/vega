@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	starterKitsRepoName = "git@github.com:Azure/draft.git" // TODO: Change this to vega once make public
-	starterKitsDirName  = "packs"
+	starterKitsRepoName = "git@github.com:srijanone/vega.git"
+	starterKitsDirName  = "starterkits"
 )
 
 type initCmd struct {
@@ -29,7 +29,7 @@ func newInitCmd(out io.Writer, in io.Reader) *cobra.Command {
 		out: out,
 	}
 
-	const initDesc = `sets up local configuration in $VEGA_HOME (default ~/.vega/) with default starter-kits`
+	const initDesc = `sets up local configuration in $VEGA_HOME with default starterkits`
 
 	initCmd := &cobra.Command{
 		Use:   "init",

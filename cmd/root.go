@@ -19,8 +19,6 @@ var (
 	flagDebug bool
 	vegaHome  string
 	rootCmd   *cobra.Command
-	// TODO: globalConfig is the configuration stored in $VEGA_HOME/config.toml
-	// globalConfig VegaConfig
 )
 
 func init() {
@@ -44,7 +42,7 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 	}
 
 	persistentFlags := cmd.PersistentFlags()
-	persistentFlags.StringVar(&vegaHome, "home", defaultVegaHome(), "location of your Vega init directory ($VEGA_HOME)")
+	persistentFlags.StringVar(&vegaHome, "home", defaultVegaHome(), "location of your Vega init directory")
 	persistentFlags.BoolVar(&flagDebug, "debug", false, "enable verbose output")
 
 	cmd.AddCommand(newInitCmd(out, in))
@@ -81,13 +79,6 @@ func debug(format string, args ...interface{}) {
 		format = fmt.Sprintf("[debug] %s\n", format)
 		fmt.Printf(format, args...)
 	}
-}
-
-func validateArgs(args, expectedArgs []string) error {
-	if len(args) != len(expectedArgs) {
-		return fmt.Errorf("This command needs %v argument(s): %v", len(expectedArgs), expectedArgs)
-	}
-	return nil
 }
 
 // Execute root command
