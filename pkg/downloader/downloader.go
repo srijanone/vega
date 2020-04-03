@@ -14,7 +14,7 @@ type Downloader struct{}
 func (d *Downloader) Download(src string, dest string) {
 	pwd, err := os.Getwd()
 	if err != nil {
-		fmt.Println("Error in getting working directory: %s", err)
+		fmt.Println("Error in getting working directory:", err)
 	}
 
 	opts := []getter.ClientOption{}
@@ -36,7 +36,8 @@ func (d *Downloader) Download(src string, dest string) {
 	go func() {
 		defer wg.Done()
 		if err := client.Get(); err != nil {
-			fmt.Println("Error in downloading", err)
+			fmt.Println("Error in downloading, make sure the repo address is valid")
+			fmt.Println(err)
 			errChannel <- err
 		}
 	}()

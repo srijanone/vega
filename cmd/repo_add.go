@@ -18,9 +18,9 @@ type repoAddCmd struct {
 
 func newAddCmd(out io.Writer) *cobra.Command {
 	rAddCmd := repoAddCmd{out: out}
-	
+
 	const addCmdDesc = "add starterkits repository"
-	
+
 	addCmd := &cobra.Command{
 		Use:   "add [name] [url]",
 		Short: addCmdDesc,
@@ -33,7 +33,7 @@ func newAddCmd(out io.Writer) *cobra.Command {
 			rAddCmd.execute()
 		},
 	}
-	
+
 	return addCmd
 }
 
@@ -44,6 +44,6 @@ func (rAddCmd *repoAddCmd) execute() {
 		Home: rAddCmd.home,
 	}
 
-	fmt.Fprintf(rAddCmd.out, "Adding new repo %s from %s", rAddCmd.name, rAddCmd.URL)
+	fmt.Fprintf(rAddCmd.out, "Adding new repo %s from %s\n", rAddCmd.name, rAddCmd.URL)
 	starterKitsRepo.Add()
 }
