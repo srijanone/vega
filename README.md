@@ -80,7 +80,7 @@ Several options to install:
 ## Development
 `go run main.go`
 
-- For Releasing Binaries: `goreleaser`
+- To Release Binaries: `goreleaser`
   - Github Token to be created and exported: `export GITHUB_TOKEN=<token>`
 
 ---
