@@ -51,7 +51,7 @@ func (repo *StarterKitRepo) StarterKitList() (StarterKits, error) {
 	switch fileInfo, err := os.Stat(repo.Path); {
 	case err != nil:
 		if os.IsNotExist(err) {
-			return nil, errors.New("No repo found, please type `vega init`")
+			return nil, errors.New(fmt.Sprintf("No repo found with name %s", repo.Name))
 		}
 	case !fileInfo.IsDir():
 		return nil, errors.New(fmt.Sprintf("%s is not a starterkit repo", repo.Path))
