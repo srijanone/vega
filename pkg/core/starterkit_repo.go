@@ -99,7 +99,7 @@ func (repo *StarterKitRepo) Find(name string) ([]StarterKit, error) {
 func (repo *StarterKitRepo) Add() {
 	d := downloader.Downloader{}
 	if repo.Dir == "" {
-		repo.Dir = repo.Home.StarterKits()
+		repo.Dir = Home("").StarterKits()
 	}
 	sourceRepo := fmt.Sprintf("%s//%s", repo.URL, repo.Dir)
 	fmt.Println("Downloading starterkits...")
