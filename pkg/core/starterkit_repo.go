@@ -7,6 +7,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	downloader "github.com/srijanone/vega/pkg/downloader"
 )
 
 // ErrStarterKitNotFoundInRepo is the error returned when a starterkit is not found in a starterkits
@@ -14,17 +16,42 @@ var ErrStarterKitNotFoundInRepo = errors.New("starterkit not found")
 
 type StarterKitRepo struct {
 	Name string
-	Path string
+	Path string // local absolute path to repo
+	Home Home
+	URL  string
+	Dir  string // starterkits directory name at source/remote
 }
 
-// Gets the list of all StarterKits for given repo.
-func (repo *StarterKitRepo) List() (StarterKits, error) {
+type StarterKitRepos []StarterKitRepo
+
+// RepoList list of all the local Repositories
+func RepoList(path string) ([]StarterKitRepo, error) {
+	var repositories StarterKitRepos
+
+	files, err := ioutil.ReadDir(path)
+	if err != nil {
+		return nil, err
+	}
+	for _, file := range files {
+		if file.IsDir() {
+			repository := &StarterKitRepo{
+				Name: file.Name(),
+				Path: filepath.ToSlash(filepath.Join(path, file.Name())),
+			}
+			repositories = append(repositories, *repository)
+		}
+	}
+	return repositories, nil
+}
+
+// StarterKitList Gets the list of all StarterKits for given repo.
+func (repo *StarterKitRepo) StarterKitList() (StarterKits, error) {
 	var starterkits StarterKits
 
 	switch fileInfo, err := os.Stat(repo.Path); {
 	case err != nil:
 		if os.IsNotExist(err) {
-			return nil, errors.New(fmt.Sprintf("starterkit local repo %s not found", repo.Path))
+			return nil, errors.New(fmt.Sprintf("No repo found with name %s", repo.Name))
 		}
 	case !fileInfo.IsDir():
 		return nil, errors.New(fmt.Sprintf("%s is not a starterkit repo", repo.Path))
@@ -46,11 +73,11 @@ func (repo *StarterKitRepo) List() (StarterKits, error) {
 	return starterkits, nil
 }
 
-// Finds a starterkits matching with the given name
+// Find returns the starterkits matching with the given name
 func (repo *StarterKitRepo) Find(name string) ([]StarterKit, error) {
 	var starterkits StarterKits
 
-	starterkitList, err := repo.List()
+	starterkitList, err := repo.StarterKitList()
 	if err != nil {
 		return nil, err
 	}
@@ -66,4 +93,26 @@ func (repo *StarterKitRepo) Find(name string) ([]StarterKit, error) {
 		}
 	}
 	return starterkits, nil
+}
+
+// Add adds repo and starterkits to vega
+func (repo *StarterKitRepo) Add() {
+	d := downloader.Downloader{}
+	if repo.Dir == "" {
+		repo.Dir = Home("").StarterKits()
+	}
+	sourceRepo := fmt.Sprintf("%s//%s", repo.URL, repo.Dir)
+	fmt.Println("Downloading starterkits...")
+	if repo.Path == "" {
+		repo.Path = filepath.Join(repo.Home.StarterKits(), repo.Name)
+	}
+	d.Download(sourceRepo, repo.Path)
+}
+
+// Delete deletes the starterkit repo
+func (repo StarterKitRepo) Delete() {
+	if repo.Dir == "" {
+		repo.Dir = repo.Home.StarterKits()
+	}
+	// TODO
 }

@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"io"
+	"path/filepath"
 
 	vega "github.com/srijanone/vega/pkg/core"
 
@@ -12,6 +13,7 @@ import (
 type starterkitListCmd struct {
 	out  io.Writer
 	home vega.Home
+	repo string
 }
 
 func newStarterKitListCmd(out io.Writer) *cobra.Command {
@@ -29,6 +31,8 @@ func newStarterKitListCmd(out io.Writer) *cobra.Command {
 			return skListCmd.execute()
 		},
 	}
+	flags := listCmd.Flags()
+	flags.StringVarP(&skListCmd.repo, "repo", "r", "default", "name of the starterkit repo")
 
 	skListCmd.home = vega.Home(homePath())
 
@@ -36,11 +40,12 @@ func newStarterKitListCmd(out io.Writer) *cobra.Command {
 }
 
 func (cmd *starterkitListCmd) execute() error {
+	path := filepath.Join(cmd.home.StarterKits(), cmd.repo)
 	starterkitRepo := vega.StarterKitRepo{
-		Name: "local",
-		Path: cmd.home.StarterKits(),
+		Name: cmd.repo,
+		Path: path,
 	}
-	starterkits, err := starterkitRepo.List()
+	starterkits, err := starterkitRepo.StarterKitList()
 	if err != nil {
 		return err
 	}

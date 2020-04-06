@@ -9,7 +9,6 @@ import (
 
 	common "github.com/srijanone/vega/pkg/common"
 	vega "github.com/srijanone/vega/pkg/core"
-	downloader "github.com/srijanone/vega/pkg/downloader"
 )
 
 const (
@@ -40,7 +39,6 @@ func newInitCmd(out io.Writer, in io.Reader) *cobra.Command {
 			if len(args) != 0 {
 				return errors.New("Command does not accept arguments")
 			}
-			fmt.Println("Vega Home: ", homePath())
 			init.home = vega.Home(homePath())
 			return init.execute()
 		},
@@ -79,9 +77,12 @@ func (iCmd *initCmd) setupVegaHome() error {
 	}
 
 	// Ensuring default starter kits exists or not
-	d := downloader.Downloader{}
-	sourceRepo := fmt.Sprintf("%s//%s", starterKitsRepoName, starterKitsDirName)
-	fmt.Fprintln(iCmd.out, "Downloading starterkits...")
-	d.Download(sourceRepo, iCmd.home.StarterKits())
+	defaultStarterKit := vega.StarterKitRepo{
+		Name: "default",
+		URL:  starterKitsRepoName,
+		Home: iCmd.home,
+		Dir:  starterKitsDirName,
+	}
+	defaultStarterKit.Add()
 	return nil
 }
