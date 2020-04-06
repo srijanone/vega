@@ -61,3 +61,8 @@ release-using-gorelease:
 clean:
 	@echo "cleaning..."
 	rm -rf bin
+
+.PHONY: clean-home
+clean:
+	@echo "cleaning $VEGA_HOME..."
+	rm -rf ~/.vega

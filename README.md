@@ -1,8 +1,9 @@
-# वेग
+# Vega (वेग)
 
 Vega (वेग) is developer friendly project scaffolding tool to speed up development process.
 
-![Release](https://github.com/srijanone/vega/workflows/Release/badge.svg)
+[![Release](https://github.com/srijanone/vega/workflows/Release/badge.svg)](https://github.com/srijanone/vega/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/srijanone/vega)](https://goreportcard.com/report/github.com/srijanone/vega)
 
 ## Installation
 
@@ -28,6 +29,8 @@ Several options to install:
 
 ## Getting Started
 
+- `vega`: Vega usage
+![vega usage](_screenshots/vega_usage.png)
 - `vega init`: Initializes vega
 ![vega init](_screenshots/vega_init.png)
 - `vega starterkit list`: List all available starterkits
@@ -51,9 +54,16 @@ Several options to install:
 | `vega starterkit list`                         | List all available starterkits                                                        |                                                 | drupal8<br>nodejs    |
 | `vega create [path] --starterkit <name>`       | Creates the starter kit at provided directory                                         | \--starterkit <name><br>\--repo <repo>          |            |
 | `vega repo add <repo-name> <url>`              | Add another starterkit repo, Can choose local folder as well                          |                                                 |            |
-| `vega repo list`                               | Lists all the repo available                                                          |                                                 |            |
+| `vega repo list`                               | Lists all the repo available                                                          | \--repo <repo>                                  |            |
 | `vega up`                                      | Runs the application                                                                  | \--port <log-port><br>\--watch<br>\--no-browser |            |
 | `vega down`                                    | Remove the application resources                                                      |                                                 |            |
+
+#### Notes:
+- All commands can take additional `--home` flag which will override default $VEGA_HOME
+- `--repo` flag can take git url or local folder url
+  - Examples:
+    1. `vega repo add globe git@github.com:vs4vijay/vega-starterkits.git`
+    2. `vega repo add new /Users/viz/SrijanX/custom`
 
 ---
 
@@ -70,7 +80,6 @@ Several options to install:
 - Srijan Team (https://srijan.net)
 - Inspiration from Draft (https://draft.sh)
 - Utilized Tilt (https://tilt.dev) for running the application 
-
 
 ---
 
