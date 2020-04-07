@@ -1,6 +1,5 @@
-FROM srijanlabs/php-cli:7.2-1.x as build
-ADD --chown=continua:continua . /app
-RUN composer install --no-dev --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
+ARG CLI_IMAGE
+FROM ${CLI_IMAGE} as cli
 
-FROM srijanlabs/php-fpm:7.2-1.x-dev
-COPY --from=build /app /app
+FROM srijanlabs/php-fpm:7.3-1.x-dev
+COPY --from=cli /app /app
