@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 	"runtime"
 
-	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
@@ -33,9 +32,6 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 		Short: rootDesc,
 		Long:  rootDesc,
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) (err error) {
-			if flagDebug {
-				log.SetLevel(log.DebugLevel)
-			}
 			os.Setenv(homeEnvVar, vegaHome)
 			return
 		},

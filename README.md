@@ -47,6 +47,8 @@ Several options to install:
 
 - `vega up`
 
+![vega down](_screenshots/vega_up.png)
+
 - `vega down`
 
 ![vega down](_screenshots/vega_down.png)
@@ -66,7 +68,7 @@ Several options to install:
 | `vega repo add <repo-name> <url>`              | Add another starterkit repo, Can choose local folder as well                          |                                                 |            |
 | `vega repo list`                               | Lists all the repo available                                                          | \--repo <repo>                                  |            |
 | `vega up`                                      | Runs the application                                                                  | \--port <log-port><br>\--watch<br>\--no-browser |            |
-| `vega down`                                    | Remove the application resources                                                      |                                                 |            |
+| `vega down`                                    | Stops the application and deletes the resources                                       |                                                 |            |
 
 #### Notes:
 - All commands can take additional `--home` flag which will override default $VEGA_HOME
