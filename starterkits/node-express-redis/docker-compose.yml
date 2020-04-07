@@ -1,0 +1,22 @@
+version: '3.5'
+services:
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+  app:
+    build:
+      context: .
+    image: vega/express-redis
+    links:
+      - redis
+    ports:
+      - 3000:3000
+    environment:
+      - REDIS_URL=redis://cache
+      - NODE_ENV=development
+      - PORT=3000
+    command:
+      sh -c 'node server.js'
+
