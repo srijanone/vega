@@ -5,10 +5,9 @@
 #   curl -fsSL https://raw.githubusercontent.com/srijanone/vega/develop/scripts/install.sh | bash
 
 VERSION="1.0.0"
-BREW=$(command -v brew1)
+BREW=$(command -v brew)
 
 set -e
-#set -x
 
 function copy_binary() {
   name="$1"
