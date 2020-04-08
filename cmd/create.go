@@ -21,7 +21,7 @@ type createCmd struct {
 func newCreateCmd(out io.Writer) *cobra.Command {
 	cCmd := &createCmd{out: out}
 
-	const createDesc = "create starterkit"
+	const createDesc = "create a project using starterkit"
 
 	createCmd := &cobra.Command{
 		Use:   "create [path]",
