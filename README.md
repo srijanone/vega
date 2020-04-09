@@ -9,9 +9,10 @@ Vega (वेग) is developer friendly project scaffolding tool to speed up deve
 
 Several options to install:
 
+- Via **Installer Script**: `curl -fsSL https://raw.githubusercontent.com/srijanone/vega/develop/scripts/install.sh | bash`
 - Via **Homebrew**: `brew install srijanone/vega/vega`
-  - (Mac and Linux only)
-  - Update vega: `brew update && brew upgrade vega` 
+  - Update vega: `brew update && brew upgrade vega`
+  - For Mac and Linux
 - Via **Go**: `go install github.com/srijanone/vega`
   - (This might install latest unreleases/bleeding-edge version)
 - Via released binaries:
