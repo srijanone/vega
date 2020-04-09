@@ -1,7 +1,4 @@
-version: '2.3'
-
-x-vega-project:
-  &vega-project drupal8
+version: '3.5'
 
 services:
 
@@ -14,13 +11,7 @@ services:
       - app:/app
 
   php:
-    build:
-      context: .
-      dockerfile: Dockerfile-fpm
-      args:
-        CLI_IMAGE: *vega-project
-    ports:
-      - 8080:8080
+    image: srijanlabs/php-cli:7.3-1.x-dev
     depends_on:
       - cli
     ports:
