@@ -6,5 +6,6 @@ RUN composer install --no-dev --prefer-dist --no-progress --no-suggest --no-inte
 
 FROM srijanlabs/php-fpm:${PHP_IMAGE_TAG}
 COPY --from=installer --chown=continua /app  /app
+COPY . /app
 
 CMD ["php-fpm", "-F"]
