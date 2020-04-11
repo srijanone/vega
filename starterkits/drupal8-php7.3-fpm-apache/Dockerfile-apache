@@ -1,5 +1,9 @@
-ARG CLI_IMAGE
-FROM ${CLI_IMAGE} as cli
+ARG PHP_FPM_IMAGE
+FROM ${PHP_FPM_IMAGE} as php-fpm
 
 FROM srijanlabs/apache:1.x
-COPY --from=cli /app /app
+COPY --from=php-fpm /app /app
+## set docroot and php-fmp address
+COPY ./apache/vhost/app.conf /etc/apache2/sites-enabled/000-default.conf
+
+CMD ["apache2ctl", "-D", "FOREGROUND"]

@@ -1,5 +1,9 @@
-ARG CLI_IMAGE
-FROM ${CLI_IMAGE} as cli
+FROM srijanlabs/php-cli:7.3-1.x as cli
+COPY composer.json composer.lock /app/
+COPY scripts ./scripts
+RUN composer install --no-dev --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
 
-FROM srijanlabs/php-fpm:7.3-1.x-dev
-COPY --from=cli /app /app
+FROM srijanlabs/php-fpm:7.3-1.x
+COPY --from=cli --chown=continua /app  /app
+
+CMD ["php-fpm", "-F"]
