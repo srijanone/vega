@@ -18,6 +18,12 @@ services:
       - 9000:9000
     volumes:
       - app:/app
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=vega
+      - DB_USER=vega
+      - DB_PASSWORD=vega
 
   apache:
     image: srijanlabs/apache:1.x
