@@ -1,8 +1,8 @@
 ARG PHP_FPM_IMAGE
-FROM ${PHP_FPM_IMAGE} as php-fpm
+FROM ${PHP_FPM_IMAGE} as fpm
 
-FROM srijanlabs/apache:1.x
-COPY --from=php-fpm /app /app
+FROM srijanlabs/apache:1.x as apache
+COPY --from=fpm /app /app
 ## set docroot and php-fmp address
 COPY ./apache/vhost/app.conf /etc/apache2/sites-enabled/000-default.conf
 

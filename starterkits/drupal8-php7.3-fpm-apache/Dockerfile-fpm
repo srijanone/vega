@@ -4,8 +4,8 @@ COPY composer.json composer.lock /app/
 COPY scripts ./scripts
 RUN composer install --no-dev --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
 
-FROM srijanlabs/php-fpm:${PHP_IMAGE_TAG}
+FROM srijanlabs/php-fpm:${PHP_IMAGE_TAG} as fpm
 COPY --from=installer --chown=continua /app  /app
-COPY . /app
+COPY --chown=continua . /app
 
 CMD ["php-fpm", "-F"]
