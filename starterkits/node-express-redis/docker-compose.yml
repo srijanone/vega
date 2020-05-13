@@ -9,14 +9,12 @@ services:
     build:
       context: .
     image: vega/express-redis
-    links:
-      - redis
+    command: ["node", "server.js"]
     ports:
       - 3000:3000
     environment:
       - REDIS_URL=redis://cache
       - NODE_ENV=development
       - PORT=3000
-    command:
-      sh -c 'node server.js'
-
+    depends_on:
+      - redis
