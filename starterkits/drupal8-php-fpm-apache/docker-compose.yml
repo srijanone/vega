@@ -1,0 +1,92 @@
+#========================================= Drupal 8 StarterKit =============================================#
+version: '3.8'
+#____________________________________________ Named Volumes ________________________________________________#
+volumes:
+  app:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}
+  mysql-data:
+  # Add These volume will increse speed on non linux hosts.
+  core:               # drupal core
+  vendor:             # php modules
+#______________________________________________ Networks ___________________________________________________#
+networks: 
+  default:
+    name: vega-${PROJECT_NAME}
+#___________________________________________ YAML extensions _______________________________________________#
+x-app-volumes: &app-volumes
+    - app:/app
+    - core:/app/web/core
+    - vendor:/app/vendor
+    # Add any custom configuration files here
+
+x-app-envsfile: &app-envsfile .env
+
+x-app-networks: &app-networks
+  - default
+  
+#_______________________________________________ Services __________________________________________________#
+services:
+  #----------------------------- permission setter ------------------------------------#
+  # Change mounted named volumes user from root(default) to continua.
+  chown:
+    image: "srijanlabs/php-cli:${PHP_VERSION}-10"
+    container_name: ${PROJECT_NAME}_chown
+    entrypoint: [ "bash", "-c"]
+    command:
+      - "chown -R continua:continua /app/{vendor,web/core}"
+    user: root
+    volumes: *app-volumes
+  #---------------------------------- php cli -----------------------------------------#
+  cli:
+    image: "srijanlabs/php-cli:${PHP_VERSION}-10"
+    container_name: ${PROJECT_NAME}_cli
+    command: ["composer", "install", "--no-dev", "--prefer-dist", "--no-progress", "--no-suggest", "--no-interaction", "--optimize-autoloader"]
+    user: continua
+    working_dir: /app
+    depends_on:
+      - chown
+    volumes:  *app-volumes
+    networks: *app-networks
+    env_file:  *app-envsfile
+  #---------------------------------- php-fpm -----------------------------------------#
+  php:
+    image: srijanlabs/php-fpm-apache:${PHP_VERSION}-10-dev
+    container_name: ${PROJECT_NAME}_php-fpm
+    command: ["php-fpm", "-F"]
+    depends_on:
+      - cli
+      - mysql
+    volumes:  *app-volumes
+    networks: *app-networks
+    env_file:  *app-envsfile
+  #---------------------------------- apache ------------------------------------------#
+  apache:
+    image: srijanlabs/php-fpm-apache:${PHP_VERSION}-10-dev
+    container_name: ${PROJECT_NAME}_apache
+    command: ["apache2ctl", "-D", "FOREGROUND"]
+    depends_on:
+      - php
+    ports:
+      - ${APPLICATION_PORT}:8080
+    volumes: *app-volumes
+    networks: *app-networks
+    env_file:  *app-envsfile
+  #------------------------------- database (mysql) -----------------------------------#
+  mysql:
+    image: mysql:5.7
+    container_name: ${PROJECT_NAME}_mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    networks: *app-networks
+#===========================================================================================================#
