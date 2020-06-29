@@ -1,0 +1,64 @@
+version: '3.5'
+
+services:
+
+  cli:
+    image: srijanlabs/php-cli:7.3-1.x-dev
+    user: continua
+    command: ["composer", "install", "--no-dev", "--prefer-dist", "--no-progress", "--no-suggest", "--no-interaction", "--optimize-autoloader"]
+    working_dir: /app
+    volumes:
+      - app:/app
+
+  php:
+    image: srijanlabs/php-fpm:7.3-1.x-dev
+    depends_on:
+      - cli
+    ports:
+      - 9000:9000
+    volumes:
+      - app:/app
+
+  apache:
+    image: srijanlabs/apache:1.x
+    working_dir: /app
+    ports:
+      - 8080:8080
+    volumes:
+      - ./apache/vhost/app.conf:/etc/apache2/sites-enabled/000-default.conf 
+      - app:/app
+    depends_on:
+      - php
+
+  db:
+    image: mysql:5.6
+    ports:
+      - "3306:3306"
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: vega
+      MYSQL_USER: vega
+      MYSQL_PASSWORD: vega
+      MYSQL_DATABASE: vega
+  
+  # mailhog:
+  #   image: mailhog/mailhog
+  #   ports:
+  #     - 8025:8025
+
+  # blackfire:
+  #   image: blackfire/blackfire
+  #   environment:
+  #     # Exposes BLACKFIRE_SERVER_* environment variables from the host
+  #     BLACKFIRE_SERVER_ID: 1ce028d2-644b-4451-9eaa-7f142f4151cc
+  #     BLACKFIRE_SERVER_TOKEN: 91471c1696eefc49bf4a397ddafc457a49825c57ccbd45916a64e23aa106add0
+
+volumes:
+  app:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}
+  data:

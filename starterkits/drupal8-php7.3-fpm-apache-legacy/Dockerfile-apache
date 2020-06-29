@@ -1,0 +1,5 @@
+ARG CLI_IMAGE
+FROM ${CLI_IMAGE} as cli
+
+FROM srijanlabs/apache:1.x
+COPY --from=cli /app /app
