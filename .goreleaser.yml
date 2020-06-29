@@ -59,7 +59,8 @@ brews:
 #    publish: true
 
 archives:
-  - replacements:
+  - name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    replacements:
       darwin: mac
       linux: linux
       windows: windows

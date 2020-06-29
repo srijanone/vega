@@ -8,7 +8,7 @@ VERSION="1.0.0"
 BREW=$(command -v brew)
 BREW="" # Don't wanna use brew, as some people don't have brew or sudo permission
 
-# Vega has depedency of tilt: tilt.dev
+# Vega has dependency of tilt: tilt.dev
 TILT_VERSION="0.14.3"
 
 set -e
@@ -53,13 +53,13 @@ function copy_binary() {
 
 function install_vega() {
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    curl -fsSL https://github.com/srijanone/vega/releases/download/v${VERSION}/vega_${VERSION}_linux_x86_64.tar.gz | tar -xzv vega 2>/dev/null
+    curl -fsSL https://github.com/srijanone/vega/releases/download/v${VERSION}/vega_linux_x86_64.tar.gz | tar -xzv vega 2>/dev/null
     copy_binary "vega"
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     if [[ "$BREW" != "" ]]; then
       brew install srijanone/vega/vega
     else
-      curl -fsSL https://github.com/srijanone/vega/releases/download/v${VERSION}/vega_${VERSION}_mac_x86_64.tar.gz | tar -xzv vega 2>/dev/null
+      curl -fsSL https://github.com/srijanone/vega/releases/download/v${VERSION}/vega_mac_x86_64.tar.gz | tar -xzv vega 2>/dev/null
       copy_binary "vega"
     fi
   else

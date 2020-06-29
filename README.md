@@ -81,10 +81,13 @@ Several options to install:
 ---
 
 ## Development
-`go run main.go`
 
-- To Release Binaries: `goreleaser`
+- Run Vega: `go run main.go`
+- Release Binaries: `goreleaser`
   - Github Token to be created and exported: `export GITHUB_TOKEN=<token>`
+  - Make command is added to Makefile:
+    - `make release-dry-run`        # to test and verify on local machine
+    - `make release-using-gorelease`
 
 ---
 
