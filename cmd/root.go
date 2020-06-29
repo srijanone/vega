@@ -24,7 +24,7 @@ var (
 func init() {
 	rootCmd = newRootCmd(os.Stdout, os.Stdin)
 
-	fmt.Println("---- Checking for update")
+	// Checking for New Version of Vega
 	vega.CheckForLatestVersion()
 }
 

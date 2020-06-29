@@ -53,13 +53,13 @@ function copy_binary() {
 
 function install_vega() {
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    curl -fsSL https://github.com/srijanone/vega/releases/download/v${VERSION}/vega_linux_x86_64.tar.gz | tar -xzv vega 2>/dev/null
+    curl -fsSL https://github.com/srijanone/vega/releases/download/v${VERSION}/vega_linux_amd64.tar.gz | tar -xzv vega 2>/dev/null
     copy_binary "vega"
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     if [[ "$BREW" != "" ]]; then
       brew install srijanone/vega/vega
     else
-      curl -fsSL https://github.com/srijanone/vega/releases/download/v${VERSION}/vega_mac_x86_64.tar.gz | tar -xzv vega 2>/dev/null
+      curl -fsSL https://github.com/srijanone/vega/releases/download/v${VERSION}/vega_darwin_amd64.tar.gz | tar -xzv vega 2>/dev/null
       copy_binary "vega"
     fi
   else

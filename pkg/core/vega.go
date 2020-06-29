@@ -15,7 +15,6 @@ const (
 
 func CheckForLatestVersion() {
 	currentVersionStr := version.New().FormatVersion(true)
-	fmt.Println("currentVersionStr --", currentVersionStr)
 
 	u := updater.NewUpdater(vegaRepo, currentVersionStr)
 
@@ -23,18 +22,14 @@ func CheckForLatestVersion() {
 	if err != nil {
 		fmt.Printf("Error in checking latest version: %v", err)
 	}
-	fmt.Println("latestVersion --", latestVersion)
-	fmt.Println("available --", available)
-
 
 	if !available {
-		fmt.Println("Already latest version")
 		return
 	}
 
 	update := false
 	prompt := &survey.Confirm{
-		Message: "Do you want to update Vega to " + latestVersion + "?",
+		Message: "New update available, Do you want to update Vega to " + latestVersion + " version?",
 	}
 	survey.AskOne(prompt, &update, nil)
 

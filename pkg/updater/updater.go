@@ -21,15 +21,11 @@ func NewUpdater(repo string, version string) *Updater {
 }
 
 func (u *Updater) IsLatestAvailable() (string, bool, error) {
-	fmt.Println("u.Repo", u.Repo)
 	latest, found, err := selfupdate.DetectLatest(u.Repo)
 	if err != nil {
 		return "", false, fmt.Errorf("error occurred while detecting version: %v", err)
 	}
 
-	fmt.Println("-----", latest, found)
-
-	// v := semver.MustParse(u.Version)
 	v, err := semver.ParseTolerant(u.Version)
 	if err != nil {
 		return "", false, fmt.Errorf("not able to parse version: %v - %v", err ,u.Version)
@@ -44,9 +40,7 @@ func (u *Updater) IsLatestAvailable() (string, bool, error) {
 }
 
 func (u *Updater) SelfUpdate() error {
-
-	currentVersion := semver.MustParse(u.Version)
-	fmt.Println("currentVersion --", currentVersion)
+	currentVersion, _ := semver.ParseTolerant(u.Version)
 
 	latest, err := selfupdate.UpdateSelf(currentVersion, u.Repo)
 	if err != nil {
@@ -54,7 +48,7 @@ func (u *Updater) SelfUpdate() error {
 	}
 
 	if currentVersion.Equals(latest.Version) {
-		fmt.Println("Current version", currentVersion, "is the latest")
+		// Do Nothing
 	} else {
 		fmt.Println("Successfully updated to version", latest.Version)
 		fmt.Println("Release Note:\n", latest.ReleaseNotes)
