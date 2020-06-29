@@ -3,7 +3,7 @@ version: '3.5'
 services:
 
   cli:
-    image: srijanlabs/php-cli:7.3-1.x-dev
+    image: srijanlabs/php-cli:7.4-1.x-dev
     user: continua
     command: ["composer", "install", "--no-dev", "--prefer-dist", "--no-progress", "--no-suggest", "--no-interaction", "--optimize-autoloader"]
     working_dir: /app
