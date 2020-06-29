@@ -1,0 +1,9 @@
+.git
+.env
+vendor
+web/sites/default/files
+web/core
+docker-compose.yml
+Dockerfile
+Readme.md
+Tiltfile

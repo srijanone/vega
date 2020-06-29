@@ -1,5 +1,0 @@
-ARG CLI_IMAGE
-FROM ${CLI_IMAGE} as cli
-
-FROM srijanlabs/php-fpm:7.3-1.x-dev
-COPY --from=cli /app /app
