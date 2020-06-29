@@ -11,7 +11,7 @@ services:
       - app:/app
 
   php:
-    image: srijanlabs/php-fpm:7.3-1.x-dev
+    image: srijanlabs/php-fpm:7.4-1.x-dev
     depends_on:
       - cli
     ports:
