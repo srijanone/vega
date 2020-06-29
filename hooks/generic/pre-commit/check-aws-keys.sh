@@ -16,7 +16,7 @@ KEY_ID=$(git diff --cached --name-only -z $against | xargs -0 cat | grep -c -E '
 KEY=$(git diff --cached --name-only -z $against | xargs -0 cat | grep -c -E '[^A-Za-z0-9/+=][A-Za-z0-9/+=]{40}[^A-Za-z0-9/+=]')
  
 if [ $KEY_ID -ne 0 -o $KEY -ne 0 ]; then
-    echo "Found patterns for AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY"
+    echo "Found credentials for AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY"
     echo "Please check your code and remove AWS Credentials"
     exit 1
 fi
