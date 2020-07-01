@@ -5,8 +5,8 @@ import (
 	"io"
 	"path/filepath"
 
-	downloader "github.com/srijanone/vega/pkg/downloader"
 	common "github.com/srijanone/vega/pkg/common"
+	downloader "github.com/srijanone/vega/pkg/downloader"
 	git "github.com/srijanone/vega/pkg/git"
 )
 
@@ -15,7 +15,7 @@ type GitHooks struct {
 	Home Home
 	URL  string
 	Dir  string // hooks directory name at source/remote
-	Out io.Writer
+	Out  io.Writer
 }
 
 // Add downloads git hooks to vega home

@@ -91,7 +91,7 @@ func (iCmd *initCmd) setupVegaHome() error {
 		Home: iCmd.home,
 		URL:  gitHooksRepoName,
 		Dir:  gitHooksDirName,
-		Out: iCmd.out,
+		Out:  iCmd.out,
 	}
 	gitHooks.Add()
 

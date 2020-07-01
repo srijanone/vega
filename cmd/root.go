@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/spf13/cobra"
+	vega "github.com/srijanone/vega/pkg/core"
 )
 
 const (
@@ -22,6 +23,9 @@ var (
 
 func init() {
 	rootCmd = newRootCmd(os.Stdout, os.Stdin)
+
+	// Checking for New Version of Vega
+	vega.CheckForLatestVersion()
 }
 
 func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
