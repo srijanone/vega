@@ -3,7 +3,7 @@ PREFIX  		:= "/usr/local"
 
 GIT_COMMIT 		:= `git rev-parse HEAD`
 GIT_SHA 		:= `git rev-parse --short HEAD`
-GIT_TAG 		:= `git describe --tags --abbrev=0 --exact-match 2>/dev/null || echo "canary"`
+GIT_TAG 		:= `git describe --tags --abbrev=0 --exact-match 2>/dev/null || echo "v0.0.0"`
 BUILD_TIME  	:= `date +%s`
 
 
