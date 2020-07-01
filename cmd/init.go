@@ -14,6 +14,8 @@ import (
 const (
 	starterKitsRepoName = "git@github.com:srijanone/vega.git"
 	starterKitsDirName  = "starterkits"
+	gitHooksRepoName    = "git@github.com:srijanone/vega.git"
+	gitHooksDirName     = "hooks"
 )
 
 type initCmd struct {
@@ -60,29 +62,40 @@ func (iCmd *initCmd) execute() error {
 }
 
 func (iCmd *initCmd) setupVegaHome() error {
-	// Ensuring that required directory exists or not
 	directories := []string{
 		iCmd.home.String(),
 		iCmd.home.StarterKits(),
+		iCmd.home.GitHooks(),
 		iCmd.home.Logs(),
 	}
 
+	// Ensuring that required directory exists or not
 	for _, path := range directories {
-		// TODO: One liner
-		err := common.EnsureDir(path)
-		fmt.Fprintln(iCmd.out, "Initializing", path)
-		if err != nil {
+		if err := common.EnsureDir(path); err != nil {
 			return err
 		}
+		fmt.Fprintln(iCmd.out, "Initializing", path)
 	}
 
-	// Ensuring default starter kits exists or not
+	// Adding default starter kits to Vega Home
 	defaultStarterKit := vega.StarterKitRepo{
 		Name: "default",
-		URL:  starterKitsRepoName,
 		Home: iCmd.home,
+		URL:  starterKitsRepoName,
 		Dir:  starterKitsDirName,
 	}
 	defaultStarterKit.Add()
+
+	// Adding Git Hooks to Vega Home
+	gitHooks := vega.GitHooks{
+		Home: iCmd.home,
+		URL:  gitHooksRepoName,
+		Dir:  gitHooksDirName,
+		Out: iCmd.out,
+	}
+	gitHooks.Add()
+
+	// Installing Git Hooks as Global hooks
+	gitHooks.Install()
 	return nil
 }

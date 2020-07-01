@@ -1,4 +1,5 @@
 PROJECT 		:= "vega"
+PREFIX  		:= "/usr/local"
 
 GIT_COMMIT 		:= `git rev-parse HEAD`
 GIT_SHA 		:= `git rev-parse --short HEAD`
@@ -32,9 +33,14 @@ fmt:
 	gofmt -l -w .
 
 
+.PHONY: run
+run: build
+	./bin/$(PROJECT)
+
+
 .PHONY: build
 build: info
-	CGO_ENABLED=0 go build -v -ldflags "$(LDFLAGS)"
+	CGO_ENABLED=0 go build -v -o bin/$(PROJECT) -ldflags "$(LDFLAGS)"
 
 
 .PHONY: build-all
@@ -49,20 +55,36 @@ build-all:
 
 .PHONY: release-dry-run
 release-dry-run:
+	@echo "release dry run"
 	goreleaser --snapshot --skip-publish --rm-dist
 
 
 .PHONY: release-using-gorelease
 release-using-gorelease:
+	@echo "releasing..."
 	goreleaser --rm-dist
 
 
 .PHONY: clean
 clean:
 	@echo "cleaning..."
-	rm -rf bin
+	GO111MODULE=on go clean --modcache
+	rm -rf bin/
+
 
 .PHONY: clean-home
 clean-home:
 	@echo "cleaning $VEGA_HOME..."
 	rm -rf ~/.vega
+
+
+.PHONY: install
+install: build
+	@echo "installing..."
+	cp bin/$(PROJECT) $(PREFIX)/bin/$(PROJECT)
+
+
+.PHONY: uninstall
+uninstall:
+	@echo "uninstalling..."
+	rm -f $(PREFIX)/bin/$(PROJECT)
