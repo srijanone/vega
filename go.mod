@@ -8,5 +8,5 @@ require (
 	github.com/hashicorp/go-getter v1.4.1
 	github.com/otiai10/copy v1.1.1
 	github.com/rhysd/go-github-selfupdate v1.2.2
-	github.com/spf13/cobra v0.0.7
+	github.com/spf13/cobra v1.0.0
 )
