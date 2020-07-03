@@ -32,27 +32,27 @@ Several options to install:
 
 - `vega`: Vega usage
 
-![vega usage](_screenshots/vega_usage.png)
+![vega usage](.screenshots/vega_usage.png)
 
 - `vega init`: Initializes vega
 
-![vega init](_screenshots/vega_init.png)
+![vega init](.screenshots/vega_init.png)
 
 - `vega starterkit list`: List all available starterkits
 
-![vega starterkit list](_screenshots/vega_starterkit_list.png)
+![vega starterkit list](.screenshots/vega_starterkit_list.png)
 
 - `vega create awesome-app --starterkit nodejs+redis`
 
-![vega create](_screenshots/vega_create.png)
+![vega create](.screenshots/vega_create.png)
 
 - `vega up`
 
-![vega down](_screenshots/vega_up.png)
+![vega down](.screenshots/vega_up.png)
 
 - `vega down`
 
-![vega down](_screenshots/vega_down.png)
+![vega down](.screenshots/vega_down.png)
 
 ---
 
