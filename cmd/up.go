@@ -19,20 +19,15 @@ func newUpCmd(out io.Writer) *cobra.Command {
 		Short: upDesc,
 		Long:  upDesc,
 		Run: func(cmd *cobra.Command, args []string) {
-			if tilt.IsInstalled() {
-				fmt.Fprintln(out, "Running the application")
-				args := []string{"--port", port}
-				if noBrowser {
-					args = append(args, "--no-browser")
-				}
-				if watch == false {
-					args = append(args, "--watch", "false")
-				}
-				tilt.Up(out, args...)
-			} else {
-				fmt.Fprintf(out, tilt.RequiredText)
-				fmt.Fprintf(out, tilt.InstallInstructions)
+			fmt.Fprintln(out, "Running the application")
+			upArgs := []string{"--port", port}
+			if noBrowser {
+				upArgs = append(upArgs, "--no-browser")
 			}
+			if watch == false {
+				upArgs = append(upArgs, "--watch", "false")
+			}
+			tilt.Up(out, upArgs...)
 		},
 	}
 

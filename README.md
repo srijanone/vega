@@ -68,6 +68,7 @@ Several options to install:
 | `vega create [path] --starterkit <name>`       | Creates the starter kit at provided directory                                         | \--starterkit <name><br>\--repo <repo>          |            |
 | `vega repo add <repo-name> <url>`              | Add another starterkit repo, Can choose local folder as well                          |                                                 |            |
 | `vega repo list`                               | Lists all the repo available                                                          | \--repo <repo>                                  |            |
+| `vega hooks install [path]`                    | Installs git hooks to specified path                                                  |                                                 |            |
 | `vega up`                                      | Runs the application                                                                  | \--port <log-port><br>\--watch<br>\--no-browser |            |
 | `vega down`                                    | Stops the application and deletes the resources                                       |                                                 |            |
 

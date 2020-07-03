@@ -51,7 +51,7 @@ func (cCmd *createCmd) execute() error {
 	// TODO: Check if starterkits files are already there or not properly
 	dockerfileExists, err := common.Exists(filepath.Join(cCmd.dest, vega.DockerfileName))
 	if err != nil {
-		return fmt.Errorf("there was an error checking if %s exists: %v", vega.DockerfileName, err)
+		return fmt.Errorf("couldn't check if starterkit already exists: %v", err)
 	}
 
 	if dockerfileExists {
@@ -75,9 +75,9 @@ func (cCmd *createCmd) execute() error {
 		starterkit.Create(cCmd.dest)
 	} else if len(starterkits) > 0 {
 		// TODO: display proper list of matching kits
-		return fmt.Errorf("Multiple starterkit named %s found: %v", cCmd.starterkit, starterkits)
+		return fmt.Errorf("multiple starterkit named %s found: %v", cCmd.starterkit, starterkits)
 	} else {
-		return fmt.Errorf("No starterkit found with name %s in %s repo", cCmd.starterkit, cCmd.repo)
+		return fmt.Errorf("no starterkit found with name %s in %s repo", cCmd.starterkit, cCmd.repo)
 	}
 
 	fmt.Fprintln(cCmd.out, "Ready for development")

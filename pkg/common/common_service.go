@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"runtime"
 )
 
@@ -62,3 +63,30 @@ func CopyFile(sourceFile string, destFile string) error {
 	}
 	return nil
 }
+
+// ShellScriptOnly returns a walk function which only processes shell scripts
+func ShellScriptOnly(files *[]string) filepath.WalkFunc {
+	return func(path string, info os.FileInfo, err error) error {
+		if info.IsDir() {
+			return nil
+		}
+		if filepath.Ext(path) != ".sh" {
+			return nil
+		}
+		*files = append(*files, path)
+		return nil
+	}
+}
+
+// ListFiles returns the list of file names in given directory
+func ListFiles(dir string) []string {
+	var files []string
+
+	// TODO: make walkFunc parameterized
+	err := filepath.Walk(dir, ShellScriptOnly(&files))
+	if err != nil {
+		panic(err)
+	}
+	return files
+}
+

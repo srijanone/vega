@@ -96,6 +96,6 @@ func (iCmd *initCmd) setupVegaHome() error {
 	gitHooks.Add()
 
 	// Installing Git Hooks as Global hooks
-	gitHooks.Install()
+	gitHooks.InstallGlobally()
 	return nil
 }

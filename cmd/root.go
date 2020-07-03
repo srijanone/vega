@@ -53,6 +53,7 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 	cmd.AddCommand(newUpCmd(out))
 	cmd.AddCommand(newDownCmd(out))
 	cmd.AddCommand(newRepoCmd(out))
+	cmd.AddCommand(newHooksCmd(out))
 
 	return cmd
 }
