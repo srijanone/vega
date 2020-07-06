@@ -13,6 +13,7 @@ const (
 	vegaRepo = "srijanone/vega"
 )
 
+// CheckForLatestVersion checks for latest releases
 func CheckForLatestVersion() {
 	currentVersionStr := version.New().FormatVersion(true)
 
@@ -20,7 +21,7 @@ func CheckForLatestVersion() {
 
 	latestVersion, available, err := u.IsLatestAvailable()
 	if err != nil {
-		fmt.Printf("Error in checking latest version: %v", err)
+		fmt.Printf("Error in checking latest version: %v\n", err)
 	}
 
 	if !available {
@@ -39,6 +40,6 @@ func CheckForLatestVersion() {
 
 	err = u.SelfUpdate()
 	if err != nil {
-		fmt.Println("Error in updating Vega")
+		fmt.Printf("Error in updating Vega: %v\n", err)
 	}
 }
