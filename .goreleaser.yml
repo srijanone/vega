@@ -11,7 +11,7 @@ builds:
       - -s -w
       - -X=github.com/srijanone/vega/pkg/version.SemVer={{ .Version }}
       - -X=github.com/srijanone/vega/pkg/version.GitCommit={{ .Commit }}
-      - -X=github.com/srijanone/vega/pkg/version.BuildTime={{ .Date }}
+      # - -X=github.com/srijanone/vega/pkg/version.BuildTime={{ .Date }}
     goos:
       - darwin
       - linux
