@@ -16,7 +16,6 @@ const (
 // CheckForLatestVersion checks for latest releases
 func CheckForLatestVersion() {
 	currentVersionStr := version.New().FormatVersion(true)
-
 	u := updater.NewUpdater(vegaRepo, currentVersionStr)
 
 	latestVersion, available, err := u.IsLatestAvailable()

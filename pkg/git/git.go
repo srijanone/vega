@@ -1,6 +1,7 @@
 package git
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -22,12 +23,19 @@ func IsInstalled() bool {
 	return err == nil
 }
 
-func Execute(out io.Writer, arguments ...string) {
+func Execute(out io.Writer, arguments ...string) error {
+	if !IsInstalled() {
+		fmt.Fprintf(out, RequiredText)
+		fmt.Fprintf(out, InstallInstructions)
+		return errors.New("git is not installed on system")
+	}
+
 	command := exec.Command(commandName, arguments...)
 	command.Stdout = out
 	command.Stderr = os.Stderr
 	err := command.Run()
 	if err != nil {
-		fmt.Fprintln(out, "Error in Executing", err)
+		return err
 	}
+	return nil
 }
