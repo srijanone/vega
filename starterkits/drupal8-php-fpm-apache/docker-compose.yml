@@ -13,7 +13,7 @@ volumes:
   core:               # drupal core
   vendor:             # php modules
 #______________________________________________ Networks ___________________________________________________#
-networks: 
+networks:
   default:
     name: vega-${PROJECT_NAME}
 #___________________________________________ YAML extensions _______________________________________________#
@@ -27,7 +27,7 @@ x-app-envsfile: &app-envsfile .env
 
 x-app-networks: &app-networks
   - default
-  
+
 #_______________________________________________ Services __________________________________________________#
 services:
   #----------------------------- permission setter ------------------------------------#
@@ -89,4 +89,15 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
     networks: *app-networks
+  #------------------------------- blackfire -----------------------------------#
+  # blackfire:
+  #   image: blackfire/blackfire
+  #   container_name: ${PROJECT_NAME}_blackfire
+  #   ports:
+  #     - "8707:8707"
+  #   environment:
+  #     # Exposes BLACKFIRE_SERVER_* environment variables from the host
+  #     BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
+  #     BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
+  #   networks: *app-networks
 #===========================================================================================================#
