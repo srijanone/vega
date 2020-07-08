@@ -1,6 +1,6 @@
 # XDebug Setup on VS Code with Docker PHP container
 
-## Tasks to do inside VSCode.
+## Set up XDebug in VSCode.
 
 - [Download VSCode Editor](https://code.visualstudio.com/download)
 - [Configure VSCode for drupal development](https://www.drupal.org/docs/develop/development-tools/configuring-visual-studio-code)
@@ -45,8 +45,8 @@
   }
   ```
 
-  The left side key is the path of your docroot in the docker container (forex /app)
-  The right side key is the path of code docroot in the VSCode (forex ~/Sites/your_project).
+  The left side key is the path of your docroot in the docker container (e.g. /app)
+  The right side key is the path of code docroot in the VSCode (e.g. ~/Sites/your_project).
 
 ## Debugging the code
 
