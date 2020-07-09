@@ -1,0 +1,81 @@
+{
+  "name": "srijanone/ezcontent-project",
+  "description": "Project creator for EZ Content Distribution.",
+  "type": "composer-plugin",
+  "license": "GPL-2.0-or-later",
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    "assets": {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "process-timeout": 0
+  },
+  "require": {
+    "composer/installers": "^1.2",
+    "cweagans/composer-patches": "^1.6.5",
+    "drupal/core-composer-scaffold": "^8.8",
+    "drush/drush": "~9",
+    "oomphinc/composer-installers-extender": "^1.1",
+    "srijanone/ezcontent": "8.x-dev",
+    "zaporylie/composer-drupal-optimizations": "^1.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "quick-start": [
+      "composer install",
+      "php docroot/core/scripts/drupal quick-start ezcontent"
+    ]
+  },
+  "extra": {
+    "composer-exit-on-patch-failure": true,
+    "drupal-scaffold": {
+      "locations": {
+        "web-root": "./docroot"
+      },
+      "file-mapping": {
+        "[web-root]/sites/default/default.services.yml": {
+          "mode": "replace",
+          "path": "docroot/core/assets/scaffold/files/default.services.yml",
+          "overwrite": false
+        },
+        "[web-root]/sites/default/default.settings.php": {
+          "mode": "replace",
+          "path": "docroot/core/assets/scaffold/files/default.settings.php",
+          "overwrite": false
+        }
+      }
+    },
+    "installer-paths": {
+      "docroot/core": [
+        "type:drupal-core"
+      ],
+      "docroot/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      ],
+      "docroot/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "docroot/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "docroot/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ]
+    },
+    "installer-types": [
+      "bower-asset",
+      "npm-asset"
+    ],
+    "enable-patching": true
+  }
+}

@@ -105,6 +105,16 @@ $databases = [];
  * webserver.  For most other drivers, you must specify a
  * username, password, host, and database name.
  *
+ * Drupal core implements drivers for mysql, pgsql, and sqlite. Other drivers
+ * can be provided by contributed or custom modules. To use a contributed or
+ * custom driver, the "namespace" property must be set to the namespace of the
+ * driver. The code in this namespace must be autoloadable prior to connecting
+ * to the database, and therefore, prior to when module root namespaces are
+ * added to the autoloader. To add the driver's namespace to the autoloader,
+ * set the "autoload" property to the PSR-4 base directory of the driver's
+ * namespace. This is optional for projects managed with Composer if the
+ * driver's namespace is in Composer's autoloader.
+ *
  * Transaction support is enabled by default for all drivers that support it,
  * including MySQL. To explicitly disable it, set the 'transactions' key to
  * FALSE.
@@ -224,6 +234,20 @@ $databases = [];
  *     'database' => '/path/to/databasefilename',
  *   ];
  * @endcode
+ *
+ * Sample Database configuration format for a driver in a contributed module:
+ * @code
+ *   $databases['default']['default'] = [
+ *     'driver' => 'mydriver',
+ *     'namespace' => 'Drupal\mymodule\Driver\Database\mydriver',
+ *     'autoload' => 'modules/mymodule/src/Driver/Database/mydriver/',
+ *     'database' => 'databasename',
+ *     'username' => 'sqlusername',
+ *     'password' => 'sqlpassword',
+ *     'host' => 'localhost',
+ *     'prefix' => '',
+ *   ];
+ * @endcode
  */
 
 /**
@@ -266,7 +290,7 @@ $databases = [];
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = getenv('HASH_SALT');
+$settings['hash_salt'] = '';
 
 /**
  * Deployment identifier.
@@ -742,6 +766,19 @@ $settings['entity_update_batch_size'] = 50;
 $settings['entity_update_backup'] = TRUE;
 
 /**
+ * Node migration type.
+ *
+ * This is used to force the migration system to use the classic node migrations
+ * instead of the default complete node migrations. The migration system will
+ * use the classic node migration only if there are existing migrate_map tables
+ * for the classic node migrations and they contain data. These tables may not
+ * exist if you are developing custom migrations and do not want to use the
+ * complete node migrations. Set this to TRUE to force the use of the classic
+ * node migrations.
+ */
+$settings['migrate_node_migrate_type_classic'] = FALSE;
+
+/**
  * Load local development override configuration, if available.
  *
  * Use settings.local.php to override variables on secondary (staging,
@@ -755,14 +792,3 @@ $settings['entity_update_backup'] = TRUE;
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
-$databases['default']['default'] = array (
-  'database' => getenv('DB_NAME'),
-  'username' => getenv('DB_USER'),
-  'password' => getenv('DB_PASSWORD'),
-  'prefix' => '',
-  'host' => getenv('DB_HOST'),
-  'port' => getenv('DB_PORT'),
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
-$settings['config_sync_directory'] = '../config/sync';
