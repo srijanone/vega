@@ -38,7 +38,7 @@ services:
     container_name: ${PROJECT_NAME}_chown
     entrypoint: [ "bash", "-c"]
     command:
-      - "chown -R continua:continua /app/{vendor,web/core}"
+      - "chown -R continua:continua /app"
     user: root
     volumes: *app-volumes
   #---------------------------------- php cli -----------------------------------------#
