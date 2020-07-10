@@ -13,6 +13,7 @@
 # Ingore files that are only for the current local environment
 docroot/sites/*/settings.local.php
 docroot/sites/*/services.local.yml
+docroot/sites/*/settings.php
 
 # Ignore SimpleTest multi-site environment.
 docroot/sites/simpletest
