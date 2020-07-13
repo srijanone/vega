@@ -31,7 +31,15 @@ func (sk *StarterKit) Create(dest string) error {
 // Install installs a starterkit at existing project
 func (sk *StarterKit) Install(dest string) error {
 	// TODO: This filesToCopy is dependent of type of starterkit
-	// files for Drupal starterkit
+	// Currently Content for Drupal starterkit
+	srcReadme := filepath.ToSlash(filepath.Join(sk.Path, "Readme.md"))
+	destReadme := filepath.ToSlash(filepath.Join(dest, "Readme_vega.md"))
+	err := common.CopyFile(srcReadme, destReadme)
+	if err != nil {
+		return err
+	}
+
+	// Files To Copy
 	filesToCopy := []string{
 		// Docker Related
 		"Dockerfile",
@@ -44,7 +52,6 @@ func (sk *StarterKit) Install(dest string) error {
 		// Others
 		".env",
 	}
-
 	for _, file := range filesToCopy {
 		srcFile := filepath.ToSlash(filepath.Join(sk.Path, file))
 		destFile := filepath.ToSlash(filepath.Join(dest, file))
@@ -54,12 +61,11 @@ func (sk *StarterKit) Install(dest string) error {
 		}
 	}
 
-	// Directory To Copy
+	// Directories To Copy
 	dirToCopy := []string{
 		// Debug Related
 		".vscode",
 	}
-
 	for _, dir := range dirToCopy {
 		srcDir := filepath.ToSlash(filepath.Join(sk.Path, dir))
 		destDir := filepath.ToSlash(filepath.Join(dest, dir))
