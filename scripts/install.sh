@@ -13,12 +13,12 @@ TILT_VERSION="0.14.3"
 
 set -e
 
-red="\e[31m"
-green="\e[32m"
-yellow="\e[33m"
-blue="\e[34m"
-bold="\e[1m"
-reset="\e[0m"
+red="\033[31m"
+green="\033[32m"
+yellow="\033[33m"
+blue="\033[34m"
+bold="\033[1m"
+reset="\033[0m"
 
 show_next_step_message="NO"
 
