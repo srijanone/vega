@@ -4,7 +4,7 @@
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/srijanone/vega/develop/scripts/install.sh | bash
 
-VERSION="1.0.3"
+VERSION="1.0.4"
 BREW=$(command -v brew)
 BREW="" # Don't wanna use brew, as some people don't have brew or sudo permission
 
