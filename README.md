@@ -66,6 +66,7 @@ Several options to install:
 | `vega init`                                    | Initializes vega                                                                      |                                                 |            |
 | `vega starterkit list`                         | List all available starterkits                                                        |                                                 | drupal8<br>nodejs    |
 | `vega create [path] --starterkit <name>`       | Creates the starter kit at provided directory                                         | \--starterkit <name><br>\--repo <repo>          |            |
+| `vega install [path]`                          | Install a starterkit to existing project                                              | \--repo <repo>                                   |            |
 | `vega repo add <repo-name> <url>`              | Add another starterkit repo, Can choose local folder as well                          |                                                 |            |
 | `vega repo list`                               | Lists all the repo available                                                          | \--repo <repo>                                  |            |
 | `vega hooks install [path]`                    | Installs git hooks to specified path                                                  |                                                 |            |

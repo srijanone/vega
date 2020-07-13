@@ -48,6 +48,7 @@ func newRootCmd(out io.Writer, in io.Reader) *cobra.Command {
 	cmd.AddCommand(newInitCmd(out, in))
 	cmd.AddCommand(newHomeCmd(out))
 	cmd.AddCommand(newCreateCmd(out))
+	cmd.AddCommand(newInstallCmd(out))
 	cmd.AddCommand(newVersionCmd(out))
 	cmd.AddCommand(newStarterKitCmd(out))
 	cmd.AddCommand(newUpCmd(out))
