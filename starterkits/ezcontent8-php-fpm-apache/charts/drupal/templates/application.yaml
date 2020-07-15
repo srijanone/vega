@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: {{ .Values.applicationKind }}
+metadata:
+  name: {{ template "drupal.fullname" . }}
+  labels: {{- include "drupal.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels: {{- include "drupal.matchLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels: {{- include "drupal.labels" . | nindent 8 }}
+    spec:
+      {{- if .Values.affinity }}
+      affinity: {{- include "drupal.tplValue" (dict "value" .Values.affinity "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{- include "drupal.tplValue" (dict "value" .Values.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations: {{- include "drupal.tplValue" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.securityContext.enabled }}
+      securityContext:
+        fsGroup: {{ .Values.securityContext.fsGroup }}
+        runAsUser: {{ .Values.securityContext.runAsUser }}
+      {{- end }}
+      containers:
+        - name: apache
+          image: {{ template "apache.image" . }}
+          imagePullPolicy: {{ .Values.apache.image.pullPolicy | quote }}
+          workingDir: /app
+          # command: ["/bin/sh", "-c"]
+          # args:
+          #   - "/start.sh"
+          ports:
+            - name: apache
+              containerPort: {{ .Values.apache.applicationPort }}
+          livenessProbe:
+{{ toYaml .Values.apache.livenessProbe | indent 12 }}
+          readinessProbe:
+{{ toYaml .Values.apache.readinessProbe | indent 12 }}
+          {{- if .Values.apache.resources }}
+          resources: {{- toYaml .Values.apache.resources | nindent 12 }}
+          {{- end }}
+        - name: php
+          image: {{ template "phpfpm.image" . }}
+          imagePullPolicy: {{ .Values.phpfpm.image.pullPolicy | quote }}
+          envFrom:
+            - secretRef:
+                name: {{ template "drupal.fullname" . }}
+          workingDir: /app
+          # command: ["/bin/sh", "-c"]
+          # args:
+          #   - "/start.sh"
+          ports:
+            - name: phpfpm
+              containerPort: {{ .Values.phpfpm.applicationPort }}
+          livenessProbe:
+{{ toYaml .Values.phpfpm.livenessProbe | indent 12 }}
+          readinessProbe:
+{{ toYaml .Values.phpfpm.readinessProbe | indent 12 }}
+          {{- if .Values.phpfpm.resources }}
+          resources: {{- toYaml .Values.phpfpm.resources | nindent 12 }}
+          {{- end }}
