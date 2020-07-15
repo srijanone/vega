@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: {{ .Values.applicationKind }}
+metadata:
+  name: {{ template "drupal.fullname" . }}
+  labels: {{- include "drupal.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels: {{- include "drupal.matchLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels: {{- include "drupal.labels" . | nindent 8 }}
+    spec:
+      {{- if .Values.affinity }}
+      affinity: {{- include "drupal.tplValue" (dict "value" .Values.affinity "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{- include "drupal.tplValue" (dict "value" .Values.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations: {{- include "drupal.tplValue" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.securityContext.enabled }}
+      securityContext:
+        fsGroup: {{ .Values.securityContext.fsGroup }}
+        runAsUser: {{ .Values.securityContext.runAsUser }}
+      {{- end }}
+      containers:
+        - name: webserver
+          image: {{ template "webserver.image" . }}
+          imagePullPolicy: {{ .Values.webserver.image.pullPolicy | quote }}
+          {{- if .Values.webserver.command }}
+          command: {{- toYaml .Values.webserver.command | nindent 12 }}
+          {{- end }}
+          {{- if .Values.webserver.args }}
+          args: {{- toYaml .Values.webserver.args | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: webserver
+              containerPort: {{ .Values.webserver.port }}
+          livenessProbe:
+{{ toYaml .Values.webserver.livenessProbe | indent 12 }}
+          readinessProbe:
+{{ toYaml .Values.webserver.readinessProbe | indent 12 }}
+          {{- if .Values.webserver.resources }}
+          resources: {{- toYaml .Values.webserver.resources | nindent 12 }}
+          {{- end }}
+        - name: php
+          image: {{ template "phpfpm.image" . }}
+          imagePullPolicy: {{ .Values.phpfpm.image.pullPolicy | quote }}
+          envFrom:
+            - secretRef:
+                name: {{ template "drupal.fullname" . }}
+          {{- if .Values.phpfpm.extraEnv }}
+          env: {{- toYaml .Values.phpfpm.extraEnv | nindent 12 }}
+          {{- end }}
+          {{- if .Values.phpfpm.command }}
+          command: {{- toYaml .Values.phpfpm.command | nindent 12 }}
+          {{- end }}
+          {{- if .Values.phpfpm.args }}
+          args: {{- toYaml .Values.phpfpm.args | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: phpfpm
+              containerPort: {{ .Values.phpfpm.port }}
+          livenessProbe:
+{{ toYaml .Values.phpfpm.livenessProbe | indent 12 }}
+          readinessProbe:
+{{ toYaml .Values.phpfpm.readinessProbe | indent 12 }}
+          {{- if .Values.phpfpm.resources }}
+          resources: {{- toYaml .Values.phpfpm.resources | nindent 12 }}
+          {{- end }}
