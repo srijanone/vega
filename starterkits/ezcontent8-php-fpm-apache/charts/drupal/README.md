@@ -99,7 +99,7 @@ The above command clones the remote git repository to the `/app/` directory  of 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
 ```console
-$ helm install --name my-release -f values.yaml ./helm-chart/stable/drupal
+$ helm install --name my-release -f values.yaml ./charts/drupal
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
