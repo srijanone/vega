@@ -42,21 +42,25 @@ The following table lists the configurable parameters of the drupal chart and th
 
 | Parameter                               | Description                                                                 | Default                                                 |
 | --------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------- |
-| `global.imageRegistry`                  | Global Docker image registry                                                | `nil`                                                   |
-| `global.storageClass`                   | Global storage class for dynamic provisioning                               | `nil`                                                   |
-| `image.registry`                        | drupal image registry                                                       | `501705404328.dkr.ecr.ap-southeast-1.amazonaws.com`     |
-| `image.repository`                      | drupal image name                                                           | `drupal-dev`                                            |
-| `image.tag`                             | drupal image tag                                                            | `{TAG_NAME}`                                            |
-| `image.pullPolicy`                      | drupal image pull policy                                                    | `IfNotPresent`                                          |
+| `global.imageRegistry`                  | Global Docker image registry                                                | `docker.io`                                             |
+| `phpfpm.registry`                       | PHP-FPM image registry                                                      | `nil`                                                   |
+| `phpfpm.repository`                     | PHP-FPM image name                                                          | `drupal:8`                                            |
+| `phpfpm.pullPolicy`                     | PHP-FPM image pull policy                                                   | `IfNotPresent`                                          |
+| `phpfpm.extraEnv`                       | PHP-FPM container environment variables                                     | `nill`                                                  |
+| `phpfpm.command`                        | PHP-FPM container entry point                                               | from image                                              |
+| `phpfpm.arg`                            | PHP-FPM container arguments                                                 | from image                                              |
+| `phpfpm.port`                           | PHP-FPM container listing port                                              | 9000                                                    |
+| `webserver.registry`                    | Web Server image registry                                                   | `nil`                                                   |
+| `webserver.repository`                  | Web Server image name                                                       | `drupal:8`                                            |
+| `webserver.pullPolicy`                  | Web Server image pull policy                                                | `IfNotPresent`                                          |
+| `webserver.extraEnv`                    | Web Server container environment variables                                  | `nill`                                                  |
+| `webserver.command`                     | Web Server container entry point                                            | from image                                              |
+| `webserver.arg`                         | Web Server container arguments                                              | from image                                              |
+| `webserver.port`                        | Web Server container listing port                                           | 8080                                                    |
 | `nameOverride`                          | String to partially override drupal.fullname template                       | `nil`                                                   |
 | `fullnameOverride`                      | String to fully override drupal.fullname template                           | `nil`                                                   |
-| `initSecret.registry`                   | initSecret image registry                                                   | `501705404328.dkr.ecr.ap-southeast-1.amazonaws.com`     |
-| `initSecret.repository`                 | initSecret image name                                                       | `init-secret`                                           |
-| `initSecret.tag`                        | initSecret image tag                                                        | `{TAG_NAME}`                                            |
-| `initSecret.pullPolicy`                 | initSecret image pull policy                                                | `IfNotPresent`                                          |
 | `applicationKind`                       | Deployment or ReplicaSet                                                    | `Deployment`                                            |
 | `replicas`                              | Number of replicas for the application                                      | `1`                                                     |
-| `applicationPort`                       | Port where the application will be running                                  | `3000`                                                  |
 | `extraEnv`                              | Any extra environment variables to be pass to the pods                      | `{}`                                                    |
 | `affinity`                              | Map of drupal/pod affinities                                                | `{}` (The value is evaluated as a template)             |
 | `drupalSelector`                        | drupal labels for pod assignment                                            | `{}` (The value is evaluated as a template)             |

@@ -14,7 +14,7 @@ spec:
   ports:
     - name: http
       port: {{ .Values.service.port }}
-      targetPort: apache
+      targetPort: webserver
       {{- if and (or (eq .Values.service.type "NodePort") (eq .Values.service.type "LoadBalancer")) (not (empty .Values.service.nodePort)) }}
       nodePort: {{ .Values.service.nodePort  }}
       {{- else if eq .Values.service.type "ClusterIP" }}

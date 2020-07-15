@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "drupal.name" -}}
+{{- define "drupal.appName" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -34,7 +34,7 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "drupal.labels" -}}
-app: {{ include "drupal.name" . }}
+app: {{ include "drupal.appName" . }}
 chart: {{ include "drupal.chart" . }}
 release: {{ .Release.Name }}
 heritage: {{ .Release.Service }}
@@ -44,7 +44,7 @@ heritage: {{ .Release.Service }}
 Common labels for cron-jobs to be used for deletion
 */}}
 {{- define "drupal.cronLabels" -}}
-app: {{ include "drupal.name" . }}
+app: {{ include "drupal.appName" . }}
 chart: {{ include "drupal.chart" . }}
 release: {{ .Release.Name }}
 heritage: {{ .Release.Service }}
@@ -55,17 +55,16 @@ workload: cronjob
 Labels to use on deploy.spec.selector.matchLabels and svc.spec.selector
 */}}
 {{- define "drupal.matchLabels" -}}
-app: {{ include "drupal.name" . }}
+app: {{ include "drupal.appName" . }}
 release: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
-Return the proper Apache image name
+Return the proper Web Server image name
 */}}
-{{- define "apache.image" -}}
-{{- $registryName := .Values.apache.image.registry -}}
-{{- $repositoryName := .Values.apache.image.repository -}}
-{{- $tag := .Values.apache.image.tag | toString -}}
+{{- define "webserver.image" -}}
+{{- $registryName := .Values.webserver.image.registry -}}
+{{- $repositoryName := .Values.webserver.image.repository -}}
 {{/*
 Helm 2.11 supports the assignment of a value to a variable defined in a different scope,
 but Helm 2.9 and 2.10 doesn't support it, so we need to implement this if-else logic.

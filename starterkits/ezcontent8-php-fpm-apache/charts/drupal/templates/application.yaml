@@ -26,22 +26,24 @@ spec:
         runAsUser: {{ .Values.securityContext.runAsUser }}
       {{- end }}
       containers:
-        - name: apache
-          image: {{ template "apache.image" . }}
-          imagePullPolicy: {{ .Values.apache.image.pullPolicy | quote }}
-          workingDir: /app
-          # command: ["/bin/sh", "-c"]
-          # args:
-          #   - "/start.sh"
+        - name: webserver
+          image: {{ template "webserver.image" . }}
+          imagePullPolicy: {{ .Values.webserver.image.pullPolicy | quote }}
+          {{- if .Values.webserver.command }}
+          command: {{- toYaml .Values.webserver.command | nindent 12 }}
+          {{- end }}
+          {{- if .Values.webserver.args }}
+          args: {{- toYaml .Values.webserver.args | nindent 12 }}
+          {{- end }}
           ports:
-            - name: apache
-              containerPort: {{ .Values.apache.applicationPort }}
+            - name: webserver
+              containerPort: {{ .Values.webserver.port }}
           livenessProbe:
-{{ toYaml .Values.apache.livenessProbe | indent 12 }}
+{{ toYaml .Values.webserver.livenessProbe | indent 12 }}
           readinessProbe:
-{{ toYaml .Values.apache.readinessProbe | indent 12 }}
-          {{- if .Values.apache.resources }}
-          resources: {{- toYaml .Values.apache.resources | nindent 12 }}
+{{ toYaml .Values.webserver.readinessProbe | indent 12 }}
+          {{- if .Values.webserver.resources }}
+          resources: {{- toYaml .Values.webserver.resources | nindent 12 }}
           {{- end }}
         - name: php
           image: {{ template "phpfpm.image" . }}
@@ -49,13 +51,18 @@ spec:
           envFrom:
             - secretRef:
                 name: {{ template "drupal.fullname" . }}
-          workingDir: /app
-          # command: ["/bin/sh", "-c"]
-          # args:
-          #   - "/start.sh"
+          {{- if .Values.phpfpm.extraEnv }}
+          env: {{- toYaml .Values.phpfpm.extraEnv | nindent 12 }}
+          {{- end }}
+          {{- if .Values.phpfpm.command }}
+          command: {{- toYaml .Values.phpfpm.command | nindent 12 }}
+          {{- end }}
+          {{- if .Values.phpfpm.args }}
+          args: {{- toYaml .Values.phpfpm.args | nindent 12 }}
+          {{- end }}
           ports:
             - name: phpfpm
-              containerPort: {{ .Values.phpfpm.applicationPort }}
+              containerPort: {{ .Values.phpfpm.port }}
           livenessProbe:
 {{ toYaml .Values.phpfpm.livenessProbe | indent 12 }}
           readinessProbe:
