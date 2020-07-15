@@ -1,5 +1,5 @@
 #========================================= Drupal 9 StarterKit =============================================#
-version: '3.8'
+version: '3.5'
 #____________________________________________ Named Volumes ________________________________________________#
 volumes:
   app:
@@ -10,8 +10,9 @@ volumes:
       device: ${PWD}
   mysql-data:
   # Add These volume will increse speed on non linux hosts.
-  core:               # drupal core
-  vendor:             # php modules
+  # core:               # drupal core
+  # vendor:             # php modules
+  # libraries:          # drupal external libraries
 #______________________________________________ Networks ___________________________________________________#
 networks:
   default:
@@ -19,8 +20,9 @@ networks:
 #___________________________________________ YAML extensions _______________________________________________#
 x-app-volumes: &app-volumes
     - app:/app
-    - core:/app/web/core
-    - vendor:/app/vendor
+    # - core:/app/web/core
+    # - vendor:/app/vendor
+    # - libraries:${DOC_ROOT}/libraries
     # Add any custom configuration files here
 
 x-app-envsfile: &app-envsfile .env
