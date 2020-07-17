@@ -1,8 +1,6 @@
 .git
 .env
-vendor
 docroot/sites/default/files
-docroot/core
 docker-compose.yml
 Dockerfile
 Readme.md
