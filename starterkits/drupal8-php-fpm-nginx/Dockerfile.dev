@@ -1,0 +1,6 @@
+ARG PHP_VERSION=7.3
+ARG BASE_VERSION=10
+
+FROM srijanlabs/php-fpm-nginx:${PHP_VERSION}-${BASE_VERSION}-dev
+COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
+COPY --chown=continua . /app
