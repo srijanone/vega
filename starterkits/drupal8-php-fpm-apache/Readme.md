@@ -25,13 +25,34 @@ are documented in the table below.
 | PHP_FPM_START_SERVERS       | 2                     |  The number of child processes created on startup |
 | PHP_FPM_MIN_SPARE_SERVERS   | 2                     |  The desired minimum number of idle server processes |
 | PHP_FPM_MAX_SPARE_SERVERS   | 10                    |  The desired maximum number of idle server processes |
-| PHP_FPM_MAX_REQUESTS        | 500                   |  The number of requests each child process should execute before respawning | 
+| PHP_FPM_MAX_REQUESTS        | 500                   |  The number of requests each child process should execute before respawning |
 | PHP_MEMORY_LIMIT            | 128                   |  PHP memory limit per script  |
 | XDEBUG_REMOTE_PORT          | 9001                  |  Port on IDE is listing |
 | NEW_RELIC_ENABLED           | false                 |  Enable newrelic |
 | NEW_RELIC_APP_NAME          | ''                    |  Application name from newrelic website |
 | NEW_RELIC_LICENSE_KEY       | ''                    |  Newrelic license key  |
 
+---
+## Setting up drupal site
+On non linux platform performance is a big challenge with drupal sites.
+To mitigate this issue, installation process of starterkits is divided into two steps given below.
+```bash
+docker-compose run --rm cli composer install
+vega up
+```
+You can install profile via web browser but it is recommended to do it using drush.
+Run below command to install profile.
+```bash
+docker-compose run --rm drupal drush site:install PROFILE_NAME --account-name USERNAME --account-mail EMAIL --account-pass PASSWORD --site-name SITE_NAME --site-mail SITE_EMAIL -y
+```
+Replace the PROFILE_NAME, USERNAME, EMAIL, PASSWORD, SITE_NAME & SITE_EMAIL with actuals in previous command.
+
+@NOTE:
+For performance improvement we have used live update feature of tilt. In result of which we got one or two extra tags of existing image created by tilt to perform live update of code changes in host.
+In virtue of that, after doing vega down these extra tags needs to be cleaned up. For cleanup run below command in terminal
+```bash
+ docker image rm -f $(docker image ls -q --filter "label=builtby=tilt")
+```
 ---
 ## Installing modules
 ```bash
