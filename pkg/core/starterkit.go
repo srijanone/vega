@@ -43,6 +43,7 @@ func (sk *StarterKit) Install(dest string) error {
 	filesToCopy := []string{
 		// Docker Related
 		"Dockerfile",
+		"Dockerfile.dev",
 		".dockerignore",
 		"docker-compose.yml",
 
