@@ -66,6 +66,11 @@ services:
   #---------------------------------- drupal ------------------------------------------#
   drupal:
     image: srijanlabs/php-fpm-apache:${PHP_VERSION}-10-local
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+      args:
+        PHP_VERSION: ${PHP_VERSION}
     container_name: ${PROJECT_NAME}_drupal
     depends_on:
       - mysql
