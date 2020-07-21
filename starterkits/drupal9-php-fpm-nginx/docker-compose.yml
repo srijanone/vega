@@ -63,6 +63,11 @@ services:
   #---------------------------------- php-fpm -----------------------------------------#
   php:
     image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-10-local
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+      args:
+        PHP_VERSION: ${PHP_VERSION}
     container_name: ${PROJECT_NAME}_php-fpm
     command: ["php-fpm", "-F"]
     depends_on:

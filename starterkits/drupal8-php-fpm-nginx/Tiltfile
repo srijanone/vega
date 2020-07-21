@@ -3,6 +3,7 @@
 docker_compose('docker-compose.yml')
 php_version = str(local('source .env && echo $PHP_VERSION')).strip()
 docker_build('srijanlabs/php-fpm-nginx:' + php_version + '-10-local', '.',
+  build_arg={'PHP_VERSION': php_version},
   dockerfile='Dockerfile.dev',
   live_update = [
     sync('.', '/app'),
