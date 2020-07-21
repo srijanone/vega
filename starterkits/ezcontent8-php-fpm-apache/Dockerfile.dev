@@ -1,0 +1,5 @@
+ARG PHP_VERSION=7.3
+ARG BASE_VERSION=10
+
+FROM srijanlabs/php-fpm-apache:${PHP_VERSION}-${BASE_VERSION}-dev
+COPY --chown=continua . /app

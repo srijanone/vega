@@ -1,5 +1,5 @@
 #========================================= Drupal 8 StarterKit =============================================#
-version: '3.8'
+version: '3.5'
 #____________________________________________ Named Volumes ________________________________________________#
 volumes:
   app:
@@ -13,17 +13,24 @@ volumes:
   # core:               # drupal core
   # vendor:             # php modules
   # libraries:          # drupal external libraries
+  # profiles:
+  files:
 #______________________________________________ Networks ___________________________________________________#
 networks:
   default:
     name: vega-${PROJECT_NAME}
 #___________________________________________ YAML extensions _______________________________________________#
 x-app-volumes: &app-volumes
-    - app:/app
+    - files:${DOC_ROOT}/sites/default/files:delegated
+    # - ./:/app:cached
     # - core:${DOC_ROOT}/core
     # - vendor:/app/vendor
     # - libraries:${DOC_ROOT}/libraries
+    # - profiles:${DOC_ROOT}/profiles
     # Add any custom configuration files here
+
+x-cli-volumes: &cli-volumes
+    - ./:/app:delegated
 
 x-app-envsfile: &app-envsfile .env
 
@@ -51,29 +58,17 @@ services:
     working_dir: /app
     depends_on:
       - chown
-    volumes:  *app-volumes
+    volumes:  *cli-volumes
     networks: *app-networks
     env_file:  *app-envsfile
-    environment: 
+    environment:
       - COMPOSER_MEMORY_LIMIT=-1 # Prevent composer from running out of memory
-  #---------------------------------- php-fpm -----------------------------------------#
-  php:
-    image: srijanlabs/php-fpm-apache:${PHP_VERSION}-10-dev
-    container_name: ${PROJECT_NAME}_php-fpm
-    command: ["php-fpm", "-F"]
+  #---------------------------------- drupal ------------------------------------------#
+  drupal:
+    image: srijanlabs/php-fpm-apache:${PHP_VERSION}-10-local
+    container_name: ${PROJECT_NAME}_drupal
     depends_on:
-      - cli
       - mysql
-    volumes:  *app-volumes
-    networks: *app-networks
-    env_file:  *app-envsfile
-  #---------------------------------- apache ------------------------------------------#
-  apache:
-    image: srijanlabs/php-fpm-apache:${PHP_VERSION}-10-dev
-    container_name: ${PROJECT_NAME}_apache
-    command: ["apache2ctl", "-D", "FOREGROUND"]
-    depends_on:
-      - php
     ports:
       - ${APPLICATION_PORT}:8080
     volumes: *app-volumes

@@ -1,5 +1,5 @@
 #========================================= Drupal 8 StarterKit =============================================#
-version: '3.8'
+version: '3.5'
 #____________________________________________ Named Volumes ________________________________________________#
 volumes:
   app:
@@ -12,17 +12,22 @@ volumes:
   # Converting core and vendor to the named volume will improve the speed meanwhile debugger will fail.
   # core:               # drupal core
   # vendor:             # php modules
+  files:                # files
 #______________________________________________ Networks ___________________________________________________#
 networks:
   default:
     name: vega-${PROJECT_NAME}
 #___________________________________________ YAML extensions _______________________________________________#
 x-app-volumes: &app-volumes
-    - app:/app
+    - files:${DOC_ROOT}/sites/default/files:delegated
+    # - ./:/app:cached
     # - core:/app/web/core
     # - vendor:/app/vendor
-    - ./nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
+    # - ./nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
     # Add any custom configuration files here
+
+x-cli-volumes: &cli-volumes
+    - ./:/app:delegated
 
 x-app-envsfile: &app-envsfile .env
 
@@ -50,12 +55,14 @@ services:
     working_dir: /app
     depends_on:
       - chown
-    volumes:  *app-volumes
+    volumes:  *cli-volumes
     networks: *app-networks
     env_file:  *app-envsfile
+    environment:
+      - COMPOSER_MEMORY_LIMIT=-1 # Prevent composer from running out of memory
   #---------------------------------- php-fpm -----------------------------------------#
   php:
-    image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-10-dev
+    image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-10-local
     container_name: ${PROJECT_NAME}_php-fpm
     command: ["php-fpm", "-F"]
     depends_on:
@@ -66,7 +73,7 @@ services:
     env_file:  *app-envsfile
   #---------------------------------- nginx ------------------------------------------#
   nginx:
-    image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-10-dev
+    image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-10-local
     container_name: ${PROJECT_NAME}_nginx
     command: ["nginx"]
     depends_on:

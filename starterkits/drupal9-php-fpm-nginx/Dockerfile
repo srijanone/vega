@@ -5,6 +5,6 @@ COPY composer.json composer.lock /app/
 COPY patches ./patches
 RUN composer install --no-dev --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
 
-FROM srijanlabs/php-fpm-apache:${PHP_VERSION}-${PHP_VERSION} as fpm
+FROM srijanlabs/php-fpm-nginx:${PHP_VERSION}-${BASE_VERSION} as fpm
 COPY --from=builder --chown=continua /app  /app
 COPY --chown=continua . /app
