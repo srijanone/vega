@@ -1,0 +1,13 @@
+
+ARG NODE_VERSION=12
+FROM srijanlabs/node:${NODE_VERSION}-10-dev
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm i \
+    && npm rebuild \
+    && npm run build
+
+CMD [ "npm", "srart" ]

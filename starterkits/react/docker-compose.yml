@@ -1,0 +1,36 @@
+version: '3.5'
+
+volumes:
+  node_modules:
+
+networks:
+  default:
+    name: vega-${PROJECT_NAME}
+
+x-app-volumes: &app-volumes
+    - ./:/app:cached
+    - node_modules:/app/node_modules
+    # Add any custom configuration files here
+
+x-app-envsfile: &app-envsfile .env
+
+x-app-networks: &app-networks
+  - default
+
+services:
+  react:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+      args: 
+        NODE_VERSION: ${NODE_VERSION}
+    image: "srijanlabs/node:${NODE_VERSION}-10-local"
+    container_name: ${PROJECT_NAME}_frontend
+    command: ["npm", "start" ]
+    stdin_open: true
+    working_dir: /app
+    ports: 
+      - ${APPLICATION_PORT}:3000
+    volumes: *app-volumes
+    networks: *app-networks
+    env_file:  *app-envsfile
