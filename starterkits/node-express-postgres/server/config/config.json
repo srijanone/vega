@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "pguser",
+    "password": "mypassword",
+    "database": "mypgdb",
+    "host": "postgres",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "qwerty",
+    "password": "'SFKWEOPFGKLFGJEIORGUOERGHWROGQOjbkldfbjdfbdgh'",
+    "database": "slkfsaldf9ds08f",
+    "host": "ec2-xx-xx-xx-xx.compute-1.amazonaws.com",
+    "dialect": "postgresql"
+  }
+}
