@@ -27,6 +27,8 @@ are documented in the table below.
 | PHP_FPM_MAX_SPARE_SERVERS   | 10                    |  The desired maximum number of idle server processes |
 | PHP_FPM_MAX_REQUESTS        | 500                   |  The number of requests each child process should execute before respawning |
 | PHP_MEMORY_LIMIT            | 128                   |  PHP memory limit per script  |
+| PHP_UPLOAD_MAX_FILESIZE     | 2                     |  PHP max upload size  |
+| PHP_MAX_EXECUTION_TIME      | 180                   |  PHP max execution time  |
 | XDEBUG_REMOTE_PORT          | 9001                  |  Port on IDE is listing |
 | NEW_RELIC_ENABLED           | false                 |  Enable newrelic |
 | NEW_RELIC_APP_NAME          | ''                    |  Application name from newrelic website |
