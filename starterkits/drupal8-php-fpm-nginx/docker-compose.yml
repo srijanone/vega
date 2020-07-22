@@ -1,6 +1,6 @@
-#========================================= Drupal 8 StarterKit =============================================#
+# Drupal 8 + Nginx StarterKit with nginx.
 version: '3.5'
-#____________________________________________ Named Volumes ________________________________________________#
+
 volumes:
   app:
     driver: local
@@ -13,11 +13,11 @@ volumes:
   # core:               # drupal core
   # vendor:             # php modules
   files:                # files
-#______________________________________________ Networks ___________________________________________________#
+
 networks:
   default:
     name: vega-${PROJECT_NAME}
-#___________________________________________ YAML extensions _______________________________________________#
+
 x-app-volumes: &app-volumes
     - files:${DOC_ROOT}/sites/default/files:delegated
     # - ./:/app:cached
@@ -34,9 +34,7 @@ x-app-envsfile: &app-envsfile .env
 x-app-networks: &app-networks
   - default
 
-#_______________________________________________ Services __________________________________________________#
 services:
-  #----------------------------- permission setter ------------------------------------#
   # Change mounted named volumes user from root(default) to continua.
   chown:
     image: "srijanlabs/php-cli:${PHP_VERSION}-10"
@@ -45,22 +43,22 @@ services:
     command:
       - "chown -R continua:continua /app"
     user: root
+    depends_on:
+      - cli
     volumes: *app-volumes
-  #---------------------------------- php cli -----------------------------------------#
+
   cli:
     image: "srijanlabs/php-cli:${PHP_VERSION}-10"
     container_name: ${PROJECT_NAME}_cli
     command: ["composer", "install", "--no-dev", "--prefer-dist", "--no-progress", "--no-suggest", "--no-interaction", "--optimize-autoloader"]
-    user: continua
+    user: root
     working_dir: /app
-    depends_on:
-      - chown
     volumes:  *cli-volumes
     networks: *app-networks
     env_file:  *app-envsfile
     environment:
       - COMPOSER_MEMORY_LIMIT=-1 # Prevent composer from running out of memory
-  #---------------------------------- php-fpm -----------------------------------------#
+
   php:
     image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-10-local
     build:
@@ -76,7 +74,7 @@ services:
     volumes:  *app-volumes
     networks: *app-networks
     env_file:  *app-envsfile
-  #---------------------------------- nginx ------------------------------------------#
+
   nginx:
     image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-10-local
     container_name: ${PROJECT_NAME}_nginx
@@ -88,7 +86,7 @@ services:
     volumes: *app-volumes
     networks: *app-networks
     env_file:  *app-envsfile
-  #------------------------------- database (mysql) -----------------------------------#
+
   mysql:
     image: mysql:5.7
     container_name: ${PROJECT_NAME}_mysql
@@ -102,7 +100,13 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
     networks: *app-networks
-  #------------------------------- blackfire -----------------------------------#
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
   # blackfire:
   #   image: blackfire/blackfire
   #   container_name: ${PROJECT_NAME}_blackfire
@@ -113,4 +117,4 @@ services:
   #     BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
   #     BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
   #   networks: *app-networks
-#===========================================================================================================#
+

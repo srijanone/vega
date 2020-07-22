@@ -13,8 +13,7 @@ are documented in the table below.
 |  Project name | .env         | PROJECT_NAME |     drupal8  |
 
 ---
-**NOTE**
-
+## NOTE:
 Due to an issue as of now PHP_VERSION has to be updated in Tiltfile as well.
 ---
 
@@ -79,6 +78,17 @@ docker-compose run --rm drupal drush cr
 recommended alias:
 ```bash
 alias ddrush="docker-compose run --rm drupal drush"
+```
+---
+## NOTE:
+```
+Problem:
+  On Linux OS, during composer install cli service throws
+  a permission denied error while installing dependencies.
+
+Solution:
+  Run the cli service with root user and run chown service after to change the ownership.
+  This will prevent the error throws during the composer install.
 ```
 ---
 
