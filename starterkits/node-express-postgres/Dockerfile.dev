@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN RUN npm i \
+RUN npm i \
     && npm rebuild
 
 CMD [ "node", "app.js" ]

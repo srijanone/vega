@@ -4,7 +4,7 @@
 | Parameter         | File         |   Variable       |   Default    |
 |:------------------|:-------------|:----------------:|:------------:|
 |   Node version    | .env         | NODE_VERSION     |     12       |
-|  Project name     | .env         | PROJECT_NAME     |     drupal8  |
+|  Project name     | .env         | PROJECT_NAME     |     nodejs   |
 | Application Port  | .env         | APPLICATION_PORT |     3000     |
 
 ### vega up
