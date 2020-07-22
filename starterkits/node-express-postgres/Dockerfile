@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm i 
+RUN npm i
 
 FROM srijanlabs/node:${NODE_VERSION}-10
 
