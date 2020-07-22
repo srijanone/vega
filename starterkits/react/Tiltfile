@@ -1,0 +1,15 @@
+# -*- mode: Python -*-
+
+docker_compose('docker-compose.yml')
+node_version = 12
+docker_build(
+  # Image name - must match the image in the docker-compose file
+  'srijanlabs/node:' + node_version + '-10-local',
+  # Docker context
+  '.',
+  dockerfile='Dockerfile.dev',
+  build_args={'NODE_VERSION': node_version},
+  live_update = [
+    # Sync local files into the container.
+    sync('.', '/app'),
+  ])

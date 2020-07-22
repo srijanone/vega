@@ -1,0 +1,11 @@
+ARG NODE_VERSION=12
+FROM srijanlabs/node:${NODE_VERSION}-10-dev
+
+WORKDIR /app
+
+COPY . .
+
+RUN RUN npm i \
+    && npm rebuild
+
+CMD [ "node", "app.js" ]
