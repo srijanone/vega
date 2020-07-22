@@ -1,4 +1,4 @@
-# Drupal 8 Starterkit
+# EZContent Starterkit
 This starterkit is based on php-fpm and apache. The default php version is 7.3 which is configurable.
 Refer [Configurations](#Configurations) section for further details.
 
@@ -11,6 +11,12 @@ are documented in the table below.
 |:--------------|:-------------|:------------:|:------------:|
 |   PHP version | .env         | PHP_VERSION  |     7.3      |
 |  Project name | .env         | PROJECT_NAME |     drupal8  |
+
+---
+**NOTE**
+
+Due to an issue as of now PHP_VERSION has to be updated in Tiltfile as well.
+---
 
 ### Configuring Runtime:
 
@@ -68,11 +74,11 @@ alias dcomposer="docker-compose run --rm cli composer"
 ---
 ## Running drush commands
 ```bash
-docker-compose run --rm php drush cr
+docker-compose run --rm drupal drush cr
 ```
 recommended alias:
 ```bash
-alias ddrush="docker-compose run --rm php drush"
+alias ddrush="docker-compose run --rm drupal drush"
 ```
 ---
 ## Profiling
@@ -97,3 +103,10 @@ the dev images and is not added to production images.
 
 Follow the document to setup xdebug:
 [Setup Xdebug](/starterkits/XDEBUG-SETUP.md)
+
+## Mailhog
+
+This starterkit ships with mailhog which can be accessed at localhost:8025. This can be a handy feature
+to test email functionality on local systems without worrying about sending mails accidently to real users.
+Mailhog is only available on dev images which are used for local development and not available on production
+images.

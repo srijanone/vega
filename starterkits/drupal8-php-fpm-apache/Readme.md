@@ -12,6 +12,12 @@ are documented in the table below.
 |   PHP version | .env         | PHP_VERSION  |     7.3      |
 |  Project name | .env         | PROJECT_NAME |     drupal8  |
 
+---
+**NOTE**
+
+Due to an issue as of now PHP_VERSION has to be updated in Tiltfile as well.
+---
+
 ### Configuring Runtime:
 
 ##### These values can be configure using [.env](.env) file
@@ -68,13 +74,14 @@ alias dcomposer="docker-compose run --rm cli composer"
 ---
 ## Running drush commands
 ```bash
-docker-compose run --rm php drush cr
+docker-compose run --rm drupal drush cr
 ```
 recommended alias:
 ```bash
-alias ddrush="docker-compose run --rm php drush"
+alias ddrush="docker-compose run --rm drupal drush"
 ```
 ---
+
 ## Profiling
 All the starterkits in vega are shipped with blackfire for code profiling. This is also available on
 the dev images and is not added to production images.
@@ -97,3 +104,10 @@ the dev images and is not added to production images.
 
 Follow the document to setup xdebug:
 [Setup Xdebug](/starterkits/XDEBUG-SETUP.md)
+
+## Mailhog
+
+This starterkit ships with mailhog which can be accessed at localhost:8025. This can be a handy feature
+to test email functionality on local systems without worrying about sending mails accidently to real users.
+Mailhog is only available on dev images which are used for local development and not available on production
+images.
