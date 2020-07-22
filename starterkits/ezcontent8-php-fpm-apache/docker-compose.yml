@@ -46,16 +46,16 @@ services:
     command:
       - "chown -R continua:continua /app"
     user: root
+    depends_on:
+      - cli
     volumes: *app-volumes
 
   cli:
     image: "srijanlabs/php-cli:${PHP_VERSION}-10"
     container_name: ${PROJECT_NAME}_cli
     command: ["composer", "install", "--no-dev", "--prefer-dist", "--no-progress", "--no-suggest", "--no-interaction", "--optimize-autoloader"]
-    user: continua
+    user: root
     working_dir: /app
-    depends_on:
-      - chown
     volumes:  *cli-volumes
     networks: *app-networks
     env_file:  *app-envsfile

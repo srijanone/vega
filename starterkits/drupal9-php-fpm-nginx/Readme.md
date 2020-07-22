@@ -6,6 +6,11 @@
 |   PHP version | .env         | PHP_VERSION  |     7.3      |
 |  Project name | .env         | PROJECT_NAME |     drupal9  |
 
+---
+## NOTE:
+Due to an issue as of now PHP_VERSION has to be updated in Tiltfile as well.
+---
+
 ### Configuring Runtime:
 
 ##### These values can be configure using [.env](.env) file
@@ -68,6 +73,19 @@ recommended alias:
 alias ddrush="docker-compose run --rm php drush"
 ```
 ---
+---
+## NOTE:
+```
+Problem:
+  On Linux OS, during composer install cli service throws
+  a permission denied error while installing dependencies.
+
+Solution:
+  Run the cli service with root user and run chown service after to change the ownership.
+  This will prevent the error throws during the composer install.
+```
+---
+
 ### Profiling:
 - Get your blackfire server id and token from https://blackfire.io/my/settings/credentials
 - Configure the blackfire server id and token in .env file.
@@ -87,3 +105,10 @@ alias ddrush="docker-compose run --rm php drush"
 
 Please follow the document to setup xdebug:
 [Setup Xdebug](/starterkits/XDEBUG-SETUP.md)
+
+## Mailhog
+
+This starterkit ships with mailhog which can be accessed at localhost:8025. This can be a handy feature
+to test email functionality on local systems without worrying about sending mails accidently to real users.
+Mailhog is only available on dev images which are used for local development and not available on production
+images.
