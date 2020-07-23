@@ -37,7 +37,7 @@ x-app-networks: &app-networks
 services:
   # Change mounted named volumes user from root(default) to continua.
   chown:
-    image: "srijanlabs/php-cli:${PHP_VERSION}-10"
+    image: "srijanlabs/php-cli:${PHP_VERSION}-buster"
     container_name: ${PROJECT_NAME}_chown
     entrypoint: [ "bash", "-c"]
     command:
@@ -48,7 +48,7 @@ services:
     volumes: *app-volumes
 
   cli:
-    image: "srijanlabs/php-cli:${PHP_VERSION}-10"
+    image: "srijanlabs/php-cli:${PHP_VERSION}-buster"
     container_name: ${PROJECT_NAME}_cli
     command: ["composer", "install", "--no-dev", "--prefer-dist", "--no-progress", "--no-suggest", "--no-interaction", "--optimize-autoloader"]
     user: root
@@ -60,7 +60,7 @@ services:
       - COMPOSER_MEMORY_LIMIT=-1 # Prevent composer from running out of memory
 
   php:
-    image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-10-local
+    image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-buster-local
     build:
       dockerfile: Dockerfile.dev
       context: .
@@ -76,7 +76,7 @@ services:
     env_file:  *app-envsfile
 
   nginx:
-    image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-10-local
+    image: srijanlabs/php-fpm-nginx:${PHP_VERSION}-buster-local
     container_name: ${PROJECT_NAME}_nginx
     command: ["nginx"]
     depends_on:

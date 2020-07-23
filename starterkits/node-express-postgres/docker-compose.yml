@@ -25,7 +25,7 @@ services:
       dockerfile: Dockerfile.dev
       args:
         NODE_VERSION: ${NODE_VERSION}
-    image: srijanlabs/node:${NODE_VERSION}-10-local
+    image: srijanlabs/node:${NODE_VERSION}-buster-local
     container_name: ${PROJECT_NAME}_backend
     command: ["npm", "start"]
     working_dir: /app

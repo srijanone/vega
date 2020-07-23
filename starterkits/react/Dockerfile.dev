@@ -1,6 +1,7 @@
 
 ARG NODE_VERSION=12
-FROM srijanlabs/node:${NODE_VERSION}-10-dev
+ARG BASE_VERSION=buster
+FROM srijanlabs/node:${NODE_VERSION}-${BASE_VERSION}-dev
 
 WORKDIR /app
 
