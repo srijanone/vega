@@ -1,5 +1,5 @@
 ARG PHP_VERSION=7.3
-ARG BASE_VERSION=10
+ARG BASE_VERSION=buster
 FROM srijanlabs/php-cli:${PHP_VERSION}-${BASE_VERSION} as builder
 COPY composer.json composer.lock /app/
 COPY patches ./patches
