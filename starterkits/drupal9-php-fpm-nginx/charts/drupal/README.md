@@ -11,13 +11,12 @@ It deploys a drupal application. Optionally, you can set up an Ingress resource 
 - Kubernetes 1.12+
 - Helm 2.11+ or Helm 3.0-beta3+
 
-## Installing the Chart
+## Installing the Chart (Helm3)
 
 To install the chart with the release name `my-release`:
 
 ```console
-$ git clone https://github.com/srijanone/helm-chart
-$ helm install --name my-release ./helm-chart/stable/drupal
+$ helm install my-release ./charts/drupal
 ```
 
 These commands deploy drupal on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation. Also includes support for MariaDB chart out of the box.
@@ -31,7 +30,7 @@ Due that the Helm Chart clones the application on the /app volume while the cont
 To uninstall/delete the `my-release` deployment:
 
 ```console
-$ helm delete my-release
+$ helm uninstall my-release
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -44,7 +43,7 @@ The following table lists the configurable parameters of the drupal chart and th
 | --------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------- |
 | `global.imageRegistry`                  | Global Docker image registry                                                | `docker.io`                                             |
 | `phpfpm.registry`                       | PHP-FPM image registry                                                      | `nil`                                                   |
-| `phpfpm.repository`                     | PHP-FPM image name                                                          | `drupal:8`                                            |
+| `phpfpm.repository`                     | PHP-FPM image name                                                          | `drupal:demo`                                            |
 | `phpfpm.pullPolicy`                     | PHP-FPM image pull policy                                                   | `IfNotPresent`                                          |
 | `phpfpm.extraEnv`                       | PHP-FPM container environment variables                                     | `nill`                                                  |
 | `phpfpm.command`                        | PHP-FPM container entry point                                               | from image                                              |
@@ -89,9 +88,9 @@ The following table lists the configurable parameters of the drupal chart and th
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
 ```console
-$ helm install --name my-release \
+$ helm install my-release \
   --set replicas=2 \
-    ./helm-chart/stable/drupal
+    ./charts/drupal
 ```
 
 The above command clones the remote git repository to the `/app/` directory  of the container. Additionally it sets the number of `replicas` to `2`.
@@ -99,7 +98,7 @@ The above command clones the remote git repository to the `/app/` directory  of 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
 ```console
-$ helm install --name my-release -f values.yaml ./charts/drupal
+$ helm install my-release -f values.yaml ./charts/drupal
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
@@ -143,9 +142,9 @@ ingress:
 - You should see a helm package named - `drupal-1.0.0.tgz`.
 - Upload the `drupal-1.0.0.tgz` helm package to s3 bucket :
   ```
-  aws s3 cp drupal-1.0.0.tgz s3://s3-st-helm-dev/drupal/drupal-1.0.0.tgz --sse=AES256 --region=ap-southeast-1
+  aws s3 cp drupal-1.0.0.tgz s3://s3-helm/drupal/drupal-1.0.0.tgz --sse=AES256 --region=ap-southeast-1
   ```
 - Upload the `values.yaml` to s3 bucket :
   ```
-  aws s3 cp values-<env>.yaml s3://s3-st-helm-dev/drupal/values/st-<env>-values.yaml --sse=AES256 --region=ap-southeast-1
+  aws s3 cp values-<env>.yaml s3://s3-helm/drupal/values/st-<env>-values.yaml --sse=AES256 --region=ap-southeast-1
   ```
