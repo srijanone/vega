@@ -1,0 +1,25 @@
+{
+  "name": "node-express",
+  "version": "1.0.0",
+  "description": "Demo app to debug node app running inside docker using vscode",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "debug": "npm i && npx nodemon --inspect=0.0.0.0:9229 index.js"
+  },
+  "keywords": [
+    "docker",
+    "nodejs",
+    "nodemon",
+    "debug",
+    "vscode"
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

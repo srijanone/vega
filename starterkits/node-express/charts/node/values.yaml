@@ -1,0 +1,229 @@
+## Global Docker image parameters
+## Please, note that this will override the image parameters, including dependencies, configured to use the global value
+## Current available global Docker image parameters: imageRegistry and imagePullSecrets
+##
+global:
+  imageRegistry: docker.io
+
+node:
+  image:
+    # registry: docker.io
+    repository: srijanlabs/node:demo
+    ## tag:
+    ## Specify a imagePullPolicy
+    ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+    ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+    ##
+    pullPolicy: IfNotPresent
+    ## Optionally specify an array of imagePullSecrets.
+    ## Secrets must be manually created in the namespace.
+    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    ##
+    # pullSecrets:
+    #   - myRegistryKeySecretName
+
+  ## Specify the port where your application will be running
+  ##
+  port: 3000
+
+
+  ## Container Entrypoint
+  # command: ["/bin/sh", "-c"]
+
+  ## Container Command
+  # args: ["/start.sh"]
+
+  ## Define custom environment variables to pass to the image here
+  ##
+  extraEnv:
+  #   - name: key
+  #     value: value
+
+  ## Node conatiners' resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ##
+  resources:
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    limits:
+      cpu: "1"
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+  ## Configure liveness and readiness probes.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+  #
+  livenessProbe:
+    httpGet:
+      path: /
+      port: node
+    initialDelaySeconds: 120
+  readinessProbe:
+    httpGet:
+      path: /
+      port: node
+    initialDelaySeconds: 30
+
+## String to partially override node.fullname template (will maintain the release name)
+##
+# nameOverride:
+
+## String to fully override node.fullname template
+##
+# fullnameOverride:
+
+## K8S Object type
+## Supported values are ReplicaSet and Deployment
+applicationKind: Deployment
+
+## Specify the number of replicas for the application
+##
+replicas: 1
+
+## Affinity for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+##
+affinity: {}
+
+## Node labels for pod assignment. Evaluated as a template.
+## Ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
+nodeSelector: {}
+
+## Tolerations for pod assignment. Evaluated as a template.
+## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: {}
+
+## Pod Security Context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+##
+securityContext:
+  enabled: false
+  fsGroup: 1001
+  runAsUser: 1001
+
+## External database configuration
+##
+externalDatabase:
+  ## Database host
+  # host: mysql.example.com
+
+  ## Database port
+  # port: "3306"
+
+  ## Database user
+  # user: example
+
+  ## Database password
+  # password: example
+
+  ## Database name
+  # database: example
+  
+## External filesystem configuration
+##
+s3Config:
+  ## s3 buket name
+  # bucket: example
+
+  ## s3 region
+  # region: us-west-2
+
+  ## s3 access key
+  # accessKey: S3_ACCESS_KEY
+
+  ## s3 secret key
+  # secretKey: S3_SECRET_KEY
+
+## Service paramaters
+service:
+  ## Service type
+  ##
+  type: NodePort
+  ## HTTP Port
+  ##
+  port: 80
+  ## Specify the nodePort value for the LoadBalancer and NodePort service types.
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
+  ##
+  # nodePort:
+  ## Set the LoadBalancer service type to internal only.
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
+  ##
+  # loadBalancerIP:
+  ## Provide any additional annotations which may be required. This can be used to
+  ## set the LoadBalancer service type to internal only.
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
+  ##
+  annotations: {}
+
+## Ingress paramaters
+##
+ingress:
+  ## Set to true to enable ingress record generation
+  ##
+  enabled: false
+
+  ## The list of hostnames to be covered with this ingress record.
+  ## Most likely this will be just one host, but in the event more hosts are needed, this is an array
+  hosts:
+    - name: www.example.com
+
+      ## Set the path after hostname, default is '/'
+      ##
+      path: /*
+
+      ## Set this to true in order to enable TLS on the ingress record
+      ##
+      tls: false
+
+      ## Set this to true in order to add the corresponding annotations for cert-manager
+      ##
+      certManager: false
+
+      ## If TLS is set to true, you must declare what secret will store the key/certificate for TLS
+      ##
+      tlsSecret: node.local-tls
+
+      ## Ingress annotations done as key:value pairs
+      ## For a full list of possible ingress annotations, please see
+      ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
+      ##
+      ## If certManager is set to true, annotation kubernetes.io/tls-acme: "true" will automatically be set
+      annotations:
+        kubernetes.io/ingress.class: alb
+        alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:xxxxxxxxxxxxxx:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
+        alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+        alb.ingress.kubernetes.io/scheme: internal
+        alb.ingress.kubernetes.io/security-groups: SG-LB-Internal
+        alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-FS-1-2-2019-08
+        alb.ingress.kubernetes.io/tags: env=dev
+        alb.ingress.kubernetes.io/healthcheck-path: /probe.php
+        alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+
+  secrets:
+  ## If you're providing your own certificates, please use this to add the certificates as secrets
+  ## key and certificate should start with -----BEGIN CERTIFICATE----- or
+  ## -----BEGIN RSA PRIVATE KEY-----
+  ##
+  ## name should line up with a tlsSecret set further up
+  ## If you're using cert-manager, this is unneeded, as it will create the secret for you if it is not set
+  ##
+  ## It is also possible to create and manage the certificates outside of this helm chart
+  ## Please see README.md for more information
+  # - name: node.local-tls
+  #   key:
+  #   certificate:
+
+
+## HorizontalPodAutoscaler for node
+HPA:
+  enabled: false
+  minReplicas: 25
+  maxReplicas: 30
+  targetCPUUtilizationPercentage: 60
