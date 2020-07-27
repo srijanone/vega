@@ -49,6 +49,28 @@ func newCreateCmd(out io.Writer) *cobra.Command {
 	return createCmd
 }
 
+func askUserChoice(starterkits []vega.StarterKit) (vega.StarterKit, error) {
+	var sk vega.StarterKit
+	prompt := &survey.Select{
+		Message: "Select starterkit which you want to install:",
+	}
+	for _, starterkit := range starterkits {
+		prompt.Options = append(prompt.Options, starterkit.Name)
+	}
+	var skName = ""
+	err := survey.AskOne(prompt, &skName)
+	if err != nil {
+		return sk, err
+	}
+	for _, starterkit := range starterkits {
+		if skName == starterkit.Name {
+			sk = starterkit
+			break
+		}
+	}
+	return sk, nil
+}
+
 func (cCmd *createCmd) execute() error {
 	// TODO: Check if starterkits files are already there or not properly
 	dockerfileExists, err := common.Exists(filepath.Join(cCmd.dest, vega.DockerfileName))
@@ -67,8 +89,6 @@ func (cCmd *createCmd) execute() error {
 		Path: repoPath,
 	}
 
-	fmt.Printf("checkthis this \n")
-
 	var starterkit vega.StarterKit
 
 	if cCmd.starterkit == "" {
@@ -76,7 +96,7 @@ func (cCmd *createCmd) execute() error {
 		if err != nil {
 			fmt.Fprintln(cCmd.out, "No starterkit found")
 		}
-		starterkit, err = askUserChoice(starterkits, repoPath)
+		starterkit, err = askUserChoice(starterkits)
 		if err != nil {
 			return fmt.Errorf("Bad choice")
 		}
@@ -86,13 +106,12 @@ func (cCmd *createCmd) execute() error {
 			fmt.Fprintln(cCmd.out, "No starterkit found")
 			return fmt.Errorf("No starterkit named %s found", cCmd.starterkit)
 		}
-		fmt.Fprintf(cCmd.out, "checkthis this %v", starterkits)
 		if len(starterkits) == 1 {
 			starterkit = starterkits[0]
 			fmt.Println(starterkit)
 		} else if len(starterkits) > 0 {
-			fmt.Fprintf(cCmd.out, "multiple starterkit named %s found: %v", cCmd.starterkit, starterkits)
-			starterkit, err = askUserChoice(starterkits, repoPath)
+			fmt.Fprintf(cCmd.out, "multiple starterkit named %s found:\n", cCmd.starterkit)
+			starterkit, err = askUserChoice(starterkits)
 			if err != nil {
 				return fmt.Errorf("Bad choice")
 			}
@@ -109,27 +128,4 @@ func (cCmd *createCmd) execute() error {
 	}
 	fmt.Fprintln(cCmd.out, "Ready for development")
 	return nil
-}
-
-func askUserChoice(starterkits []vega.StarterKit, repoPath string) (vega.StarterKit, error) {
-	var starterkit vega.StarterKit
-	prompt := &survey.Select{
-		Message: "Select starterkit which you want to install:",
-	}
-	for _, starterkit := range starterkits {
-		prompt.Options = append(prompt.Options, starterkit.Name)
-	}
-	var skName = ""
-	err := survey.AskOne(prompt, &skName)
-	if err != nil {
-		return starterkit, err
-	}
-
-	starterkit = vega.StarterKit{
-		Name: skName,
-		Path: filepath.ToSlash(filepath.Join(repoPath, skName)),
-	}
-
-	return starterkit, nil
-
 }
