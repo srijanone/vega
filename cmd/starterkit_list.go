@@ -51,7 +51,7 @@ func (cmd *starterkitListCmd) execute() error {
 	}
 	fmt.Fprintln(cmd.out, "Available starterkits:")
 	for _, starterkit := range starterkits {
-		fmt.Fprintf(cmd.out, "  %10s (%s)\n", starterkit.Name, starterkit.Path)
+		fmt.Fprintf(cmd.out, "  %s \n", starterkit.Name)
 	}
 	return nil
 }
