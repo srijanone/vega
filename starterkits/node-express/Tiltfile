@@ -13,4 +13,6 @@ docker_compose('docker-compose.yml')
 #   live_update = [
 #     # Sync local files into the container.
 #     sync('.', '/app'),
+#     run('npm i', trigger='package.json'),
+#     restart_container()
 #   ])

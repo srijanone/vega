@@ -1,0 +1,13 @@
+ARG NODE_VERSION=12
+ARG BASE_VERSION=buster
+FROM srijanlabs/node:${NODE_VERSION}-${BASE_VERSION}-dev
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm i \
+    && npm rebuild
+
+# Add debug script to package.json to start app in debug mode
+CMD [ "npm", "run", "debug" ]

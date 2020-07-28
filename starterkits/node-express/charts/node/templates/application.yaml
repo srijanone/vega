@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: {{ .Values.applicationKind }}
+metadata:
+  name: {{ template "node.fullname" . }}
+  labels: {{- include "node.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels: {{- include "node.matchLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels: {{- include "node.labels" . | nindent 8 }}
+    spec:
+      {{- if .Values.affinity }}
+      affinity: {{- include "node.tplValue" (dict "value" .Values.affinity "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{- include "node.tplValue" (dict "value" .Values.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations: {{- include "node.tplValue" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.securityContext.enabled }}
+      securityContext:
+        fsGroup: {{ .Values.securityContext.fsGroup }}
+        runAsUser: {{ .Values.securityContext.runAsUser }}
+      {{- end }}
+      containers:
+        - name: node
+          image: {{ template "node.image" . }}
+          imagePullPolicy: {{ .Values.node.image.pullPolicy | quote }}
+          envFrom:
+            - secretRef:
+                name: {{ template "node.fullname" . }}
+          {{- if .Values.node.extraEnv }}
+          env: {{- toYaml .Values.node.extraEnv | nindent 12 }}
+          {{- end }}
+          {{- if .Values.node.command }}
+          command: {{- toYaml .Values.node.command | nindent 12 }}
+          {{- end }}
+          {{- if .Values.node.args }}
+          args: {{- toYaml .Values.node.args | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: node
+              containerPort: {{ .Values.node.port }}
+          livenessProbe:
+{{ toYaml .Values.node.livenessProbe | indent 12 }}
+          readinessProbe:
+{{ toYaml .Values.node.readinessProbe | indent 12 }}
+          {{- if .Values.node.resources }}
+          resources: {{- toYaml .Values.node.resources | nindent 12 }}
+          {{- end }}
