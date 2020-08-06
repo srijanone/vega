@@ -34,6 +34,48 @@ x-app-networks: &app-networks
   - default
 
 services:
+  traefik:
+    # The official v2 Traefik docker image
+    image: traefik:v2.2.0
+    container_name: ${PROJECT_NAME}_proxy
+    env_file:  *app-envsfile
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      #--configFile=proxy.yml
+      --entrypoints.web.address=:80
+      --entrypoints.websecure.address=:443
+      --api.insecure=true
+      --providers.docker=true
+      --certificatesresolvers.leresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      --certificatesresolvers.leresolver.acme.email=vega@vega.com
+      --certificatesresolvers.leresolver.acme.storage=/acme.json
+      --certificatesresolvers.leresolver.acme.tlschallenge=true
+
+    labels:
+      # Dashboard
+      - "traefik.http.routers.traefik.rule=Host(`traefik.docker.localhost`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls.certresolver=leresolver"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.middlewares=authtraefik"
+      - "traefik.http.middlewares.authtraefik.basicauth.users=user:$$apr1$$q8eZFHjF$$Fvmkk//V6Btlaf2i/ju5n/" # user/password
+
+      # global redirect to https
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=web"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+
+      # middleware redirect
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+
+    ports:
+      - ${APPLICATION_PORT}:80
+      - "443:443"
+      - "8000:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./acme.json:/acme.json
+
   # Change mounted named volumes user from root(default) to continua.
   chown:
     image: "srijanlabs/php-cli:${PHP_VERSION}-buster"
@@ -68,11 +110,16 @@ services:
     container_name: ${PROJECT_NAME}_drupal
     depends_on:
       - mysql
-    ports:
-      - ${APPLICATION_PORT}:8080
+    # ports:
+    #   - ${APPLICATION_PORT}:8080
     volumes: *app-volumes
     networks: *app-networks
     env_file:  *app-envsfile
+    labels:
+      - traefik.http.routers.drupal.rule=Host(`${PROJECT_NAME}.vega.localhost`)
+      - traefik.http.routers.drupal.entrypoints=websecure
+      - traefik.http.routers.drupal.tls=true
+      - traefik.http.routers.drupal.tls.certresolver=leresolver
 
   mysql:
     image: mysql:5.7
