@@ -92,17 +92,6 @@ func (iCmd *initCmd) setupVegaHome() error {
 	}
 	defaultStarterKit.Add()
 
-	// Adding Git Hooks to Vega Home
-	//gitHooks := vega.GitHooks{
-	//	Home: iCmd.home,
-	//	URL:  gitHooksRepoName,
-	//	Dir:  gitHooksDirName,
-	//	Out:  iCmd.out,
-	//}
-	//gitHooks.Add()
-
-	// Installing Git Hooks as Global hooks
-	// gitHooks.InstallGlobally()
 	return nil
 }
 

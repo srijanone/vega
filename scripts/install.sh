@@ -102,12 +102,12 @@ function install_git_secrets() {
 function install() {
   VEGA_PATH=$(command -v vega 2>&1 || true)
   TILT_PATH=$(command -v tilt 2>&1 || true)
-  GIT_SECRETS_PATH=$(command -v tilt 2>&1 || true)
+  GIT_SECRETS_PATH=$(command -v git-secrets 2>&1 || true)
 
   if [[ -z $VEGA_PATH ]]; then
     echo -e "${green}Installing Vega${reset}"
     install_vega
-  else
+  else  
     echo -e "${green}Vega already installed, Please run 'vega' for details${reset}"
   fi
 

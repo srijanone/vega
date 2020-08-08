@@ -26,10 +26,13 @@ func IsInstalled() bool {
 	return err == nil
 }
 
-// @TODO:
 func Configure(out io.Writer) {
 	templateDir := filepath.Join(common.DefaultHome(), ".git-templates", "git-secrets")
-	drupalSecretRegex := "(\"|')?(host|port|password|username)(\"|')?\\s*(:|=>|=)\\s*(\"|')?(\".*\")(\"|')?\\s*"
+	// This is a very rudimentary check, it checks if host, port, password etc in the database
+	// array in settings.php(drupal) is written in plain text. In case these are written in plain
+	// text the developer might write them in "", or '' and in case these are externalise typically
+	// developers would use https://www.php.net/manual/en/function.getenv.php or some other function.
+	drupalSecretRegex := "(\"|')?(host|port|password|username)(\"|')?\\s*(=>)\\s*(\"|')+(.*)(\"|')+\\s*"
 
 	fmt.Print("Adding common AWS patterns to the git config...\n")
 	execute(out, "--register-aws", "--global")
