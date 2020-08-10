@@ -5,19 +5,13 @@ import (
 	"io"
 
 	"github.com/spf13/cobra"
-	common "github.com/srijanone/vega/pkg/common"
 	compose "github.com/srijanone/vega/pkg/compose"
+	detector "github.com/srijanone/vega/pkg/detector"
 	tilt "github.com/srijanone/vega/pkg/tilt"
 )
 
 var watch, noBrowser bool
 var port string
-
-func isDrupal() bool {
-	signature := "composer.json"
-	result, _ := common.Exists(signature)
-	return result
-}
 
 func newUpCmd(out io.Writer) *cobra.Command {
 	const upDesc = "start the application"
@@ -34,7 +28,7 @@ func newUpCmd(out io.Writer) *cobra.Command {
 			if watch == false {
 				upArgs = append(upArgs, "--watch", "false")
 			}
-			if isDrupal() {
+			if detector.IsDrupal() {
 				fmt.Fprintln(out, "Building the application")
 				compose.Run(out, "cli")
 			}

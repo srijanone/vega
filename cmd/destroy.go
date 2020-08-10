@@ -9,17 +9,17 @@ import (
 )
 
 func newDestroyCmd(out io.Writer) *cobra.Command {
-	const downDesc = "Delete application and persisted data"
+	const destroyDesc = "Delete application and persisted data"
 
-	downCmd := &cobra.Command{
-		Use:   "down",
-		Short: downDesc,
-		Long:  downDesc,
+	destroyCmd := &cobra.Command{
+		Use:   "destroy",
+		Short: destroyDesc,
+		Long:  destroyDesc,
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Fprintln(out, "Deleting the application")
 			compose.Destroy(out, args...)
 		},
 	}
 
-	return downCmd
+	return destroyCmd
 }
