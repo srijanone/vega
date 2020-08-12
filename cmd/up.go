@@ -5,6 +5,8 @@ import (
 	"io"
 
 	"github.com/spf13/cobra"
+	compose "github.com/srijanone/vega/pkg/compose"
+	detector "github.com/srijanone/vega/pkg/detector"
 	tilt "github.com/srijanone/vega/pkg/tilt"
 )
 
@@ -19,7 +21,6 @@ func newUpCmd(out io.Writer) *cobra.Command {
 		Short: upDesc,
 		Long:  upDesc,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Fprintln(out, "Running the application")
 			upArgs := []string{"--port", port}
 			if noBrowser {
 				upArgs = append(upArgs, "--no-browser")
@@ -27,10 +28,14 @@ func newUpCmd(out io.Writer) *cobra.Command {
 			if watch == false {
 				upArgs = append(upArgs, "--watch", "false")
 			}
+			if detector.IsDrupal() {
+				fmt.Fprintln(out, "Building the application")
+				compose.Run(out, "cli")
+			}
+			fmt.Fprintln(out, "Running the application")
 			tilt.Up(out, upArgs...)
 		},
 	}
-
 	flags := upCmd.Flags()
 	flags.BoolVar(&noBrowser, "no-browser", false, "If true, Web UI will not open on startup")
 	flags.BoolVar(&watch, "watch", true, "If true, services will be automatically rebuilt and redeployed when files change")
