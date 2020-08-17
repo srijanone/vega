@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/srijanone/vega/pkg/git_secrets"
+
 	"github.com/spf13/cobra"
 
 	common "github.com/srijanone/vega/pkg/common"
@@ -57,6 +59,11 @@ func (iCmd *initCmd) execute() error {
 		}
 	}
 
+	if !iCmd.dryRun {
+		if err := iCmd.setupGitSecrets(); err != nil {
+			return err
+		}
+	}
 	fmt.Fprintln(iCmd.out, "$VEGA_HOME has been initialized at", vegaHome)
 	return nil
 }
@@ -65,7 +72,7 @@ func (iCmd *initCmd) setupVegaHome() error {
 	directories := []string{
 		iCmd.home.String(),
 		iCmd.home.StarterKits(),
-		iCmd.home.GitHooks(),
+		// iCmd.home.GitHooks(),
 		iCmd.home.Logs(),
 	}
 
@@ -86,16 +93,10 @@ func (iCmd *initCmd) setupVegaHome() error {
 	}
 	defaultStarterKit.Add()
 
-	// Adding Git Hooks to Vega Home
-	gitHooks := vega.GitHooks{
-		Home: iCmd.home,
-		URL:  gitHooksRepoName,
-		Dir:  gitHooksDirName,
-		Out:  iCmd.out,
-	}
-	gitHooks.Add()
+	return nil
+}
 
-	// Installing Git Hooks as Global hooks
-	gitHooks.InstallGlobally()
+func (iCmd *initCmd) setupGitSecrets() error {
+	git_secrets.Configure(iCmd.out)
 	return nil
 }

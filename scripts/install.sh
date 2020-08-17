@@ -33,7 +33,7 @@ function shell_rc() {
 }
 
 function next_step_message() {
-  local name="Vega"
+  local name="vega"
   echo -e "${yellow}${name} is installed to \$HOME/.local/bin, Please add following line to your $(shell_rc) file and reload it using: ${bold}source $(shell_rc) ${reset}"
   echo ""
   echo -e "${bold}export PATH=\"\$PATH:\$HOME/.local/bin\"${reset}"
@@ -63,7 +63,7 @@ function install_vega() {
       copy_binary "vega"
     fi
   else
-    echo -e "${red}The Vega installer does not work for your platform: ${OS} ${reset}"
+    echo -e "${red}The Vega installer is not supported for your platform ${OS} ${reset}"
     echo -e "${red}Please file an issue at https://github.com/srijanone/vega/issues/new ${reset}"
     exit 1
   fi
@@ -81,8 +81,20 @@ function install_tilt() {
       copy_binary "tilt"
     fi
   else
-    echo -e "${red}The Tilt installer does not work for your platform: ${OS} ${reset}"
+    echo -e "${red}The Tilt installer is not supported for your platform: ${OS} ${reset}"
     echo -e "${red}Please file an issue at https://github.com/tilt-dev/tilt/issues/new ${reset}"
+    exit 1
+  fi
+}
+
+function install_git_secrets() {
+  if [[ "$OSTYPE" == "linux-gnu" ]] || [[ "$OSTYPE" == "darwin"* ]]; then
+    curl -sSL -o git-secrets -D - -L -s 'https://raw.githubusercontent.com/awslabs/git-secrets/master/git-secrets'
+    chmod +x git-secrets
+    copy_binary "git-secrets"
+  else
+    echo -e "${red}git-secrets installer is not supported for your platform: ${OS} ${reset}"
+    echo -e "${red}Please file an issue at https://github.com/awslabs/git-secrets/issues/new ${reset}"
     exit 1
   fi
 }
@@ -90,11 +102,12 @@ function install_tilt() {
 function install() {
   VEGA_PATH=$(command -v vega 2>&1 || true)
   TILT_PATH=$(command -v tilt 2>&1 || true)
+  GIT_SECRETS_PATH=$(command -v git-secrets 2>&1 || true)
 
   if [[ -z $VEGA_PATH ]]; then
     echo -e "${green}Installing Vega${reset}"
     install_vega
-  else
+  else  
     echo -e "${green}Vega already installed, Please run 'vega' for details${reset}"
   fi
 
@@ -102,6 +115,13 @@ function install() {
     echo -e "${green}Installing Dependencies${reset}"
     echo -e "${green}Installing Tilt${reset}"
     install_tilt
+  fi
+
+  if [[ -z $GIT_SECRETS_PATH ]]; then
+    echo -e "${green}Installing git-secrets${reset}"
+    install_git_secrets
+  else
+    echo -e "${green}git-secrets already installed, Please run 'git-secrets for details${reset}"
   fi
 
   if [[ "${show_next_step_message}" == "YES" ]]; then
