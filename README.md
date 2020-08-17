@@ -25,6 +25,7 @@ Several options to install:
 - [Docker](https://docs.docker.com/install/)
 - [docker-compose](https://docs.docker.com/compose/install/)
 
+---
 
 ## Getting Started
 
@@ -66,6 +67,8 @@ The above commands are mostly used commands, please refer commands table for fur
     1. `vega repo add globe git@github.com:vs4vijay/vega-starterkits.git`
     2. `vega repo add new /Users/viz/SrijanX/custom`
 
+---
+
 ## Development
 
 - Run Vega: `go run main.go`
@@ -75,6 +78,14 @@ The above commands are mostly used commands, please refer commands table for fur
     - `make release-dry-run`        # to test and verify on local machine
     - `make release-using-gorelease`
 
+---
+
+## Release
+- Releases are generated using Github Action Pipelines which runs `goreleaser`
+- Create a new tag: `git tag origin v1.0.x`
+- Push tag: `git push origin v1.0.x`
+
+---
 
 ## Secrets
 vega has been integrated with [git-secrets](https://github.com/awslabs/git-secrets) which adds following hooks to your repositories when ```vega hooks install``` is executed.
@@ -89,6 +100,8 @@ vega has been integrated with [git-secrets](https://github.com/awslabs/git-secre
 
 ```vega hooks install``` overrides any current git hooks if you have added any. In case you would like to have multiple
 hooks please refer: https://gist.github.com/carlos-jenkins/89da9dcf9e0d528ac978311938aade43
+
+---
 
 ## Credits
 
