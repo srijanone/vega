@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Vega Installer Script
+# Git Secrets Installer Script
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/srijanone/vega/develop/scripts/install-git-secrets.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/srijanone/vega/develop/scripts/install_git_secrets.sh | bash
 
 VERSION="1.0.4"
 
