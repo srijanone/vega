@@ -42,4 +42,3 @@ func (gitHook *GitHooks) Install(path string) {
 	args := []string{"secrets", "--install", "-f"}
 	git.Execute(gitHook.Out, args...)
 }
-

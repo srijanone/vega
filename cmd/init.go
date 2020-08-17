@@ -3,8 +3,9 @@ package cmd
 import (
 	"errors"
 	"fmt"
-	"github.com/srijanone/vega/pkg/git_secrets"
 	"io"
+
+	"github.com/srijanone/vega/pkg/git_secrets"
 
 	"github.com/spf13/cobra"
 
@@ -71,7 +72,7 @@ func (iCmd *initCmd) setupVegaHome() error {
 	directories := []string{
 		iCmd.home.String(),
 		iCmd.home.StarterKits(),
-		iCmd.home.GitHooks(),
+		// iCmd.home.GitHooks(),
 		iCmd.home.Logs(),
 	}
 
@@ -95,7 +96,7 @@ func (iCmd *initCmd) setupVegaHome() error {
 	return nil
 }
 
-func (iCmd *initCmd) setupGitSecrets()  error {
+func (iCmd *initCmd) setupGitSecrets() error {
 	git_secrets.Configure(iCmd.out)
 	return nil
 }

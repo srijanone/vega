@@ -18,43 +18,29 @@ Several options to install:
 - Via released binaries:
   - [releases](https://github.com/srijanone/vega/releases)
 
----
-
 ## Requirements
 
 - git
 - [tilt](https://docs.tilt.dev/install.html)
 - [Docker](https://docs.docker.com/install/)
+- [docker-compose](https://docs.docker.com/compose/install/)
 
----
 
 ## Getting Started
 
-- `vega`: Vega usage
-
-![vega usage](.screenshots/vega_usage.png)
+- `vega`: vega usage
 
 - `vega init`: Initializes vega
 
-![vega init](.screenshots/vega_init.png)
-
 - `vega starterkit list`: List all available starterkits
 
-![vega starterkit list](.screenshots/vega_starterkit_list.png)
+- `vega create my-drupal-app --starterkit drupal8-php-fpm-apache`: Bootload a new app using starterkit
 
-- `vega create awesome-app --starterkit nodejs+redis`
+- `vega up`: Get your docker containers up & running.
 
-![vega create](.screenshots/vega_create.png)
+- `vega down`: Stop all docker containers.
 
-- `vega up`
-
-![vega down](.screenshots/vega_up.png)
-
-- `vega down`
-
-![vega down](.screenshots/vega_down.png)
-
----
+The above commands are mostly used commands, please refer commands table for further details.
 
 ## Commands
 
@@ -64,7 +50,7 @@ Several options to install:
 | `vega version`                                 | Prints out version                                                                    |                                                 | Vega 1.0.0 |
 | `vega home`                                    | Prints out home vega home                                                             |                                                 |            |
 | `vega init`                                    | Initializes vega                                                                      |                                                 |            |
-| `vega starterkit list`                         | List all available starterkits                                                        |                                                 | drupal8<br>nodejs    |
+| `vega starterkit list`                         | List all available starterkits                                                        |                                                 | drupal9-php-fpm-apache<br>react    |
 | `vega create [path] --starterkit <name>`       | Creates the starter kit at provided directory                                         | \--starterkit <name><br>\--repo <repo>          |            |
 | `vega install [path]`                          | Install a starterkit to existing project                                              | \--repo <repo>                                   |            |
 | `vega repo add <repo-name> <url>`              | Add another starterkit repo, Can choose local folder as well                          |                                                 |            |
@@ -80,8 +66,6 @@ Several options to install:
     1. `vega repo add globe git@github.com:vs4vijay/vega-starterkits.git`
     2. `vega repo add new /Users/viz/SrijanX/custom`
 
----
-
 ## Development
 
 - Run Vega: `go run main.go`
@@ -91,15 +75,26 @@ Several options to install:
     - `make release-dry-run`        # to test and verify on local machine
     - `make release-using-gorelease`
 
----
+
+## Secrets
+vega has been integrated with [git-secrets](https://github.com/awslabs/git-secrets) which adds following hooks to your repositories when ```vega hooks install``` is executed.
+
+  1. ```pre-commit```: Used to check if any of the files changed in the commit
+       use prohibited patterns.
+  2. ```commit-msg```: Used to determine if a commit message contains a
+       prohibited patterns.
+  3. ```prepare-commit-msg```: Used to determine if a merge commit will
+       introduce a history that contains a prohibited pattern at any point.
+       Please note that this hook is only invoked for non fast-forward merges.
+
+```vega hooks install``` overrides any current git hooks if you have added any. In case you would like to have multiple
+hooks please refer: https://gist.github.com/carlos-jenkins/89da9dcf9e0d528ac978311938aade43
 
 ## Credits
 
-- Srijan Team (https://srijan.net)
 - Inspiration from Draft (https://draft.sh)
-- Utilized Tilt (https://tilt.dev) for running the application 
-
----
+- Tilt (https://tilt.dev) is used for running the applications
+- git-secrets
 
 ## LICENSE
 

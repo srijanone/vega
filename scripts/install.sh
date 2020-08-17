@@ -33,7 +33,7 @@ function shell_rc() {
 }
 
 function next_step_message() {
-  local name="Vega"
+  local name="vega"
   echo -e "${yellow}${name} is installed to \$HOME/.local/bin, Please add following line to your $(shell_rc) file and reload it using: ${bold}source $(shell_rc) ${reset}"
   echo ""
   echo -e "${bold}export PATH=\"\$PATH:\$HOME/.local/bin\"${reset}"

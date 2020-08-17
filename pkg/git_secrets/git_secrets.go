@@ -3,12 +3,13 @@ package git_secrets
 import (
 	"errors"
 	"fmt"
-	"github.com/srijanone/vega/pkg/common"
-	"github.com/srijanone/vega/pkg/git"
 	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
+
+	"github.com/srijanone/vega/pkg/common"
+	"github.com/srijanone/vega/pkg/git"
 )
 
 const (
@@ -17,7 +18,7 @@ const (
 		git-secrets is not installed, which is required to run the application. 
 	`
 	InstallInstructions = `
-		Install using: curl -fsSL https://raw.githubusercontent.com/srijanone/vega/develop/scripts/install.sh| bash
+		Install using: curl -fsSL https://raw.githubusercontent.com/srijanone/vega/develop/scripts/install_git_secrets.sh| bash
 	`
 )
 
