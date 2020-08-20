@@ -3,6 +3,8 @@
 #
 # Usage:
 #   ./setup_hooks.sh
+# @deprecated.
+#
 
 VERSION="1.0.0"
 
