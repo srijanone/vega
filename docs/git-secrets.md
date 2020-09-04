@@ -48,3 +48,16 @@ core.hookspath=/Users/viz/.git/hooks
 vim ~/.gitconfig
 ```
 and delete the ```core.hookspath=/Users/viz/.git/hooks``` line.
+
+## FAQs
+
+**Question**: I use Docksal, Lando or Drupal VM in my project, can I continue using it?
+
+**Answer**: You can use your current development stack for your project in case you want to use the secret management capability of vega.
+Unless you have git commit hooks set up in your project there will not be any impact on your local development stack.
+
+**Question**: I get ```git-secrets``` command not found when I try to commit code.
+
+**Answer**: Have you exported the PATH in ```~/.bashrc``` or equivalent file(```.zshrc, .bash_profile etc```). 
+Check if all the binaries are there in ```/home/<user-name>/.local/bin```. In case you have just installed vega and opened a new terminal,
+the session is not retained so type following in your terminal ```source ~/.bashrc``` or equivalent file(```.zshrc, .bash_profile etc```).
