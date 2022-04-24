@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "bcrypt": "^3.0.0",
-    "body-parser": "^1.17.2",
+    "body-parser": "1.20.0",
     "compose-middleware": "^2.2.0",
     "dotenv": "^4.0.0",
     "express": "^4.16.1",
