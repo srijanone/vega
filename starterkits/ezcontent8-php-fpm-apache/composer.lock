@@ -63,7 +63,7 @@
             "version": "1.6.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jackmoore/colorbox.git",
+                "url": "git@github.com:jackmoore/colorbox.git",
                 "reference": "bac78120c6ca9e63370cc317ab6f400129cd6608"
             },
             "dist": {
@@ -96,7 +96,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -114,7 +114,7 @@
             "version": "v1.8.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kenwheeler/slick.git",
+                "url": "git@github.com:kenwheeler/slick.git",
                 "reference": "0f40c9d6a02a5c08b5f4dd80fdada3a854a59bee"
             },
             "dist": {
@@ -1842,8 +1842,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector",
-                    "Doctrine\\Inflector\\": "lib/Doctrine/Inflector"
+                    "Doctrine\\Inflector\\": "lib/Doctrine/Inflector",
+                    "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2151,6 +2151,7 @@
                 "reflection",
                 "static"
             ],
+            "abandoned": "roave/better-reflection",
             "time": "2020-03-27T11:06:43+00:00"
         },
         {
@@ -2222,7 +2223,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-2.3",
-                    "datestamp": "1592535714",
+                    "datestamp": "1629907119",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2368,6 +2369,10 @@
                 {
                     "name": "floretan",
                     "homepage": "https://www.drupal.org/user/66163"
+                },
+                {
+                    "name": "nord102",
+                    "homepage": "https://www.drupal.org/user/3471419"
                 }
             ],
             "description": "Limit which text formats are available for each field instance.",
@@ -2419,6 +2424,10 @@
                 {
                     "name": "KarenS",
                     "homepage": "https://www.drupal.org/user/45874"
+                },
+                {
+                    "name": "m4olivei",
+                    "homepage": "https://www.drupal.org/user/410384"
                 },
                 {
                     "name": "marcelovani",
@@ -2546,19 +2555,19 @@
             "authors": [
                 {
                     "name": "Edward Chan",
-                    "homepage": "https://www.drupal.org/user/1781334"
-                },
-                {
-                    "name": "Mohammed J. Razem",
                     "homepage": "https://www.drupal.org/user/255384"
                 },
                 {
-                    "name": "RajabNatshah",
+                    "name": "Rajab Natshah",
                     "homepage": "https://www.drupal.org/user/1414312"
                 },
                 {
                     "name": "edwardchiapet",
                     "homepage": "https://www.drupal.org/user/2354784"
+                },
+                {
+                    "name": "klausi",
+                    "homepage": "https://www.drupal.org/user/262198"
                 },
                 {
                     "name": "mpriscella",
@@ -2980,7 +2989,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-1.6",
-                    "datestamp": "1587025715",
+                    "datestamp": "1643231105",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3008,8 +3017,12 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "jdwfly",
-                    "homepage": "https://www.drupal.org/user/298179"
+                    "name": "jenlampton",
+                    "homepage": "https://www.drupal.org/user/85586"
+                },
+                {
+                    "name": "paulmckibben",
+                    "homepage": "https://www.drupal.org/user/279003"
                 }
             ],
             "description": "A light-weight, customizable lightbox plugin for jQuery.",
@@ -3017,6 +3030,55 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/colorbox",
                 "issues": "https://www.drupal.org/project/issues/colorbox"
+            }
+        },
+        {
+            "name": "drupal/components",
+            "version": "2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/components.git",
+                "reference": "8.x-2.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/components-8.x-2.4.zip",
+                "reference": "8.x-2.4",
+                "shasum": "9b083c2f845ff2e1a1632efcf24f88cecd7479cc"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.4",
+                    "datestamp": "1618861606",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "JohnAlbin",
+                    "homepage": "https://www.drupal.org/user/32095",
+                    "email": "virtually.johnalbin@gmail.com"
+                },
+                {
+                    "name": "RobLoach",
+                    "homepage": "https://www.drupal.org/user/61114"
+                }
+            ],
+            "description": "Registers folders of components defined by your theme or module as Twig namespaces",
+            "homepage": "https://drupal.org/project/components",
+            "support": {
+                "source": "https://git.drupalcode.org/project/components"
             }
         },
         {
@@ -3057,6 +3119,10 @@
                     "name": "Brant Wynn (brantwynn)",
                     "homepage": "https://www.drupal.org/u/brantwynn",
                     "role": "Maintainer"
+                },
+                {
+                    "name": "saltednut",
+                    "homepage": "https://www.drupal.org/user/252788"
                 }
             ],
             "description": "Rewrites existing configuration on module installation via using a 'rewrite' folder in the config directory.",
@@ -3156,6 +3222,10 @@
                     "homepage": "https://www.drupal.org/user/2103716"
                 },
                 {
+                    "name": "daniel.bosen",
+                    "homepage": "https://www.drupal.org/user/404865"
+                },
+                {
                     "name": "ergonlogic",
                     "homepage": "https://www.drupal.org/user/368613"
                 },
@@ -3166,6 +3236,10 @@
                 {
                     "name": "pandaski",
                     "homepage": "https://www.drupal.org/user/1987218"
+                },
+                {
+                    "name": "volkerk",
+                    "homepage": "https://www.drupal.org/user/57527"
                 }
             ],
             "description": "Prevents multiple users from trying to edit a content entity simultaneously to prevent edit conflicts.",
@@ -3392,8 +3466,8 @@
             "autoload": {
                 "psr-4": {
                     "Drupal\\Core\\": "lib/Drupal/Core",
-                    "Drupal\\Component\\": "lib/Drupal/Component",
-                    "Drupal\\Driver\\": "../drivers/lib/Drupal/Driver"
+                    "Drupal\\Driver\\": "../drivers/lib/Drupal/Driver",
+                    "Drupal\\Component\\": "lib/Drupal/Component"
                 },
                 "classmap": [
                     "lib/Drupal.php",
@@ -3537,7 +3611,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-3.4",
-                    "datestamp": "1585763383",
+                    "datestamp": "1620838181",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3644,8 +3718,12 @@
             "authors": [
                 {
                     "name": "Mateu Aguiló Bosch",
-                    "homepage": "https://www.drupal.org/user/550110",
+                    "homepage": "https://www.drupal.org/user/103796",
                     "email": "mateu.aguilo.bosch@gmail.com"
+                },
+                {
+                    "name": "e0ipso",
+                    "homepage": "https://www.drupal.org/user/550110"
                 },
                 {
                     "name": "mglaman",
@@ -4135,7 +4213,7 @@
             "version": "2.5.0",
             "require": {
                 "drupal/core": "^8.7.7 || ^9",
-                "drupal/entity_browser": "self.version",
+                "drupal/entity_browser": "*",
                 "drupal/inline_entity_form": "*"
             },
             "type": "metapackage",
@@ -4222,7 +4300,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-1.1",
-                    "datestamp": "1585252806",
+                    "datestamp": "1631726164",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4727,7 +4805,7 @@
                     "datestamp": "1590783194",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
+                        "message": "RC releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -4737,12 +4815,28 @@
             ],
             "authors": [
                 {
+                    "name": "DamienMcKenna",
+                    "homepage": "https://www.drupal.org/user/108450"
+                },
+                {
                     "name": "codekarate",
                     "homepage": "https://www.drupal.org/user/506260"
                 },
                 {
+                    "name": "drupalninja99",
+                    "homepage": "https://www.drupal.org/user/42248"
+                },
+                {
+                    "name": "iansholtys",
+                    "homepage": "https://www.drupal.org/user/3108171"
+                },
+                {
                     "name": "johnnybgoode",
                     "homepage": "https://www.drupal.org/user/980926"
+                },
+                {
+                    "name": "larowlan",
+                    "homepage": "https://www.drupal.org/user/395439"
                 },
                 {
                     "name": "mrjmd",
@@ -4792,10 +4886,6 @@
                 "GPL-2.0+"
             ],
             "authors": [
-                {
-                    "name": "dermario",
-                    "homepage": "https://www.drupal.org/user/241276"
-                },
                 {
                     "name": "saschaeggi",
                     "homepage": "https://www.drupal.org/user/1999056"
@@ -4995,6 +5085,10 @@
             ],
             "authors": [
                 {
+                    "name": "Centarro",
+                    "homepage": "https://www.drupal.org/user/3661446"
+                },
+                {
                     "name": "bojanz",
                     "homepage": "https://www.drupal.org/user/86106"
                 },
@@ -5021,6 +5115,10 @@
                 {
                     "name": "oknate",
                     "homepage": "https://www.drupal.org/user/471638"
+                },
+                {
+                    "name": "ram4nd",
+                    "homepage": "https://www.drupal.org/user/601534"
                 },
                 {
                     "name": "rszrama",
@@ -5130,7 +5228,7 @@
             "authors": [
                 {
                     "name": "Mateu Aguiló Bosch",
-                    "homepage": "https://www.drupal.org/user/550110",
+                    "homepage": "https://www.drupal.org/user/3366066",
                     "email": "mateu.aguilo.bosch@gmail.com"
                 },
                 {
@@ -5175,6 +5273,10 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
+                {
+                    "name": "bbrala",
+                    "homepage": "https://www.drupal.org/user/3366066"
+                },
                 {
                     "name": "e0ipso",
                     "homepage": "https://www.drupal.org/user/550110"
@@ -5528,6 +5630,10 @@
                     "homepage": "https://www.drupal.org/user/1321830"
                 },
                 {
+                    "name": "podarok",
+                    "homepage": "https://www.drupal.org/user/116002"
+                },
+                {
                     "name": "rjacobs",
                     "homepage": "https://www.drupal.org/user/422459"
                 },
@@ -5572,7 +5678,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-5.0-beta11",
-                    "datestamp": "1591971693",
+                    "datestamp": "1632933670",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -5589,6 +5695,10 @@
                     "homepage": "https://stjerneman.com",
                     "email": "emil@stjerneman.com",
                     "role": "Maintainer"
+                },
+                {
+                    "name": "johnwebdev",
+                    "homepage": "https://www.drupal.org/user/3331569"
                 }
             ],
             "description": "Linkit - Enriched linking experience",
@@ -5921,13 +6031,13 @@
                 "shasum": "c471d9982a6540fd7baccc94572947923634fb6b"
             },
             "require": {
-                "drupal/core": "^8 || ^9",
+                "drupal/core": "^8.7.7 || ^9",
                 "drupal/token": "^1.0"
             },
             "require-dev": {
                 "drupal/metatag_dc": "*",
                 "drupal/metatag_open_graph": "*",
-                "drupal/page_manager": "4.x-dev",
+                "drupal/page_manager": "*",
                 "drupal/redirect": "1.x-dev"
             },
             "type": "drupal-module",
@@ -6012,6 +6122,10 @@
                 {
                     "name": "samuel.mortenson",
                     "homepage": "https://www.drupal.org/user/2582268"
+                },
+                {
+                    "name": "smustgrave",
+                    "homepage": "https://www.drupal.org/user/3252890"
                 }
             ],
             "description": "Provides a per-user dashboard for moderation.",
@@ -6335,6 +6449,10 @@
                 {
                     "name": "phenaproxima",
                     "homepage": "https://www.drupal.org/user/205645"
+                },
+                {
+                    "name": "tim.plunkett",
+                    "homepage": "https://www.drupal.org/user/241634"
                 }
             ],
             "description": "Provides a way to place blocks on a custom page.",
@@ -6553,6 +6671,10 @@
                 "GPL-2.0+"
             ],
             "authors": [
+                {
+                    "name": "bbrala",
+                    "homepage": "https://www.drupal.org/user/3366066"
+                },
                 {
                     "name": "casey",
                     "homepage": "https://www.drupal.org/user/32403"
@@ -6998,8 +7120,16 @@
             ],
             "authors": [
                 {
+                    "name": "DamienMcKenna",
+                    "homepage": "https://www.drupal.org/user/108450"
+                },
+                {
                     "name": "KarenS",
                     "homepage": "https://www.drupal.org/user/45874"
+                },
+                {
+                    "name": "wells",
+                    "homepage": "https://www.drupal.org/user/2452278"
                 }
             ],
             "description": "Metatag implementation of Schema.org structured data (JSON-LD)",
@@ -7034,7 +7164,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-4.1",
-                    "datestamp": "1512797885",
+                    "datestamp": "1629912252",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -7102,10 +7232,6 @@
             ],
             "authors": [
                 {
-                    "name": "jhodgdon",
-                    "homepage": "https://www.drupal.org/user/155601"
-                },
-                {
                     "name": "martin107",
                     "homepage": "https://www.drupal.org/user/2659379"
                 }
@@ -7140,7 +7266,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-4.5",
-                    "datestamp": "1588250233",
+                    "datestamp": "1641409812",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -7159,16 +7285,16 @@
             "authors": [
                 {
                     "name": "Mateu Aguiló Bosch",
-                    "homepage": "https://www.drupal.org/user/405824",
+                    "homepage": "https://www.drupal.org/user/2801849",
                     "email": "mateu.aguilo.bosch@gmail.com"
+                },
+                {
+                    "name": "bradjones1",
+                    "homepage": "https://www.drupal.org/user/405824"
                 },
                 {
                     "name": "e0ipso",
                     "homepage": "https://www.drupal.org/user/550110"
-                },
-                {
-                    "name": "mglaman",
-                    "homepage": "https://www.drupal.org/user/2416470"
                 },
                 {
                     "name": "pcambra",
@@ -7225,6 +7351,10 @@
                     "homepage": "https://www.drupal.org/u/gbyte.co",
                     "email": "contact@gbyte.co",
                     "role": "Maintainer"
+                },
+                {
+                    "name": "gbyte",
+                    "homepage": "https://www.drupal.org/user/2381352"
                 }
             ],
             "description": "Creates a standard conform hreflang XML sitemap of the site content and provides a framework for developing other sitemap types.",
@@ -7278,8 +7408,8 @@
                     "role": "Contributors"
                 },
                 {
-                    "name": "gausarts",
-                    "homepage": "https://www.drupal.org/user/159062"
+                    "name": "shadcn",
+                    "homepage": "https://www.drupal.org/user/571032"
                 },
                 {
                     "name": "thalles",
@@ -7450,24 +7580,16 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "chrisjlee",
-                    "homepage": "https://www.drupal.org/user/760600"
-                },
-                {
-                    "name": "drywall",
-                    "homepage": "https://www.drupal.org/user/192591"
-                },
-                {
-                    "name": "jsenich",
-                    "homepage": "https://www.drupal.org/user/58871"
-                },
-                {
-                    "name": "markie",
-                    "homepage": "https://www.drupal.org/user/206687"
-                },
-                {
                     "name": "newsignature",
                     "homepage": "https://www.drupal.org/user/765518"
+                },
+                {
+                    "name": "ultimike",
+                    "homepage": "https://www.drupal.org/user/51132"
+                },
+                {
+                    "name": "volkswagenchick",
+                    "homepage": "https://www.drupal.org/user/3332522"
                 }
             ],
             "description": "Provides a more robust alternative to 'summary or trimmed' textfield format.",
@@ -7563,6 +7685,10 @@
             ],
             "authors": [
                 {
+                    "name": "Neslee Canil Pinto",
+                    "homepage": "https://www.drupal.org/user/3580850"
+                },
+                {
                     "name": "cbeier",
                     "homepage": "https://www.drupal.org/user/1500710"
                 }
@@ -7589,7 +7715,7 @@
                 "shasum": "c7e3a3757282e4c94e3c1fff08d01e22155cb853"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9"
+                "drupal/core": "^8.7.7 || ^9"
             },
             "type": "drupal-module",
             "extra": {
@@ -7749,7 +7875,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/viewsreference.git",
-                "reference": "84ca0fefd328eee3dd1ee7e795693d73b178b35e"
+                "reference": "ec2bac8253a86f37048808768de23156a545179e"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -7763,8 +7889,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-alpha7+1-dev",
-                    "datestamp": "1590246457",
+                    "version": "8.x-2.0-beta2+6-dev",
+                    "datestamp": "1628021597",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -7773,7 +7899,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -7799,10 +7925,10 @@
                 "Drupal"
             ],
             "support": {
-                "source": "http://cgit.drupalcode.org/viewsreference",
-                "issues": "http://drupal.org/project/issues/viewsreference"
+                "source": "https://git.drupalcode.org/project/viewsreference",
+                "issues": "https://www.drupal.org/project/issues/viewsreference"
             },
-            "time": "2020-05-23T14:40:01+00:00"
+            "time": "2021-08-03T12:01:22+00:00"
         },
         {
             "name": "drupal/warmer",
@@ -7882,12 +8008,12 @@
                 "drupal/bootstrap": "~3.0",
                 "drupal/captcha": "~1.0",
                 "drupal/chosen": "~2.0",
-                "drupal/clientside_validation": "~3.0",
+                "drupal/clientside_validation": "*",
                 "drupal/clientside_validation_jquery": "*",
-                "drupal/devel": "~3.0",
-                "drupal/entity_print": "~2.0",
+                "drupal/devel": "*",
+                "drupal/entity_print": "*",
                 "drupal/gnode": "*",
-                "drupal/group": "~1.0",
+                "drupal/group": "*",
                 "drupal/lingotek": "~3.0",
                 "drupal/mailsystem": "~4.0",
                 "drupal/paragraphs": "~1.0",
@@ -7895,7 +8021,7 @@
                 "drupal/smtp": "~1.0",
                 "drupal/styleguide": "~1.0",
                 "drupal/telephone_validation": "~2.0",
-                "drupal/token": "~1.0",
+                "drupal/token": "*",
                 "drupal/webform_access": "*",
                 "drupal/webform_attachment": "*",
                 "drupal/webform_clientside_validation": "*",
@@ -7912,7 +8038,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-5.19",
-                    "datestamp": "1593681136",
+                    "datestamp": "1614791857",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -7945,28 +8071,8 @@
                     "role": "Contributor"
                 },
                 {
-                    "name": "fenstrat",
-                    "homepage": "https://www.drupal.org/user/362649"
-                },
-                {
-                    "name": "jrockowitz",
-                    "homepage": "https://www.drupal.org/user/371407"
-                },
-                {
-                    "name": "podarok",
-                    "homepage": "https://www.drupal.org/user/116002"
-                },
-                {
                     "name": "quicksketch",
                     "homepage": "https://www.drupal.org/user/35821"
-                },
-                {
-                    "name": "sanchiz",
-                    "homepage": "https://www.drupal.org/user/1671246"
-                },
-                {
-                    "name": "tedbow",
-                    "homepage": "https://www.drupal.org/user/240860"
                 },
                 {
                     "name": "torotil",
@@ -8027,18 +8133,6 @@
                 {
                     "name": "bramtenhove",
                     "homepage": "https://www.drupal.org/user/1549848"
-                },
-                {
-                    "name": "jaapjan",
-                    "homepage": "https://www.drupal.org/user/555428"
-                },
-                {
-                    "name": "jochemvn",
-                    "homepage": "https://www.drupal.org/user/2521788"
-                },
-                {
-                    "name": "naveenvalecha",
-                    "homepage": "https://www.drupal.org/user/2665733"
                 },
                 {
                     "name": "robertragas",
@@ -8388,12 +8482,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "HTMLPurifier": "library/"
-                },
                 "files": [
                     "library/HTMLPurifier.composer.php"
                 ],
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
                 "exclude-from-classmap": [
                     "/library/HTMLPurifier/Language/"
                 ]
@@ -8513,24 +8607,24 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.5.5",
+            "version": "6.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "9d4290de1cfd701f38099ef7e183b64b4b7b0c5e"
+                "reference": "a52f0440530b54fa079ce76e8c5d196a42cad981"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/9d4290de1cfd701f38099ef7e183b64b4b7b0c5e",
-                "reference": "9d4290de1cfd701f38099ef7e183b64b4b7b0c5e",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/a52f0440530b54fa079ce76e8c5d196a42cad981",
+                "reference": "a52f0440530b54fa079ce76e8c5d196a42cad981",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/promises": "^1.0",
-                "guzzlehttp/psr7": "^1.6.1",
+                "guzzlehttp/psr7": "^1.9",
                 "php": ">=5.5",
-                "symfony/polyfill-intl-idn": "^1.17.0"
+                "symfony/polyfill-intl-idn": "^1.17"
             },
             "require-dev": {
                 "ext-curl": "*",
@@ -8547,12 +8641,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -8560,9 +8654,39 @@
             ],
             "authors": [
                 {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Jeremy Lindblom",
+                    "email": "jeremeamia@gmail.com",
+                    "homepage": "https://github.com/jeremeamia"
+                },
+                {
+                    "name": "George Mponos",
+                    "email": "gmponos@gmail.com",
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://github.com/sagikazarmark"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
+                    "homepage": "https://github.com/Tobion"
                 }
             ],
             "description": "Guzzle is a PHP HTTP client library",
@@ -8576,41 +8700,55 @@
                 "rest",
                 "web service"
             ],
-            "time": "2020-06-16T21:01:06+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/guzzle",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-06-20T22:16:07+00:00"
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "v1.3.1",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
+                "reference": "fe752aedc9fd8fcca3fe7ad05d419d32998a06da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/fe752aedc9fd8fcca3fe7ad05d419d32998a06da",
+                "reference": "fe752aedc9fd8fcca3fe7ad05d419d32998a06da",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "php": ">=5.5"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.0"
+                "symfony/phpunit-bridge": "^4.4 || ^5.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Promise\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\Promise\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -8618,29 +8756,58 @@
             ],
             "authors": [
                 {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
+                    "homepage": "https://github.com/Tobion"
                 }
             ],
             "description": "Guzzle promises library",
             "keywords": [
                 "promise"
             ],
-            "time": "2016-12-20T10:07:11+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/promises",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-10-22T20:56:57+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.6.1",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "239400de7a173fe9901b9ac7c06497751f00727a"
+                "reference": "e98e3e6d4f86621a9b75f623996e6bbdeb4b9318"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/239400de7a173fe9901b9ac7c06497751f00727a",
-                "reference": "239400de7a173fe9901b9ac7c06497751f00727a",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/e98e3e6d4f86621a9b75f623996e6bbdeb4b9318",
+                "reference": "e98e3e6d4f86621a9b75f623996e6bbdeb4b9318",
                 "shasum": ""
             },
             "require": {
@@ -8653,24 +8820,24 @@
             },
             "require-dev": {
                 "ext-zlib": "*",
-                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
             },
             "suggest": {
-                "zendframework/zend-httphandlerrunner": "Emit PSR-7 responses"
+                "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Psr7\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -8678,12 +8845,33 @@
             ],
             "authors": [
                 {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
                 },
                 {
+                    "name": "George Mponos",
+                    "email": "gmponos@gmail.com",
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://github.com/sagikazarmark"
+                },
+                {
                     "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
                     "homepage": "https://github.com/Tobion"
                 }
             ],
@@ -8698,7 +8886,21 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-07-01T23:21:34+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/psr7",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-06-20T21:43:03+00:00"
         },
         {
             "name": "j7mbo/twitter-api-php",
@@ -9448,12 +9650,12 @@
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "src/Spec/validator-generated.php"
-                ],
                 "psr-4": {
                     "Lullabot\\AMP\\": "src"
-                }
+                },
+                "classmap": [
+                    "src/Spec/validator-generated.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -10360,12 +10562,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "QueryPath": "src/"
-                },
                 "files": [
                     "src/qp_functions.php"
-                ]
+                ],
+                "psr-0": {
+                    "QueryPath": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -10695,12 +10897,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/srijanone/ezcontent_admin.git",
-                "reference": "1b59088c99c04668776a4c8f69ac9b1f6c3a83eb"
+                "reference": "a95cda69063485a1d0a837d2bb9e312b154f6be1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/srijanone/ezcontent_admin/zipball/1b59088c99c04668776a4c8f69ac9b1f6c3a83eb",
-                "reference": "1b59088c99c04668776a4c8f69ac9b1f6c3a83eb",
+                "url": "https://api.github.com/repos/srijanone/ezcontent_admin/zipball/a95cda69063485a1d0a837d2bb9e312b154f6be1",
+                "reference": "a95cda69063485a1d0a837d2bb9e312b154f6be1",
                 "shasum": ""
             },
             "type": "drupal-theme",
@@ -10710,7 +10912,7 @@
             ],
             "description": "Ezcontent administration theme with modern minimalist design.",
             "homepage": "https://github.com/srijanone/ezcontent_admin",
-            "time": "2020-06-04T10:08:28+00:00"
+            "time": "2020-11-04T09:39:32+00:00"
         },
         {
             "name": "srijanone/ezcontent_amp",
@@ -10718,12 +10920,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/srijanone/ezcontent_amp.git",
-                "reference": "28500ae3990264fcff33ab6534cc71762b35286f"
+                "reference": "ef0eae852b2ae00d60e968ad9de2874c762e46c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/srijanone/ezcontent_amp/zipball/28500ae3990264fcff33ab6534cc71762b35286f",
-                "reference": "28500ae3990264fcff33ab6534cc71762b35286f",
+                "url": "https://api.github.com/repos/srijanone/ezcontent_amp/zipball/ef0eae852b2ae00d60e968ad9de2874c762e46c2",
+                "reference": "ef0eae852b2ae00d60e968ad9de2874c762e46c2",
                 "shasum": ""
             },
             "require": {
@@ -10742,7 +10944,7 @@
                 "drupal",
                 "ezcontent"
             ],
-            "time": "2020-07-01T08:49:57+00:00"
+            "time": "2020-11-25T13:47:37+00:00"
         },
         {
             "name": "srijanone/ezcontent_theme",
@@ -10750,25 +10952,33 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/srijanone/ezcontent_theme.git",
-                "reference": "c180abd55d5c636a953b9d991e1811ff853500d7"
+                "reference": "ad0bb048f83e551aaf6b07c08b7edf08f83937a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/srijanone/ezcontent_theme/zipball/c180abd55d5c636a953b9d991e1811ff853500d7",
-                "reference": "c180abd55d5c636a953b9d991e1811ff853500d7",
+                "url": "https://api.github.com/repos/srijanone/ezcontent_theme/zipball/ad0bb048f83e551aaf6b07c08b7edf08f83937a5",
+                "reference": "ad0bb048f83e551aaf6b07c08b7edf08f83937a5",
                 "shasum": ""
             },
             "require": {
-                "drupal/bootstrap_barrio": "^4.22"
+                "drupal/bootstrap_barrio": "^4.22",
+                "drupal/components": "2.x"
             },
             "type": "drupal-theme",
+            "extra": {
+                "patches": {
+                    "drupal/bootstrap_barrio": {
+                        "Display Suite classes breaks Layout Builder if Display Suite is not installed": "https://www.drupal.org/files/issues/2018-06-01/2976934-3.patch"
+                    }
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0+"
             ],
             "description": "Ezcontent starter theme.",
             "homepage": "https://github.com/srijanone/ezcontent_theme",
-            "time": "2020-06-25T09:22:24+00:00"
+            "time": "2021-02-17T10:02:05+00:00"
         },
         {
             "name": "stack/builder",
@@ -11161,6 +11371,7 @@
                     "type": "tidelift"
                 }
             ],
+            "abandoned": "symfony/error-handler",
             "time": "2020-05-24T08:33:35+00:00"
         },
         {
@@ -11655,12 +11866,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Ctype\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -11731,12 +11942,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Iconv\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Iconv\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -11779,21 +11990,21 @@
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "v1.17.1",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "a57f8161502549a742a63c09f0a604997bf47027"
+                "reference": "59a8d271f00dd0e4c2e518104cc7963f655a1aa8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/a57f8161502549a742a63c09f0a604997bf47027",
-                "reference": "a57f8161502549a742a63c09f0a604997bf47027",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/59a8d271f00dd0e4c2e518104cc7963f655a1aa8",
+                "reference": "59a8d271f00dd0e4c2e518104cc7963f655a1aa8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
-                "symfony/polyfill-mbstring": "^1.3",
+                "php": ">=7.1",
+                "symfony/polyfill-intl-normalizer": "^1.10",
                 "symfony/polyfill-php72": "^1.10"
             },
             "suggest": {
@@ -11802,7 +12013,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.17-dev"
+                    "dev-main": "1.26-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -11810,12 +12021,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Idn\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Idn\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -11825,6 +12036,10 @@
                 {
                     "name": "Laurent Bassin",
                     "email": "laurent@bassin.info"
+                },
+                {
+                    "name": "Trevor Rowbotham",
+                    "email": "trevor.rowbotham@pm.me"
                 },
                 {
                     "name": "Symfony Community",
@@ -11855,32 +12070,32 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-06T08:46:27+00:00"
+            "time": "2022-05-24T11:49:31+00:00"
         },
         {
-            "name": "symfony/polyfill-mbstring",
-            "version": "v1.17.1",
+            "name": "symfony/polyfill-intl-normalizer",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "7110338d81ce1cbc3e273136e4574663627037a7"
+                "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
+                "reference": "219aa369ceff116e673852dce47c3a41794c14bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7110338d81ce1cbc3e273136e4574663627037a7",
-                "reference": "7110338d81ce1cbc3e273136e4574663627037a7",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/219aa369ceff116e673852dce47c3a41794c14bd",
+                "reference": "219aa369ceff116e673852dce47c3a41794c14bd",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=7.1"
             },
             "suggest": {
-                "ext-mbstring": "For best performance"
+                "ext-intl": "For best performance"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.17-dev"
+                    "dev-main": "1.26-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -11888,12 +12103,96 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Normalizer\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
                 ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for intl's Normalizer class and related functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "intl",
+                "normalizer",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-05-24T11:49:31+00:00"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.26.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "9344f9cb97f3b19424af1a21a3b0e75b0a7d8d7e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9344f9cb97f3b19424af1a21a3b0e75b0a7d8d7e",
+                "reference": "9344f9cb97f3b19424af1a21a3b0e75b0a7d8d7e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "provide": {
+                "ext-mbstring": "*"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.26-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -11932,7 +12231,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-06T08:46:27+00:00"
+            "time": "2022-05-24T11:49:31+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -11963,12 +12262,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php56\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php56\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -12037,12 +12336,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php70\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php70\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -12087,34 +12386,38 @@
         },
         {
             "name": "symfony/polyfill-php72",
-            "version": "v1.17.0",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "f048e612a3905f34931127360bdd2def19a5e582"
+                "reference": "bf44a9fd41feaac72b074de600314a93e2ae78e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/f048e612a3905f34931127360bdd2def19a5e582",
-                "reference": "f048e612a3905f34931127360bdd2def19a5e582",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/bf44a9fd41feaac72b074de600314a93e2ae78e2",
+                "reference": "bf44a9fd41feaac72b074de600314a93e2ae78e2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=7.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.17-dev"
+                    "dev-main": "1.26-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php72\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php72\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -12152,7 +12455,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-12T16:47:27+00:00"
+            "time": "2022-05-24T11:49:31+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
@@ -12182,12 +12485,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php80\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php80\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -13278,12 +13581,12 @@
             "version": "1.9.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "9dc4f203e36f2b486149058bade43c851dd97451"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/9dc4f203e36f2b486149058bade43c851dd97451",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/9dc4f203e36f2b486149058bade43c851dd97451",
                 "reference": "9dc4f203e36f2b486149058bade43c851dd97451",
                 "shasum": ""
             },
@@ -13366,6 +13669,7 @@
                 }
             ],
             "description": "A robust cross-platform utility for normalizing, comparing and modifying file paths.",
+            "abandoned": "symfony/filesystem",
             "time": "2015-12-17T08:42:14+00:00"
         },
         {
