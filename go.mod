@@ -3,7 +3,7 @@ module github.com/srijanone/vega
 go 1.14
 
 require (
-	github.com/AlecAivazis/survey/v2 v2.0.7
+	github.com/AlecAivazis/survey/v2 v2.3.7
 	github.com/blang/semver v3.5.1+incompatible
 	github.com/hashicorp/go-getter v1.4.1
 	github.com/otiai10/copy v1.2.0
